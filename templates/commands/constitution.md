@@ -76,3 +76,17 @@ If the user supplies partial updates (e.g., only one principle revision), still 
 If critical info missing (e.g., ratification date truly unknown), insert `TODO(<FIELD_NAME>): explanation` and include in the Sync Impact Report under deferred items.
 
 Do not create a new template; always operate on the existing `/memory/constitution.md` file.
+
+## Recommended Workflow
+
+```
+1. /personas.constitution  → Establish project principles (YOU ARE HERE)
+2. /personas.specify       → Create feature specifications (NEXT STEP)
+3. /personas.clarify       → Clarify requirements (optional)
+4. /personas.architect     → Define system architecture
+5. /personas.standardize   → Establish coding standards
+6. /personas.plan          → Plan feature implementation
+7. /personas.tasks         → Break down into tasks
+8. /personas.analyze       → Analyze cross-artifact consistency
+9. /personas.implement     → Execute implementation
+```

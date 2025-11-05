@@ -178,3 +178,22 @@ Behavior rules:
 - If quota reached with unresolved high-impact categories remaining, explicitly flag them under Deferred with rationale.
 
 Context for prioritization: {ARGS}
+
+## Recommended Workflow
+
+```
+1. /personas.constitution  → Establish project principles
+2. /personas.specify       → Create feature specifications (PREVIOUS STEP)
+3. /personas.clarify       → Clarify requirements (optional) (YOU ARE HERE)
+4. /personas.architect     → Define system architecture (NEXT STEP)
+5. /personas.standardize   → Establish coding standards
+6. /personas.plan          → Plan feature implementation
+7. /personas.tasks         → Break down into tasks
+8. /personas.analyze       → Analyze cross-artifact consistency
+9. /personas.implement     → Execute implementation
+```
+
+**Note**: `/personas.clarify` is optional and can be run:
+- After `/personas.specify` to resolve ambiguities before architecture/planning
+- Multiple times as needed when new clarifications emerge
+- Before `/personas.plan` if specification has unresolved questions

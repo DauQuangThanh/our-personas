@@ -20,18 +20,21 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`, `/memory/architecture.md`, `/memory/standards.md`. Load IMPL_PLAN template (already copied).
 
 3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
-   - Fill Constitution Check section from constitution
-   - Evaluate gates (ERROR if violations unjustified)
+   - **Fill Alignment Checks section**:
+     - **Constitution Check**: Verify alignment with constitutional principles (governance, values, constraints)
+     - **Architecture Check**: Verify alignment with system architecture (components, patterns, infrastructure, deployment)
+     - **Standards Check**: Verify alignment with coding standards (tools, testing requirements, security practices, code quality)
+   - Evaluate gates (ERROR if violations unjustified or conflicts unresolved)
    - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
    - Phase 1: Generate data-model.md, contracts/, quickstart.md
    - Phase 1: Update agent context by running the agent script
-   - Re-evaluate Constitution Check post-design
+   - **Re-evaluate all Alignment Checks post-design** (Constitution, Architecture, Standards)
 
-4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, generated artifacts, and alignment status with all foundational documents.
 
 ## Phases
 
@@ -66,13 +69,22 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
+   - **Verify data model aligns with architecture's data strategy** (data stores, schemas, persistence patterns)
 
 2. **Generate API contracts** from functional requirements:
    - For each user action → endpoint
-   - Use standard REST/GraphQL patterns
+   - **Use communication patterns defined in architecture** (REST/GraphQL/gRPC/message queues)
    - Output OpenAPI/GraphQL schema to `/contracts/`
+   - **Verify API design follows architecture's component interaction patterns**
+   - **Ensure contract structure aligns with architectural views** (logical, process, deployment)
 
-3. **Agent context update**:
+3. **Verify implementation approach follows coding standards**:
+   - **Check testing requirements** match standards (coverage targets, test frameworks, test types)
+   - **Check security practices** align with standards (authentication, authorization, data validation, encryption)
+   - **Check tooling choices** align with standards (linters, formatters, build tools, CI/CD)
+   - **Check code organization** follows standards (file structure, naming conventions, module patterns)
+
+4. **Agent context update**:
    - Run `{AGENT_SCRIPT}`
    - These scripts detect which AI agent is in use
    - Update the appropriate agent-specific context file
@@ -85,3 +97,20 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 - Use absolute paths
 - ERROR on gate failures or unresolved clarifications
+- **ERROR if design conflicts with architecture** (e.g., adding components not defined in architecture, using different communication patterns)
+- **ERROR if implementation approach violates coding standards** (e.g., different test framework, lower coverage target, prohibited libraries)
+- **WARN if feature requires architecture/standards updates** (document what needs updating and why, suggest running `/personas.architect` or `/personas.standardize` to update)
+
+## Recommended Workflow
+
+```
+1. /personas.constitution  → Establish project principles
+2. /personas.specify       → Create feature specifications
+3. /personas.clarify       → Clarify requirements (optional)
+4. /personas.architect     → Define system architecture
+5. /personas.standardize   → Establish coding standards
+6. /personas.plan          → Plan feature implementation (YOU ARE HERE)
+7. /personas.tasks         → Break down into tasks (NEXT STEP)
+8. /personas.analyze       → Analyze cross-artifact consistency
+9. /personas.implement     → Execute implementation
+```

@@ -91,7 +91,7 @@ Use the **`/personas.constitution`** command to create your project's governing 
 /personas.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
-### 3. Create the spec
+### 3. Create feature specifications
 
 Use the **`/personas.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
@@ -99,7 +99,31 @@ Use the **`/personas.specify`** command to describe what you want to build. Focu
 /personas.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
-### 4. Create a technical implementation plan
+### 4. Clarify requirements (optional but recommended)
+
+Use **`/personas.clarify`** to resolve any ambiguities in your specification before planning.
+
+```bash
+/personas.clarify
+```
+
+### 5. Define system architecture
+
+Use **`/personas.architect`** to establish your system's overall architecture, components, and infrastructure.
+
+```bash
+/personas.architect Design a single-page application with local storage, using a modular component architecture with clear separation between UI and data layers
+```
+
+### 6. Establish coding standards
+
+Use **`/personas.standardize`** to define coding practices, testing requirements, and quality standards.
+
+```bash
+/personas.standardize Configure standards for vanilla JavaScript with ESLint, 80% test coverage using Vitest, and Prettier formatting
+```
+
+### 7. Create a technical implementation plan
 
 Use the **`/personas.plan`** command to provide your tech stack and architecture choices.
 
@@ -107,7 +131,7 @@ Use the **`/personas.plan`** command to provide your tech stack and architecture
 /personas.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
 ```
 
-### 5. Break down into tasks
+### 8. Break down into tasks
 
 Use **`/personas.tasks`** to create an actionable task list from your implementation plan.
 
@@ -115,7 +139,15 @@ Use **`/personas.tasks`** to create an actionable task list from your implementa
 /personas.tasks
 ```
 
-### 6. Execute implementation
+### 9. Analyze for consistency (optional but recommended)
+
+Use **`/personas.analyze`** to validate consistency across all artifacts before implementation.
+
+```bash
+/personas.analyze
+```
+
+### 10. Execute implementation
 
 Use **`/personas.implement`** to execute all tasks and build your feature according to the plan.
 
@@ -126,6 +158,8 @@ Use **`/personas.implement`** to execute all tasks and build your feature accord
 For detailed step-by-step instructions, see our [comprehensive guide](./spec-driven.md).
 
 ## 🤖 Supported AI Agents
+
+Our Personas supports **multiple AI agents simultaneously**. You can select one or more agents during initialization, and the CLI will set up the appropriate command structures for each selected agent.
 
 | Agent                                                     | Support | Notes                                             |
 |-----------------------------------------------------------|---------|---------------------------------------------------|
@@ -144,6 +178,8 @@ For detailed step-by-step instructions, see our [comprehensive guide](./spec-dri
 | [Amazon Q Developer CLI](https://aws.amazon.com/developer/learning/q-developer-cli/) | ⚠️ | Amazon Q Developer CLI [does not support](https://github.com/aws/amazon-q-developer-cli/issues/3064) custom arguments for slash commands. |
 | [Amp](https://ampcode.com/) | ✅ | |
 
+**Multi-Agent Support**: When you run `personas init`, you can select multiple AI agents using the interactive menu (Space to toggle, Enter to confirm). The CLI will download and merge templates for all selected agents, allowing you to switch between different AI assistants seamlessly within the same project.
+
 ## 🔧 Personas CLI Reference
 
 The `personas` command supports the following options:
@@ -160,7 +196,7 @@ The `personas` command supports the following options:
 | Argument/Option        | Type     | Description                                                                  |
 |------------------------|----------|------------------------------------------------------------------------------|
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
-| `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, or `q` |
+| `--ai`                 | Option   | Single AI agent to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, or `q`. If not specified, an interactive multi-select menu will appear allowing you to choose multiple agents (default: `copilot` pre-selected). |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
 | `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                             |
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
@@ -173,11 +209,15 @@ The `personas` command supports the following options:
 ### Examples
 
 ```bash
-# Basic project initialization
+# Basic project initialization (interactive AI agent selection)
 personas init my-project
 
 # Initialize with specific AI assistant
 personas init my-project --ai claude
+
+# Initialize with multiple AI assistants (interactive selection will skip if --ai specified)
+# Use interactive menu to select multiple agents
+personas init my-project
 
 # Initialize with Cursor support
 personas init my-project --ai cursor-agent
@@ -191,15 +231,20 @@ personas init my-project --ai amp
 # Initialize with PowerShell scripts (Windows/cross-platform)
 personas init my-project --ai copilot --script ps
 
-# Initialize in current directory
-personas init . --ai copilot
+# Initialize in current directory (interactive AI selection)
+personas init . 
 # or use the --here flag
+personas init --here
+
+# Initialize in current directory with specific AI agent
+personas init . --ai copilot
+# or
 personas init --here --ai copilot
 
 # Force merge into current (non-empty) directory without confirmation
-personas init . --force --ai copilot
+personas init . --force
 # or
-personas init --here --force --ai copilot
+personas init --here --force
 
 # Skip git initialization
 personas init my-project --ai gemini --no-git
@@ -220,25 +265,27 @@ After running `personas init`, your AI coding agent will have access to these sl
 
 #### Core Commands
 
-Essential commands for the Spec-Driven Development workflow:
+Essential commands for the Spec-Driven Development workflow (in recommended order):
 
-| Command                  | Description                                                           |
-|--------------------------|-----------------------------------------------------------------------|
-| `/personas.constitution`  | Create or update project governing principles and development guidelines |
-| `/personas.specify`       | Define what you want to build (requirements and user stories)        |
-| `/personas.plan`          | Create technical implementation plans with your chosen tech stack     |
-| `/personas.tasks`         | Generate actionable task lists for implementation                     |
-| `/personas.implement`     | Execute all tasks to build the feature according to the plan         |
+| Command                  | Description                                                           | When to Use |
+|--------------------------|-----------------------------------------------------------------------|-------------|
+| `/personas.constitution`  | Create or update project governing principles and development guidelines | First step: establish project values |
+| `/personas.specify`       | Define what you want to build (requirements and user stories)        | After constitution: define features |
+| `/personas.clarify`       | Clarify underspecified areas through structured questioning           | Optional: after specify, before architect |
+| `/personas.architect`     | Define system architecture, components, and infrastructure            | After clarify: establish technical framework |
+| `/personas.standardize`   | Establish coding standards, testing requirements, and quality practices | After architect: define implementation rules |
+| `/personas.plan`          | Create technical implementation plans with your chosen tech stack     | After standards: plan feature implementation |
+| `/personas.tasks`         | Generate actionable task lists for implementation                     | After plan: break down into steps |
+| `/personas.analyze`       | Cross-artifact consistency & coverage analysis                        | Optional: after tasks, before implement |
+| `/personas.implement`     | Execute all tasks to build the feature according to the plan         | Final step: build the feature |
 
-#### Optional Commands
+#### Enhancement Commands
 
-Additional commands for enhanced quality and validation:
+Additional commands for improved quality and validation:
 
-| Command              | Description                                                           |
-|----------------------|-----------------------------------------------------------------------|
-| `/personas.clarify`   | Clarify underspecified areas (recommended before `/personas.plan`; formerly `/quizme`) |
-| `/personas.analyze`   | Cross-artifact consistency & coverage analysis (run after `/personas.tasks`, before `/personas.implement`) |
-| `/personas.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
+| Command              | Description                                                           | When to Use |
+|----------------------|-----------------------------------------------------------------------|-------------|
+| `/personas.checklist` | Generate custom quality checklists for validating artifacts          | Any time: after specify, plan, or tasks |
 
 ### Environment Variables
 
@@ -399,7 +446,7 @@ see yours. You can edit any comments that you make, but you can't edit comments 
 delete any comments that you made, but you can't delete comments anybody else made.
 ```
 
-After this prompt is entered, you should see Claude Code kick off the planning and spec drafting process. Claude Code will also trigger some of the built-in scripts to set up the repository.
+After this prompt is entered, you should see the AI agent kick off the planning and spec drafting process. It will also trigger some of the built-in scripts to set up the repository.
 
 Once this step is completed, you should have a new branch created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
 
@@ -416,7 +463,7 @@ At this stage, your project folder contents should resemble the following:
     │  ├── common.sh
     │  ├── create-new-feature.sh
     │  ├── setup-plan.sh
-    │  └── update-claude-md.sh
+    │  └── update-agent-context.sh
     ├── specs
     │  └── 001-create-taskify
     │      └── spec.md
@@ -426,20 +473,19 @@ At this stage, your project folder contents should resemble the following:
         └── tasks-template.md
 ```
 
-### **STEP 3:** Functional specification clarification (required before planning)
+### **STEP 3:** Functional specification clarification (optional but recommended)
 
-With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt.
+With the baseline specification created, you can clarify any requirements that were not captured properly in the first attempt.
 
-You should run the structured clarification workflow **before** creating a technical plan to reduce rework downstream.
+You should run the structured clarification workflow **before** defining architecture and planning to reduce rework downstream.
 
-Preferred order:
+Use `/personas.clarify` for sequential, coverage-based questioning that records answers in a Clarifications section:
 
-1. Use `/personas.clarify` (structured) – sequential, coverage-based questioning that records answers in a Clarifications section.
-2. Optionally follow up with ad-hoc free-form refinement if something still feels vague.
+```text
+/personas.clarify
+```
 
-If you intentionally want to skip clarification (e.g., spike or exploratory prototype), explicitly state that so the agent doesn't block on missing clarifications.
-
-Example free-form refinement prompt (after `/personas.clarify` if still needed):
+Example additional refinement if needed:
 
 ```text
 For each sample project or project that you create there should be a variable number of tasks between 5 and 15
@@ -447,15 +493,56 @@ tasks for each one randomly distributed into different states of completion. Mak
 one task in each stage of completion.
 ```
 
-You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
+You should also ask the AI agent to validate the **Review & Acceptance Checklist**, checking off items that pass the requirements. The following prompt can be used:
 
 ```text
 Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
 ```
 
-It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
+It's important to use the interaction with the AI agent as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
-### **STEP 4:** Generate a plan
+### **STEP 4:** Define system architecture (recommended before planning)
+
+Before creating detailed implementation plans, establish your system's overall architecture using the `/personas.architect` command:
+
+```text
+/personas.architect Design a web application with microservices architecture using Docker containers. 
+Use PostgreSQL for data persistence, Redis for caching, and RabbitMQ for asynchronous messaging. 
+Target MVP product level with basic monitoring and vertical scaling approach.
+```
+
+This step creates the `.personas/memory/architecture.md` file that documents:
+
+- System components and their responsibilities
+- Technology stack and versions
+- Communication patterns between components
+- Data architecture and persistence strategy
+- Deployment and infrastructure approach
+- Quality attribute targets (performance, availability, scalability)
+
+The architecture serves as the technical framework that guides all subsequent implementation planning.
+
+### **STEP 5:** Establish coding standards (recommended before planning)
+
+After defining your architecture, establish consistent coding practices using the `/personas.standardize` command:
+
+```text
+/personas.standardize Configure standards for .NET 8 with xUnit for testing, 80% code coverage requirement, 
+ESLint for code quality, automated security scanning with OWASP dependency check, and CI/CD pipeline 
+with GitHub Actions.
+```
+
+This step creates the `.personas/memory/standards.md` file that defines:
+
+- Testing requirements (frameworks, coverage targets, test types)
+- Security practices (authentication, authorization, data validation)
+- Code quality standards (linters, formatters, complexity limits)
+- Documentation requirements
+- CI/CD and deployment practices
+
+The standards ensure consistent implementation quality across all features.
+
+### **STEP 6:** Generate a plan
 
 You can now be specific about the tech stack and other technical requirements. You can use the `/personas.plan` command that is built into the project template with a prompt like this:
 

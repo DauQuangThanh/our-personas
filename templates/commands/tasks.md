@@ -129,3 +129,17 @@ Every task MUST strictly follow this format:
   - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
+
+## Recommended Workflow
+
+```
+1. /personas.constitution  → Establish project principles
+2. /personas.specify       → Create feature specifications
+3. /personas.clarify       → Clarify requirements (optional)
+4. /personas.architect     → Define system architecture
+5. /personas.standardize   → Establish coding standards
+6. /personas.plan          → Plan feature implementation
+7. /personas.tasks         → Break down into tasks (YOU ARE HERE)
+8. /personas.analyze       → Analyze cross-artifact consistency (NEXT STEP)
+9. /personas.implement     → Execute implementation
+```

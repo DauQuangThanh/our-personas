@@ -295,3 +295,37 @@ Sample items:
 - Correct: Validation of requirement quality
 - Wrong: "Does it do X?"
 - Correct: "Is X clearly specified?"
+
+## Recommended Workflow
+
+The `/personas.checklist` command can be run at multiple points in the workflow:
+
+**After specification (requirements quality checklist)**:
+```
+/personas.specify → /personas.checklist (YOU ARE HERE) → /personas.clarify
+```
+
+**After planning (design quality checklist)**:
+```
+/personas.plan → /personas.checklist (YOU ARE HERE) → /personas.tasks
+```
+
+**Before implementation (pre-flight checklist)**:
+```
+/personas.tasks → /personas.checklist (YOU ARE HERE) → /personas.analyze → /personas.implement
+```
+
+**Complete workflow context**:
+```
+1. /personas.constitution  → Establish project principles
+2. /personas.specify       → Create feature specifications
+3. /personas.clarify       → Clarify requirements (optional)
+4. /personas.architect     → Define system architecture
+5. /personas.standardize   → Establish coding standards
+6. /personas.plan          → Plan feature implementation
+7. /personas.tasks         → Break down into tasks
+8. /personas.analyze       → Analyze cross-artifact consistency
+9. /personas.implement     → Execute implementation
+```
+
+**Note**: Checklists validate quality at each stage before proceeding. You can generate multiple checklists for different aspects (requirements, design, testing, security, etc.) at appropriate workflow stages.
