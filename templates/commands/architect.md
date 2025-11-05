@@ -362,15 +362,15 @@ After completing the architecture document and checklist validation:
 10. **Establish monitoring**: Set up observability for quality attribute tracking
 11. **Create runbooks**: Document operational procedures for the architecture
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture (YOU ARE HERE)
 5. /personas.standardize   → Establish coding standards (NEXT STEP)
-6. /personas.plan          → Plan feature implementation
+6. /personas.plan          → Plan feature implementation with design
 7. /personas.tasks         → Break down into tasks
 8. /personas.analyze       → Analyze cross-artifact consistency
 9. /personas.implement     → Execute implementation

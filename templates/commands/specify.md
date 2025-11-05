@@ -251,15 +251,15 @@ Success criteria must be:
 - "React components render efficiently" (framework-specific)
 - "Redis cache hit rate above 80%" (technology-specific)
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications (YOU ARE HERE)
 3. /personas.clarify       → Clarify requirements (optional) (NEXT STEP)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation
+6. /personas.plan          → Plan feature implementation with design
 7. /personas.tasks         → Break down into tasks
 8. /personas.analyze       → Analyze cross-artifact consistency
 9. /personas.implement     → Execute implementation

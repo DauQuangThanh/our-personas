@@ -258,15 +258,15 @@ After completing the coding standard:
 6. **Training**: Brief team on new or updated standards
 7. **Monitor compliance**: Set up dashboards for tracking adherence
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards (YOU ARE HERE)
-6. /personas.plan          → Plan feature implementation (NEXT STEP)
+6. /personas.plan          → Plan feature implementation with design (NEXT STEP)
 7. /personas.tasks         → Break down into tasks
 8. /personas.analyze       → Analyze cross-artifact consistency
 9. /personas.implement     → Execute implementation

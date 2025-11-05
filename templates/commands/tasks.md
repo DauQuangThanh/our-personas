@@ -130,15 +130,15 @@ Every task MUST strictly follow this format:
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation
+6. /personas.plan          → Plan feature implementation with design
 7. /personas.tasks         → Break down into tasks (YOU ARE HERE)
 8. /personas.analyze       → Analyze cross-artifact consistency (NEXT STEP)
 9. /personas.implement     → Execute implementation

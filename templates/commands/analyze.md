@@ -229,15 +229,15 @@ Ask the user: "Would you like me to suggest concrete remediation edits for the t
 - **Use examples over exhaustive rules** (cite specific instances, not generic patterns)
 - **Report zero issues gracefully** (emit success report with coverage statistics)
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation
+6. /personas.plan          → Plan feature implementation with design
 7. /personas.tasks         → Break down into tasks (PREVIOUS STEP)
 8. /personas.analyze       → Analyze cross-artifact consistency (YOU ARE HERE)
 9. /personas.implement     → Execute implementation (NEXT STEP)

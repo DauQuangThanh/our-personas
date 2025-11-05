@@ -136,15 +136,15 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/personas.tasks` first to regenerate the task list.
 
-## Recommended Workflow
-
+**Complete workflow context**:
+Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 ```
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation
+6. /personas.plan          → Plan feature implementation with design
 7. /personas.tasks         → Break down into tasks
 8. /personas.analyze       → Analyze cross-artifact consistency (PREVIOUS STEP)
 9. /personas.implement     → Execute implementation (YOU ARE HERE)
