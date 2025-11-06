@@ -238,12 +238,13 @@ Your response **MUST** suggest the user's next step, following the sequential or
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
-7. /personas.tasks         → Break down into tasks (PREVIOUS STEP)
-8. /personas.analyze       → Analyze cross-artifact consistency (YOU ARE HERE)
-9. /personas.implement     → Execute implementation (NEXT STEP)
+7. /personas.test-plan     → Generate comprehensive test plan
+8. /personas.tasks         → Break down into tasks (PREVIOUS STEP)
+9. /personas.analyze       → Analyze cross-artifact consistency (YOU ARE HERE)
+10. /personas.implement    → Execute implementation (NEXT STEP)
 ```
 
-**Note**: `/personas.analyze` should run AFTER `/personas.tasks` to validate the complete artifact chain (constitution, architecture, standards, spec, plan, tasks) for consistency and alignment before implementation begins.
+**Note**: `/personas.analyze` should run AFTER `/personas.tasks` to validate the complete artifact chain (constitution, architecture, standards, spec, plan, test-plan, tasks) for consistency and alignment before implementation begins.
 
 ## Context
 
