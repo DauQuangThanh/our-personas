@@ -263,7 +263,8 @@ def get_key():
     if key == readchar.key.ENTER:
         return 'enter'
 
-    if key == readchar.key.ESC:
+    # Handle escape key - readchar returns '\x1b' which may not match readchar.key.ESC
+    if key == readchar.key.ESC or key == '\x1b':
         return 'escape'
 
     if key == readchar.key.CTRL_C:
