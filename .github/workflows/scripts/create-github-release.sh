@@ -44,5 +44,5 @@ gh release create "$VERSION" \
   .genreleases/our-personas-template-amp-ps-"$VERSION".zip \
   .genreleases/our-personas-template-q-sh-"$VERSION".zip \
   .genreleases/our-personas-template-q-ps-"$VERSION".zip \
-  --title "Our Personas Templates - $VERSION_NO_V" \
+  --title "Personas Templates - $VERSION_NO_V" \
   --notes-file release_notes.md

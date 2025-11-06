@@ -165,7 +165,7 @@ BANNER = """
 ╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
 """
 
-TAGLINE = "Our Personas - Organizing Us Rapidly with Personas: Powering Team Synergy and Project Velocity"
+TAGLINE = "Our Personas - Powering Team Synergy and Project Velocity"
 class StepTracker:
     """Track and render hierarchical steps without emojis, similar to Claude Code tree output.
     Supports live auto-refresh via an attached refresh callback.
@@ -376,7 +376,7 @@ def multi_select_with_arrows(options: dict, prompt_text: str = "Select options",
             table.add_row(cursor, checkbox, f"[cyan]{key}[/cyan] [dim]({options[key]})[/dim]")
 
         table.add_row("", "", "")
-        table.add_row("", "", "[dim]Use ↑/↓ to navigate, Space to toggle, Enter to confirm, Esc to cancel[/dim]")
+        table.add_row("", "", "[dim]Use ↑/↓ to navigate, Space to toggle, Enter to confirm, Ctrl+C to cancel[/dim]")
 
         return Panel(
             table,
