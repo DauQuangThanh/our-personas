@@ -1,11 +1,11 @@
 <div align="center">
     <img src="./media/logo_small.webp" alt="Our Personas Logo"/>
-    <h1>🌱 Our Personas</h1>
-    <h3><em>Organizing Us Rapidly: Powering Team Synergy and Project Velocity.</em></h3>
+    <h1>🌱 Our Personas - Organizing Us Rapidly</h1>
+    <h3><em>Powering Team Synergy and Project Velocity.</em></h3>
 </div>
 
 <p align="center">
-    <strong>An open source toolkit that allows you to focus on product scenarios and predictable outcomes instead of vibe coding every piece from scratch.</strong>
+    <strong>An open-source toolkit ensures predictable results and reduces development overhead. Eliminate 'vibe coding' and focus strictly on your product roadmap and guaranteed outcomes. This allows for rapid feature shipping and validation.</strong>
 </p>
 
 <p align="center">
