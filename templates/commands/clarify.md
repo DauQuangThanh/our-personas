@@ -17,7 +17,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.
 
-Note: This clarification workflow is expected to run (and be completed) BEFORE invoking `/personas.plan`. If the user explicitly states they are skipping clarification (e.g., exploratory spike), you may proceed, but must warn that downstream rework risk increases.
+- After `/personas.specify` to resolve ambiguities before architecture/planning
+- Multiple times as needed when new clarifications emerge
+- Before `/personas.plan` if specification has unresolved questions
+
+```text
+```
 
 Execution steps:
 
@@ -181,7 +186,8 @@ Context for prioritization: {ARGS}
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
-```
+
+```text
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional) (YOU ARE HERE)
@@ -196,6 +202,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 ```
 
 **Note**: `/personas.clarify` is optional and can be run:
+
 - After `/personas.specify` to resolve ambiguities before architecture/planning
 - Multiple times as needed when new clarifications emerge
 - Before `/personas.plan` if specification has unresolved questions

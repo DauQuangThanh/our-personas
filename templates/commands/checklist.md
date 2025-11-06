@@ -301,23 +301,27 @@ Sample items:
 The `/personas.checklist` command can be run at multiple points in the workflow:
 
 **After specification (requirements quality checklist)**:
-```
+
+```text
 /personas.specify → /personas.checklist (YOU ARE HERE) → /personas.clarify
 ```
 
 **After planning (design quality checklist)**:
-```
+
+```text
 /personas.plan → /personas.checklist (YOU ARE HERE) → /personas.tasks
 ```
 
 **Before implementation (pre-flight checklist)**:
-```
+
+```text
 /personas.tasks → /personas.checklist (YOU ARE HERE) → /personas.analyze → /personas.implement
 ```
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
-```
+
+```text
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)

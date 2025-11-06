@@ -195,7 +195,7 @@ Follow this execution flow:
 
 11. **Architecture Quality Validation**: After writing the initial architecture document, validate it against quality criteria:
 
-   a. **Create Architecture Quality Checklist**: 
+   a. **Create Architecture Quality Checklist**:
       - Copy `templates/checklist-arch-template.md` to `/memory/checklists/architecture.md`
       - Replace template placeholders:
         - `[DATE]` → Current date
@@ -209,14 +209,14 @@ Follow this execution flow:
       - **If all required items pass**: Mark checklist complete and proceed
       - **If items fail**:
         1. List the failing items and specific issues with context
-        2. Determine if failures are blockers based on product level:
+        1. Determine if failures are blockers based on product level:
            - Mock-up: Only basic completeness required
            - PoC: Core technical approach must be clear
            - MVP: Security + performance baselines required
            - Production: All quality attributes must be comprehensive
-        3. Update the architecture to address blocking issues
-        4. Re-run validation until all blocking items pass (max 3 iterations)
-        5. If still failing after 3 iterations:
+        1. Update the architecture to address blocking issues
+        1. Re-run validation until all blocking items pass (max 3 iterations)
+        1. If still failing after 3 iterations:
            - Document remaining issues in checklist notes
            - Warn user about incomplete areas
            - Suggest specific improvements needed
@@ -234,19 +234,19 @@ Follow this execution flow:
         - Recommendations for improvement
       - Add notes for context or additional observations
 
-12. **Output a final summary to the user** with:
-    - System name and purpose
-    - Product level and architectural implications
-    - Technology stack configured
-    - Key architectural decisions and rationale
-    - Components and their interactions
-    - Quality attributes and targets
-    - Infrastructure and deployment approach
-    - Alignment status with constitution and coding standards
-    - **Checklist validation results**: Pass/fail status with details
-    - **Readiness for planning**: Confirm if ready for `/personas.plan` or needs updates
-    - **Next recommended step**: Run `/personas.standardize` to establish coding standards aligned with this architecture
-    - Suggested commit message (e.g., `docs: establish architecture for [System Name] v1.0 (MVP microservices)`)
+1. **Output a final summary to the user** with:
+   - System name and purpose
+   - Product level and architectural implications
+   - Technology stack configured
+   - Key architectural decisions and rationale
+   - Components and their interactions
+   - Quality attributes and targets
+   - Infrastructure and deployment approach
+   - Alignment status with constitution and coding standards
+   - **Checklist validation results**: Pass/fail status with details
+   - **Readiness for planning**: Confirm if ready for `/personas.plan` or needs updates
+   - **Next recommended step**: Run `/personas.standardize` to establish coding standards aligned with this architecture
+   - Suggested commit message (e.g., `docs: establish architecture for [System Name] v1.0 (MVP microservices)`)
 
 ## Key Guidelines
 
@@ -364,7 +364,8 @@ After completing the architecture document and checklist validation:
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
-```
+
+```text
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)

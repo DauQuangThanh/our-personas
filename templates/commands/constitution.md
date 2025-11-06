@@ -79,7 +79,8 @@ Do not create a new template; always operate on the existing `/memory/constituti
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
-```
+
+```text
 1. /personas.constitution  → Establish project principles (YOU ARE HERE)
 2. /personas.specify       → Create feature specifications (NEXT STEP)
 3. /personas.clarify       → Clarify requirements (optional)

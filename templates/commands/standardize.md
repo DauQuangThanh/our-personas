@@ -37,50 +37,50 @@ Follow this execution flow:
      - `STANDARD_VERSION`: Start at 1.0.0 or increment from existing
      - `RATIFICATION_DATE`: Original adoption date (ask if unknown)
      - `LAST_AMENDED_DATE`: Today's date if making changes
-   
+
    - **Frontend Standards** (if frontend detected):
      - `FRONTEND_FRAMEWORK`: React, Vue, Angular, Svelte, etc.
      - `FRONTEND_DESCRIPTION`: Framework-specific best practices
      - `COMPONENT_ARCHITECTURE`: Component design patterns
      - `STATE_MANAGEMENT`: State management approach
      - `STYLING_STANDARDS`: CSS methodology and tools
-   
+
    - **Backend Standards** (if backend detected):
      - `BACKEND_FRAMEWORK`: Express, Django, FastAPI, Spring Boot, etc.
      - `BACKEND_DESCRIPTION`: Framework-specific patterns
      - `API_DESIGN`: RESTful/GraphQL design principles
      - `DATABASE_STANDARDS`: ORM, naming, migration strategy
      - `AUTH_STANDARDS`: Authentication and authorization approach
-   
+
    - **Code Quality Standards**:
      - `CODE_STYLE`: Linters, formatters, style guides
      - `TESTING_REQUIREMENTS`: Test frameworks, coverage requirements
      - `DOCUMENTATION_STANDARDS`: Documentation expectations
-   
+
    - **Security Standards**:
      - `INPUT_VALIDATION`: Validation and sanitization rules
      - `DATA_PROTECTION`: Encryption and data handling
      - `DEPENDENCY_MANAGEMENT`: Dependency security practices
-   
+
    - **Performance Standards**:
      - `FRONTEND_PERFORMANCE`: Bundle size, loading times, metrics
      - `BACKEND_PERFORMANCE`: Response times, optimization strategies
      - `MONITORING_STANDARDS`: Observability and monitoring tools
-   
+
    - **DevOps Standards**:
      - `VERSION_CONTROL`: Git workflow and branching strategy
      - `CICD_PIPELINE`: CI/CD requirements and tools
      - `INFRASTRUCTURE_STANDARDS`: IaC and deployment practices
-   
+
    - **Database Standards**:
      - `SCHEMA_DESIGN`: Schema design principles
      - `MIGRATION_STRATEGY`: Database migration approach
      - `DATA_ACCESS_PATTERNS`: Data access best practices
-   
+
    - **Project-Specific Standards**:
      - `TECH_STACK_SPECIFIC`: Monorepo, microservices, etc.
      - `DOMAIN_SPECIFIC`: Industry-specific requirements (PCI-DSS, HIPAA, GDPR)
-   
+
    - **Governance**:
      - `REVIEW_CHECKLIST`: Code review checklist items
      - `REVIEW_PROCESS`: Review workflow and requirements
@@ -114,30 +114,30 @@ Follow this execution flow:
      - TypeScript strict mode
      - Jest/Vitest for testing
      - pnpm/npm/yarn for package management
-   
+
    - **Python**:
      - Black + isort for formatting
      - Pylint/Flake8 for linting
      - pytest for testing
      - Poetry/pip for dependency management
-   
+
    - **Go**:
      - gofmt for formatting
      - golangci-lint for linting
      - Standard library testing
      - Go modules for dependencies
-   
+
    - **Java**:
      - Checkstyle/PMD for code quality
      - JUnit 5 for testing
      - Maven/Gradle for builds
      - Spring Boot conventions if applicable
-   
+
    - **Ruby**:
      - RuboCop for style
      - RSpec/Minitest for testing
      - Bundler for dependencies
-   
+
    - **Rust**:
      - rustfmt for formatting
      - clippy for linting
@@ -260,7 +260,8 @@ After completing the coding standard:
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
-```
+
+```text
 1. /personas.constitution  → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)

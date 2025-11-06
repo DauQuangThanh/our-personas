@@ -74,7 +74,7 @@
 
 ### Standards Alignment Check
 
-*GATE: Must align with standards.md E2E testing requirements*
+*GATE:* Must align with standards.md E2E testing requirements
 
 | Standard Requirement | Test Strategy Compliance | Status |
 |---------------------|--------------------------|--------|
@@ -85,7 +85,7 @@
 
 ### Architecture Alignment Check
 
-*GATE: Must match deployment architecture*
+*GATE:* Must match deployment architecture
 
 | Architecture Component | Test Coverage | Status |
 |------------------------|---------------|--------|
@@ -174,8 +174,8 @@
 | User Role | Username | Email | Password | Purpose |
 |-----------|----------|-------|----------|---------|
 | Guest | N/A | N/A | N/A | Unauthenticated workflows |
-| Registered User | testuser001 | testuser001@example.com | ValidPass123! | Basic workflows |
-| Admin User | testadmin | admin@example.com | AdminPass123! | Admin workflows |
+| Registered User | testuser001 | `testuser001@example.com` | ValidPass123! | Basic workflows |
+| Admin User | testadmin | `admin@example.com` | AdminPass123! | Admin workflows |
 
 ### Test Data Fixtures
 
@@ -229,6 +229,7 @@
 **Framework Version**: [X.Y.Z]
 
 **Browsers to Install**:
+
 - Chrome (latest)
 - Firefox (latest)
 - Safari (if on macOS)
@@ -236,6 +237,7 @@
 ### CI/CD Integration
 
 **From standards.md**:
+
 - **Pipeline**: [GitHub Actions / Jenkins / GitLab CI]
 - **Trigger**: [On PR / On commit to main / Nightly]
 - **Test Stages**: [E2E tests run after build and deployment to test environment]

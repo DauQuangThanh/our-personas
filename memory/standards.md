@@ -6,6 +6,7 @@
 ### I. Frontend Standards
 
 #### [FRONTEND_FRAMEWORK]
+
 <!-- Example: React, Vue, Angular, Svelte, etc. -->
 [FRONTEND_DESCRIPTION]
 <!-- Example: 
@@ -17,6 +18,7 @@
 -->
 
 #### Component Architecture
+
 [COMPONENT_ARCHITECTURE]
 <!-- Example:
 - Atomic design principles: atoms → molecules → organisms → templates → pages
@@ -27,6 +29,7 @@
 -->
 
 #### State Management
+
 [STATE_MANAGEMENT]
 <!-- Example:
 - Local state: useState for component-specific data
@@ -37,6 +40,7 @@
 -->
 
 #### Styling Standards
+
 [STYLING_STANDARDS]
 <!-- Example:
 - CSS Modules / Styled Components / Tailwind CSS
@@ -47,6 +51,7 @@
 -->
 
 #### Naming Conventions for UI Elements
+
 [UI_NAMING_CONVENTIONS]
 <!-- Example:
 Component Naming:
@@ -82,6 +87,7 @@ File Organization:
 ### II. Backend Standards
 
 #### [BACKEND_FRAMEWORK]
+
 <!-- Example: Node.js/Express, Django/FastAPI, Spring Boot, Go/Gin, etc. -->
 [BACKEND_DESCRIPTION]
 <!-- Example:
@@ -93,6 +99,7 @@ File Organization:
 -->
 
 #### API Design
+
 [API_DESIGN]
 <!-- Example:
 - RESTful endpoints: /api/v1/resources
@@ -105,6 +112,7 @@ File Organization:
 -->
 
 #### Database Standards
+
 [DATABASE_STANDARDS]
 <!-- Example:
 - ORM required: Prisma / TypeORM / Sequelize / Django ORM
@@ -116,6 +124,7 @@ File Organization:
 -->
 
 #### Authentication & Authorization
+
 [AUTH_STANDARDS]
 <!-- Example:
 - JWT tokens with refresh token rotation
@@ -129,6 +138,7 @@ File Organization:
 ### III. Code Quality & Testing
 
 #### Code Style
+
 [CODE_STYLE]
 <!-- Example:
 - Linting: ESLint (frontend), Pylint/Black (Python), golangci-lint (Go)
@@ -142,6 +152,7 @@ File Organization:
 -->
 
 #### Testing Requirements
+
 [TESTING_REQUIREMENTS]
 <!-- Example:
 - Unit tests: Jest/Vitest (frontend), pytest (Python), Go test
@@ -154,6 +165,7 @@ File Organization:
 -->
 
 #### Documentation Standards
+
 [DOCUMENTATION_STANDARDS]
 <!-- Example:
 - Code comments: JSDoc/TSDoc for public APIs
@@ -167,6 +179,7 @@ File Organization:
 ### IV. Security Standards
 
 #### Input Validation
+
 [INPUT_VALIDATION]
 <!-- Example:
 - Validate all user inputs on both client and server
@@ -177,6 +190,7 @@ File Organization:
 -->
 
 #### Data Protection
+
 [DATA_PROTECTION]
 <!-- Example:
 - Encryption at rest: AES-256 for sensitive data
@@ -187,6 +201,7 @@ File Organization:
 -->
 
 #### Dependency Management
+
 [DEPENDENCY_MANAGEMENT]
 <!-- Example:
 - Lock files required: package-lock.json, poetry.lock, go.sum
@@ -199,6 +214,7 @@ File Organization:
 ### V. Performance Standards
 
 #### Frontend Performance
+
 [FRONTEND_PERFORMANCE]
 <!-- Example:
 - Bundle size: Max 300KB gzipped initial load
@@ -210,6 +226,7 @@ File Organization:
 -->
 
 #### Backend Performance
+
 [BACKEND_PERFORMANCE]
 <!-- Example:
 - API response time: p95 <500ms, p99 <1s
@@ -221,6 +238,7 @@ File Organization:
 -->
 
 #### Monitoring & Observability
+
 [MONITORING_STANDARDS]
 <!-- Example:
 - Application Performance Monitoring: New Relic / DataDog / Sentry
@@ -234,6 +252,7 @@ File Organization:
 ### VI. DevOps & Deployment
 
 #### Version Control
+
 [VERSION_CONTROL]
 <!-- Example:
 - Git branching: GitFlow or trunk-based development
@@ -244,6 +263,7 @@ File Organization:
 -->
 
 #### CI/CD Pipeline
+
 [CICD_PIPELINE]
 <!-- Example:
 - Automated builds on every commit
@@ -255,6 +275,7 @@ File Organization:
 -->
 
 #### Infrastructure as Code
+
 [INFRASTRUCTURE_STANDARDS]
 <!-- Example:
 - Terraform / AWS CloudFormation / Pulumi for infrastructure
@@ -268,6 +289,7 @@ File Organization:
 ### VII. Database & Data Standards
 
 #### Schema Design
+
 [SCHEMA_DESIGN]
 <!-- Example:
 - Normalization: 3NF minimum for OLTP databases
@@ -279,6 +301,7 @@ File Organization:
 -->
 
 #### Migration Strategy
+
 [MIGRATION_STRATEGY]
 <!-- Example:
 - All schema changes via migrations (no manual SQL)
@@ -290,6 +313,7 @@ File Organization:
 -->
 
 #### Data Access Patterns
+
 [DATA_ACCESS_PATTERNS]
 <!-- Example:
 - Repository pattern for data access abstraction
@@ -325,6 +349,7 @@ File Organization:
 ## Code Review Guidelines
 
 ### Review Checklist
+
 [REVIEW_CHECKLIST]
 <!-- Example:
 - [ ] Code follows project coding standards
@@ -340,6 +365,7 @@ File Organization:
 -->
 
 ### Review Process
+
 [REVIEW_PROCESS]
 <!-- Example:
 - Self-review before requesting PR review
@@ -353,6 +379,7 @@ File Organization:
 ## Exception Process
 
 ### When to Deviate
+
 [EXCEPTION_CRITERIA]
 <!-- Example:
 - Technical debt must be documented with ticket number
@@ -363,6 +390,7 @@ File Organization:
 -->
 
 ### Documentation Requirements
+
 [EXCEPTION_DOCUMENTATION]
 <!-- Example:
 - Create ADR (Architecture Decision Record) for major deviations
@@ -374,6 +402,7 @@ File Organization:
 ## Governance
 
 ### Standard Enforcement
+
 [ENFORCEMENT_RULES]
 <!-- Example:
 - All PRs must pass automated checks (linting, tests, security scans)
@@ -384,6 +413,7 @@ File Organization:
 -->
 
 ### Amendment Process
+
 [AMENDMENT_PROCESS]
 <!-- Example:
 - Propose changes via RFC document
@@ -395,6 +425,7 @@ File Organization:
 -->
 
 ### Compliance Verification
+
 [COMPLIANCE_VERIFICATION]
 <!-- Example:
 - Automated checks in CI/CD pipeline
