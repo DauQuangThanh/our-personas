@@ -336,6 +336,7 @@ Implement the feature:
 ### Phase 3: Iterate With More Features
 
 Repeat Phase 2 for each additional feature (003, 004, etc.):
+
 - Feature 003: Kanban boards with drag-and-drop
 - Feature 004: Task comments and assignments
 - Feature 005: Real-time collaboration
