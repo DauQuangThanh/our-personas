@@ -1283,7 +1283,7 @@ def init(
     steps_lines.append("   2.6 [cyan]/personas.design-test[/] - Build E2E test specification")
     steps_lines.append("   2.7 [cyan]/personas.taskify[/] - Generate actionable tasks")
     steps_lines.append("   2.8 [cyan]/personas.implement[/] - Execute implementation")
-    steps_lines.append("   2.9 [cyan]/personas.test[/] - Perform E2E test scenario")
+    steps_lines.append("   2.9 [cyan]/personas.test[/] - Perform E2E testing")
 
     steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
     console.print()
