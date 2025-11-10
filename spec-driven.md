@@ -103,7 +103,7 @@ A comprehensive set of commands that automate the entire development process:
 - **`/personas.design-test`**: Create E2E test scenarios from user workflows
 - **`/personas.taskify`**: Break down plans into executable task lists
 - **`/personas.analyze`**: Validate cross-artifact consistency
-- **`/personas.checklist`**: Generate quality validation checklists
+- **`/personas.validate-specs`**: Generate quality validation checklists
 - **`/personas.implement`**: Execute implementation following task list
 - **`/personas.test`**: Run E2E tests and generate comprehensive reports
 
@@ -280,7 +280,7 @@ Executes E2E tests according to the test spec:
 4. **Report Generation**: Creates comprehensive test-report.md with results and recommendations
 5. **Traceability**: Links test results back to workflows and requirements
 
-### The `/personas.checklist` Command
+### The `/personas.validate-specs` Command
 
 Generates custom quality checklists for validating artifacts:
 

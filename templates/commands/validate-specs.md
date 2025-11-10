@@ -76,7 +76,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Derive checklist theme (e.g., security, review, deploy, ux)
    - Consolidate explicit must-have items mentioned by user
    - Map focus selections to category scaffolding
-   - Infer any missing context from spec/plan/tasks (do NOT hallucinate)
+   - Infer any missing context from spec/design/tasks (do NOT hallucinate)
 
 4. **Load feature context**: Read from FEATURE_DIR:
    - spec.md: Feature requirements and scope
@@ -96,7 +96,7 @@ You **MUST** consider the user input before proceeding (if not empty).
      - Format: `[domain].md`
      - If file exists, append to existing file
    - Number items sequentially starting from CHK001
-   - Each `/personas.checklist` run creates a NEW file (never overwrites existing checklists)
+   - Each `/personas.validate-specs` run creates a NEW file (never overwrites existing checklists)
 
    **CORE PRINCIPLE - Test the Requirements, Not the Implementation**:
    Every checklist item MUST evaluate the REQUIREMENTS THEMSELVES for:
@@ -214,7 +214,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Actor/timing
    - Any explicit user-specified must-have items incorporated
 
-**Important**: Each `/personas.checklist` command invocation creates a checklist file using short, descriptive names unless file already exists. This allows:
+**Important**: Each `/personas.validate-specs` command invocation creates a checklist file using short, descriptive names unless file already exists. This allows:
 
 - Multiple checklists of different types (e.g., `ux.md`, `test.md`, `security.md`)
 - Simple, memorable filenames that indicate checklist purpose
@@ -298,24 +298,24 @@ Sample items:
 
 ## Recommended Workflow
 
-The `/personas.checklist` command can be run at multiple points in the workflow:
+The `/personas.validate-specs` command can be run at multiple points in the workflow:
 
 **After specification (requirements quality checklist)**:
 
 ```text
-/personas.specify → /personas.checklist (YOU ARE HERE) → /personas.clarify
+/personas.specify → /personas.validate-specs (YOU ARE HERE) → /personas.clarify
 ```
 
 **After planning (design quality checklist)**:
 
 ```text
-/personas.design → /personas.checklist (YOU ARE HERE) → /personas.taskify
+/personas.design → /personas.validate-specs (YOU ARE HERE) → /personas.taskify
 ```
 
 **Before implementation (pre-flight checklist)**:
 
 ```text
-/personas.taskify → /personas.checklist (YOU ARE HERE) → /personas.analyze → /personas.implement
+/personas.taskify → /personas.validate-specs (YOU ARE HERE) → /personas.analyze → /personas.implement
 ```
 
 **Complete workflow context**:
