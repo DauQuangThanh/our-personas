@@ -1,5 +1,5 @@
 ---
-description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and taskify.md after task generation.
+description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, design.md, and taskify.md after task generation.
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks
   ps: scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks
@@ -15,7 +15,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Goal
 
-Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `plan.md`, `taskify.md`) and foundational documents (`ground-rules.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.taskify` has successfully produced a complete `taskify.md`.
+Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `design.md`, `taskify.md`) and foundational documents (`ground-rules.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.taskify` has successfully produced a complete `taskify.md`.
 
 ## Operating Constraints
 
@@ -34,7 +34,7 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 Run `{SCRIPT}` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_DOCS. Derive absolute paths:
 
 - SPEC = FEATURE_DIR/spec.md
-- PLAN = FEATURE_DIR/plan.md
+- PLAN = FEATURE_DIR/design.md
 - TASKS = FEATURE_DIR/taskify.md
 
 Abort with an error message if any required file is missing (instruct the user to run missing prerequisite command).
@@ -52,7 +52,7 @@ Load only the minimal necessary context from each artifact:
 - User Stories
 - Edge Cases (if present)
 
-**From plan.md:**
+**From design.md:**
 
 - Architecture/stack choices
 - Data Model references
@@ -206,7 +206,7 @@ At end of report, output a concise Next Actions block:
 
 - If CRITICAL issues exist: Recommend resolving before `/personas.implement`
 - If only LOW/MEDIUM: User may proceed, but provide improvement suggestions
-- Provide explicit command suggestions: e.g., "Run /personas.specify with refinement", "Run /personas.plan to adjust architecture", "Manually edit taskify.md to add coverage for 'performance-metrics'"
+- Provide explicit command suggestions: e.g., "Run /personas.specify with refinement", "Run /personas.design to adjust architecture", "Manually edit taskify.md to add coverage for 'performance-metrics'"
 
 ### 8. Offer Remediation
 
@@ -238,7 +238,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency (YOU ARE HERE)

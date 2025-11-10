@@ -3,7 +3,7 @@
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `/personas.plan` command. See `.personas/templates/commands/plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/personas.design` command. See `.personas/templates/commands/design.md` for the execution workflow.
 
 ## Summary
 
@@ -39,12 +39,12 @@
 
 ```text
 specs/[###-feature]/
-├── plan.md              # This file (/personas.plan command output)
-├── research.md          # Phase 0 output (/personas.plan command)
-├── data-model.md        # Phase 1 output (/personas.plan command)
-├── quickstart.md        # Phase 1 output (/personas.plan command)
-├── contracts/           # Phase 1 output (/personas.plan command)
-└── taskify.md             # Phase 2 output (/personas.taskify command - NOT created by /personas.plan)
+├── design.md              # This file (/personas.design command output)
+├── research.md          # Phase 0 output (/personas.design command)
+├── data-model.md        # Phase 1 output (/personas.design command)
+├── quickstart.md        # Phase 1 output (/personas.design command)
+├── contracts/           # Phase 1 output (/personas.design command)
+└── taskify.md             # Phase 2 output (/personas.taskify command - NOT created by /personas.design)
 ```
 
 ### Source Code (repository root)

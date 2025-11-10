@@ -1,8 +1,8 @@
 ---
-description: Execute the implementation planning workflow using the plan template to generate design artifacts.
+description: Execute the implementation design workflow using the design template to generate design artifacts.
 scripts:
-  sh: scripts/bash/setup-plan.sh --json
-  ps: scripts/powershell/setup-plan.ps1 -Json
+  sh: scripts/bash/setup-design.sh --json
+  ps: scripts/powershell/setup-design.ps1 -Json
 agent_scripts:
   sh: scripts/bash/update-agent-context.sh __AGENT__
   ps: scripts/powershell/update-agent-context.ps1 -AgentType __AGENT__
@@ -22,7 +22,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Load context**: Read FEATURE_SPEC and `/memory/ground-rules.md`, `/d-docs/architecture.md`, `/d-docs/standards.md`. Load IMPL_PLAN template (already copied).
 
-3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
+3. **Execute design workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - **Fill Alignment Checks section**:
      - **Ground Rules Check**: Verify alignment with ground rules principles (governance, values, constraints)
@@ -110,7 +110,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design (YOU ARE HERE)
+6. /personas.design          → Plan feature implementation with design (YOU ARE HERE)
 7. /personas.design-test   → Generate E2E test spec (NEXT STEP)
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency

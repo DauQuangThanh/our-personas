@@ -33,12 +33,12 @@ New-Item -ItemType Directory -Path $paths.FEATURE_DIR -Force | Out-Null
 
 # Define design-test specific paths
 $testSpec = Join-Path $paths.FEATURE_DIR 'test-spec.md'
-$implPlan = Join-Path $paths.FEATURE_DIR 'plan.md'
+$implPlan = Join-Path $paths.FEATURE_DIR 'design.md'
 
 # Check if implementation plan exists
 if (-not (Test-Path $implPlan)) {
     Write-Error "Implementation plan not found at $implPlan"
-    Write-Output "Please run /personas.plan first to create the implementation plan"
+    Write-Output "Please run /personas.design first to create the implementation design"
     exit 1
 }
 

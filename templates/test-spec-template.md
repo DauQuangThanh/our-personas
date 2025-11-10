@@ -1,6 +1,6 @@
 # E2E Test Plan: [FEATURE]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Plan**: [link to plan.md]
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Design**: [link to design.md]
 **Input**: User workflows from `/specs/[###-feature-name]/quickstart.md`
 
 **Note**: This template is filled in by the `/personas.design-test` command. See `.personas/templates/commands/design-test.md` for the execution workflow.
@@ -14,7 +14,7 @@
 ### Source Documents Review
 
 **User Workflows**: [quickstart.md - User scenarios, workflows, steps]
-**Implementation Plan**: [plan.md - Technical context, constraints, platform]
+**Implementation Design**: [design.md - Technical context, constraints, platform]
 **Architecture**: [/d-docs/architecture.md - Deployment environment, infrastructure]
 **Standards**: [/d-docs/standards.md - E2E test framework, practices]
 
@@ -166,7 +166,7 @@
 
 <!--
   ACTION REQUIRED: Define test data requirements based on quickstart.md workflows
-  and plan.md data model.
+  and design.md data model.
 -->
 
 ### User Accounts
@@ -279,7 +279,7 @@
 ### References
 
 - **User Workflows**: `/specs/[###-feature-name]/quickstart.md`
-- **Implementation Plan**: `/specs/[###-feature-name]/plan.md`
+- **Implementation Design**: `/specs/[###-feature-name]/design.md`
 - **Architecture**: `/d-docs/architecture.md`
 - **Standards**: `/d-docs/standards.md`
 

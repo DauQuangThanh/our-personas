@@ -17,9 +17,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.
 
+
 - After `/personas.specify` to resolve ambiguities before architecture/planning
 - Multiple times as needed when new clarifications emerge
-- Before `/personas.plan` if specification has unresolved questions
+- Before `/personas.design` if specification has unresolved questions
+
+```
 
 ```text
 ```
@@ -169,7 +172,7 @@ Execution steps:
    - Path to updated spec.
    - Sections touched (list names).
    - Coverage summary table listing each taxonomy category with Status: Resolved (was Partial/Missing and addressed), Deferred (exceeds question quota or better suited for planning), Clear (already sufficient), Outstanding (still Partial/Missing but low impact).
-   - If any Outstanding or Deferred remain, recommend whether to proceed to `/personas.plan` or run `/personas.clarify` again later post-plan.
+   - If any Outstanding or Deferred remain, recommend whether to proceed to `/personas.design` or run `/personas.clarify` again later post-design.
    - Suggested next command.
 
 Behavior rules:
@@ -193,7 +196,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional) (YOU ARE HERE)
 4. /personas.architect     → Define system architecture (NEXT STEP)
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
@@ -205,4 +208,4 @@ Your response **MUST** suggest the user's next step, following the sequential or
 
 - After `/personas.specify` to resolve ambiguities before architecture/planning
 - Multiple times as needed when new clarifications emerge
-- Before `/personas.plan` if specification has unresolved questions
+- Before `/personas.design` if specification has unresolved questions

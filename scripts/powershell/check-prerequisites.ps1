@@ -40,10 +40,10 @@ OPTIONS:
   -Help, -h           Show this help message
 
 EXAMPLES:
-  # Check task prerequisites (plan.md required)
+  # Check task prerequisites (design.md required)
   .\check-prerequisites.ps1 -Json
   
-  # Check implementation prerequisites (plan.md + taskify.md required)
+  # Check implementation prerequisites (design.md + taskify.md required)
   .\check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks
   
   # Get feature paths only (no validation)
@@ -93,8 +93,8 @@ if (-not (Test-Path $paths.FEATURE_DIR -PathType Container)) {
 }
 
 if (-not (Test-Path $paths.IMPL_PLAN -PathType Leaf)) {
-    Write-Output "ERROR: plan.md not found in $($paths.FEATURE_DIR)"
-    Write-Output "Run /personas.plan first to create the implementation plan."
+    Write-Output "ERROR: design.md not found in $($paths.FEATURE_DIR)"
+    Write-Output "Run /personas.design first to create the implementation design."
     exit 1
 }
 

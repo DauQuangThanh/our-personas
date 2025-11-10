@@ -80,7 +80,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 4. **Load feature context**: Read from FEATURE_DIR:
    - spec.md: Feature requirements and scope
-   - plan.md (if exists): Technical details, dependencies
+   - design.md (if exists): Technical details, dependencies
    - taskify.md (if exists): Implementation tasks
 
    **Context Loading Strategy**:
@@ -309,7 +309,7 @@ The `/personas.checklist` command can be run at multiple points in the workflow:
 **After planning (design quality checklist)**:
 
 ```text
-/personas.plan → /personas.checklist (YOU ARE HERE) → /personas.taskify
+/personas.design → /personas.checklist (YOU ARE HERE) → /personas.taskify
 ```
 
 **Before implementation (pre-flight checklist)**:
@@ -327,7 +327,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency

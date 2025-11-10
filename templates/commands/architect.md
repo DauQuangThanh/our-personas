@@ -244,7 +244,7 @@ Follow this execution flow:
    - Infrastructure and deployment approach
    - Alignment status with ground rules and coding standards
    - **Checklist validation results**: Pass/fail status with details
-   - **Readiness for planning**: Confirm if ready for `/personas.plan` or needs updates
+   - **Readiness for planning**: Confirm if ready for `/personas.design` or needs updates
    - **Next recommended step**: Run `/personas.standardize` to establish coding standards aligned with this architecture
    - Suggested commit message (e.g., `docs: establish architecture for [System Name] v1.0 (MVP microservices)`)
 
@@ -352,11 +352,11 @@ After completing the architecture document and checklist validation:
 3. **Establish coding standards**: Run `/personas.standardize` to create technology-specific coding standards that align with this architecture
    - This ensures consistent development practices across all features
    - Standards will be based on the technology stack defined in this architecture
-   - Required before running `/personas.plan` to ensure implementation plans follow established standards
+   - Required before running `/personas.design` to ensure implementation designs follow established standards
 4. **Review with stakeholders**: Get feedback from team, product, and ops
 5. **Document ADRs**: Create Architecture Decision Records for key choices
 6. **Update related docs**: Ensure README, design docs align with architecture
-7. **Ready for feature work**: After standards are established, proceed to `/personas.plan` and `/personas.taskify` for feature development
+7. **Ready for feature work**: After standards are established, proceed to `/personas.design` and `/personas.taskify` for feature development
 8. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
 9. **Establish monitoring**: Set up observability for quality attribute tracking
 10. **Create runbooks**: Document operational procedures for the architecture
@@ -370,7 +370,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture (YOU ARE HERE)
 5. /personas.standardize   → Establish coding standards (NEXT STEP)
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency

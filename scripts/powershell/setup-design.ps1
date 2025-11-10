@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 
 # Show help if requested
 if ($Help) {
-    Write-Output "Usage: ./setup-plan.ps1 [-Json] [-Help]"
+    Write-Output "Usage: ./setup-design.ps1 [-Json] [-Help]"
     Write-Output "  -Json     Output results in JSON format"
     Write-Output "  -Help     Show this help message"
     exit 0
@@ -31,14 +31,14 @@ if (-not (Test-FeatureBranch -Branch $paths.CURRENT_BRANCH -HasGit $paths.HAS_GI
 # Ensure the feature directory exists
 New-Item -ItemType Directory -Path $paths.FEATURE_DIR -Force | Out-Null
 
-# Copy plan template if it exists, otherwise note it or create empty file
-$template = Join-Path $paths.REPO_ROOT '.personas/templates/plan-template.md'
+# Copy design template if it exists, otherwise note it or create empty file
+$template = Join-Path $paths.REPO_ROOT '.personas/templates/design-template.md'
 if (Test-Path $template) { 
     Copy-Item $template $paths.IMPL_PLAN -Force
-    Write-Output "Copied plan template to $($paths.IMPL_PLAN)"
+    Write-Output "Copied design template to $($paths.IMPL_PLAN)"
 } else {
-    Write-Warning "Plan template not found at $template"
-    # Create a basic plan file if template doesn't exist
+    Write-Warning "Design template not found at $template"
+    # Create a basic design file if template doesn't exist
     New-Item -ItemType File -Path $paths.IMPL_PLAN -Force | Out-Null
 }
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Update agent context files with information from plan.md
+# Update agent context files with information from design.md
 #
 # This script maintains AI agent context files by parsing feature specifications 
 # and updating agent-specific configuration files with project information.
@@ -8,11 +8,11 @@
 # MAIN FUNCTIONS:
 # 1. Environment Validation
 #    - Verifies git repository structure and branch information
-#    - Checks for required plan.md files and templates
+#    - Checks for required design.md files and templates
 #    - Validates file permissions and accessibility
 #
 # 2. Plan Data Extraction
-#    - Parses plan.md files to extract project metadata
+#    - Parses design.md files to extract project metadata
 #    - Identifies language/version, frameworks, databases, and project types
 #    - Handles missing or incomplete specification data gracefully
 #
@@ -129,9 +129,9 @@ validate_environment() {
         exit 1
     fi
     
-    # Check if plan.md exists
+    # Check if design.md exists
     if [[ ! -f "$NEW_PLAN" ]]; then
-        log_error "No plan.md found at $NEW_PLAN"
+        log_error "No design.md found at $NEW_PLAN"
         log_info "Make sure you're working on a feature with a corresponding spec directory"
         if [[ "$HAS_GIT" != "true" ]]; then
             log_info "Use: export SPECIFY_FEATURE=your-feature-name or create a new feature first"
@@ -329,7 +329,7 @@ create_new_agent_file() {
     local substitutions=(
         "s|\[PROJECT NAME\]|$project_name|"
         "s|\[DATE\]|$current_date|"
-        "s|\[EXTRACTED FROM ALL PLAN.MD FILES\]|$tech_stack|"
+        "s|\[EXTRACTED FROM ALL DESIGN.MD FILES\]|$tech_stack|"
         "s|\[ACTUAL STRUCTURE FROM PLANS\]|$project_structure|g"
         "s|\[ONLY COMMANDS FOR ACTIVE TECHNOLOGIES\]|$commands|"
         "s|\[LANGUAGE-SPECIFIC, ONLY FOR LANGUAGES IN USE\]|$language_conventions|"

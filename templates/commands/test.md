@@ -17,7 +17,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for TEST_SPEC, TEST_REPORT, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read TEST_SPEC, `quickstart.md`, `plan.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
+2. **Load context**: Read TEST_SPEC, `quickstart.md`, `design.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
 
 3. **Verify prerequisites**: Verify test prerequisites before execution:
    - ERROR if design-test.md is missing or incomplete
@@ -162,7 +162,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec
 8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency

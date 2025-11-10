@@ -63,7 +63,7 @@
 			"chat.promptFilesRecommendations": {
 				"personas.regulate": true,
 				"personas.specify": true,
-				"personas.plan": true,
+				"personas.design": true,
 				"personas.taskify": true,
 				"personas.implement": true
 			},

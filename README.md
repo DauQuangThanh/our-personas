@@ -165,10 +165,10 @@ Use **`/personas.standardize`** to define coding practices, testing requirements
 
 ### 7. Create a technical implementation plan
 
-Use the **`/personas.plan`** command to provide your tech stack and architecture choices.
+Use the **`/personas.design`** command to provide your tech stack and architecture choices.
 
 ```bash
-/personas.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
+/personas.design The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
 ```
 
 ### 8. Generate E2E test spec
@@ -330,7 +330,7 @@ Essential commands for the Spec-Driven Development workflow (in recommended orde
 | `/personas.clarify`       | Clarify underspecified areas through structured questioning           | Optional: after specify, before architect |
 | `/personas.architect`     | Define system architecture, components, and infrastructure            | After clarify: establish technical framework |
 | `/personas.standardize`   | Establish coding standards, testing requirements, and quality practices | After architect: define implementation rules |
-| `/personas.plan`          | Create technical implementation plans with your chosen tech stack     | After standards: plan feature implementation |
+| `/personas.design`          | Create technical implementation designs with your chosen tech stack     | After standards: design feature implementation |
 | `/personas.design-test`     | Generate E2E test spec from user workflows in quickstart.md          | After plan: define E2E test scenarios |
 | `/personas.taskify`         | Generate actionable task lists for implementation                     | After design-test: break down into steps |
 | `/personas.analyze`       | Cross-artifact consistency & coverage analysis                        | Optional: after tasks, before implement |
@@ -349,7 +349,7 @@ Additional commands for improved quality and validation:
 
 | Variable         | Description                                                                                    |
 |------------------|------------------------------------------------------------------------------------------------|
-| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/personas.plan` or follow-up commands. |
+| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/personas.design` or follow-up commands. |
 
 ## 📚 Core Philosophy
 
@@ -466,7 +466,7 @@ personas init <project_name> --ai claude --ignore-agent-tools
 
 Go to the project folder and run your AI agent. In our example, we're using `claude`.
 
-You will know that things are configured correctly if you see the `/personas.regulate`, `/personas.specify`, `/personas.plan`, `/personas.design-test`, `/personas.taskify`, `/personas.test`, and `/personas.implement` commands available.
+You will know that things are configured correctly if you see the `/personas.regulate`, `/personas.specify`, `/personas.design`, `/personas.design-test`, `/personas.taskify`, `/personas.test`, and `/personas.implement` commands available.
 
 The first step should be establishing your project's governing principles using the `/personas.regulate` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
@@ -555,13 +555,13 @@ At this stage, your project folder contents should resemble the following:
     │  ├── check-prerequisites.sh
     │  ├── common.sh
     │  ├── create-new-feature.sh
-    │  ├── setup-plan.sh
+    │  ├── setup-design.sh
     │  └── update-agent-context.sh
     ├── specs
     │  └── 001-create-taskify
     │      └── spec.md
     └── templates
-        ├── plan-template.md
+        ├── design-template.md
         ├── spec-template.md
         └── tasks-template.md
 ```
@@ -656,7 +656,7 @@ The standards ensure consistent implementation quality across all features.
 
 ### **STEP 7:** Generate a plan
 
-You can now be specific about the tech stack and other technical requirements. You can use the `/personas.plan` command that is built into the project template with a prompt like this:
+You can now be specific about the tech stack and other technical requirements. You can use the `/personas.design` command that is built into the project template with a prompt like this:
 
 ```text
 We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use
@@ -675,7 +675,7 @@ The output of this step will include a number of implementation detail documents
 │  ├── check-prerequisites.sh
 │  ├── common.sh
 │  ├── create-new-feature.sh
-│  ├── setup-plan.sh
+│  ├── setup-design.sh
 │  └── update-claude-md.sh
 ├── specs
 │  └── 001-create-taskify
@@ -683,13 +683,13 @@ The output of this step will include a number of implementation detail documents
 │      │  ├── api-spec.json
 │      │  └── signalr-spec.md
 │      ├── data-model.md
-│      ├── plan.md
+│      ├── design.md
 │      ├── quickstart.md
 │      ├── research.md
 │      └── spec.md
 └── templates
     ├── CLAUDE-template.md
-    ├── plan-template.md
+    ├── design-template.md
     ├── spec-template.md
     └── tasks-template.md
 ```

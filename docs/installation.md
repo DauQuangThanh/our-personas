@@ -67,7 +67,7 @@ uvx --from git+https://github.com/dauquangthanh/our-personas.git personas init <
 After initialization, you should see the following commands available in your AI agent:
 
 - `/personas.specify` - Create specifications
-- `/personas.plan` - Generate implementation plans
+- `/personas.design` - Generate implementation designs
 - `/personas.taskify` - Break down into actionable tasks
 
 The `.personas/scripts` directory will contain both `.sh` and `.ps1` scripts.

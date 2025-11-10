@@ -28,7 +28,7 @@ With requirements clarified, the `/personas.architect` command establishes syste
 
 The `/personas.standardize` command then establishes comprehensive coding standards aligned with the architecture. These standards ensure consistent practices across frontend, backend, testing, security, performance, and DevOps. Every standard is measurable and enforceable, with automated checks integrated into CI/CD pipelines.
 
-For individual features, the workflow repeats the specify-clarify cycle to create detailed specifications. The `/personas.plan` command then generates implementation plans that map requirements to technical decisions—all guided by the architecture and standards established earlier. Every technology choice has documented rationale. Every architectural decision traces back through the artifact chain: plan → architecture → ground rules.
+For individual features, the workflow repeats the specify-clarify cycle to create detailed specifications. The `/personas.design` command then generates implementation designs that map requirements to technical decisions—all guided by the architecture and standards established earlier. Every technology choice has documented rationale. Every architectural decision traces back through the artifact chain: design → architecture → ground rules.
 
 Throughout this process, research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications. Organizational constraints from the ground rules seamlessly integrate into every specification and plan.
 
@@ -99,7 +99,7 @@ A comprehensive set of commands that automate the entire development process:
 - **`/personas.clarify`**: Resolve ambiguities through structured questioning
 - **`/personas.architect`**: Define system architecture following ISO/IEC/IEEE 42010:2011
 - **`/personas.standardize`**: Establish comprehensive coding standards
-- **`/personas.plan`**: Generate technical implementation plans
+- **`/personas.design`**: Generate technical implementation designs
 - **`/personas.design-test`**: Create E2E test scenarios from user workflows
 - **`/personas.taskify`**: Break down plans into executable task lists
 - **`/personas.analyze`**: Validate cross-artifact consistency
@@ -217,7 +217,7 @@ Establishes comprehensive coding standards for full-stack development:
 6. **Database Standards**: Defines schema design, migration strategy, and data access patterns
 7. **Governance Framework**: Specifies review processes, exception handling, and amendment procedures
 
-### The `/personas.plan` Command
+### The `/personas.design` Command
 
 Creates a comprehensive implementation plan aligned with architecture and standards:
 
@@ -243,7 +243,7 @@ Generates comprehensive E2E test specs from user workflows:
 
 Analyzes the plan and related design documents to generate an executable task list:
 
-1. **Inputs**: Reads `plan.md` (required) and, if present, `data-model.md`, `contracts/`, and `research.md`
+1. **Inputs**: Reads `design.md` (required) and, if present, `data-model.md`, `contracts/`, and `research.md`
 2. **Task Derivation**: Converts contracts, entities, and scenarios into specific tasks
 3. **Parallelization**: Marks independent tasks `[P]` and outlines safe parallel groups
 4. **User Story Organization**: Groups tasks by user story for incremental delivery
@@ -348,10 +348,10 @@ Total: ~20-25 hours of documentation and planning work
 # - specs/002-kanban-board/spec.md
 
 # Step 7: Create implementation plan (10 minutes)
-/personas.plan Use Blazor Server for UI, SignalR for real-time, REST API for CRUD operations, EF Core for data access
+/personas.design Use Blazor Server for UI, SignalR for real-time, REST API for CRUD operations, EF Core for data access
 
 # This creates:
-# - specs/002-kanban-board/plan.md
+# - specs/002-kanban-board/design.md
 # - specs/002-kanban-board/data-model.md
 # - specs/002-kanban-board/contracts/ (API specs)
 # - specs/002-kanban-board/quickstart.md
@@ -579,9 +579,9 @@ The `/personas.design-test` command creates comprehensive E2E scenarios before i
 
 The `/personas.analyze` command validates alignment across all artifacts:
 
-- Requirements in spec.md → Addressed in plan.md
+- Requirements in spec.md → Addressed in design.md
 - User stories in spec.md → Test scenarios in design-test.md
-- Architecture decisions → Referenced in plan.md
+- Architecture decisions → Referenced in design.md
 - Ground rules → Applied in architecture and standards
 - Coding standards → Followed in plan and tasks
 

@@ -104,7 +104,7 @@ function Get-FeaturePathsEnv {
         HAS_GIT       = $hasGit
         FEATURE_DIR   = $featureDir
         FEATURE_SPEC  = Join-Path $featureDir 'spec.md'
-        IMPL_PLAN     = Join-Path $featureDir 'plan.md'
+        IMPL_PLAN     = Join-Path $featureDir 'design.md'
         TASKS         = Join-Path $featureDir 'taskify.md'
         RESEARCH      = Join-Path $featureDir 'research.md'
         DATA_MODEL    = Join-Path $featureDir 'data-model.md'

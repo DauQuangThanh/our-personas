@@ -38,12 +38,12 @@ mkdir -p "$FEATURE_DIR"
 
 # Define design-test specific path
 TEST_SPEC="$FEATURE_DIR/test-spec.md"
-IMPL_PLAN="$FEATURE_DIR/plan.md"
+IMPL_PLAN="$FEATURE_DIR/design.md"
 
 # Check if implementation plan exists
 if [[ ! -f "$IMPL_PLAN" ]]; then
     echo "Error: Implementation plan not found at $IMPL_PLAN"
-    echo "Please run /personas.plan first to create the implementation plan"
+    echo "Please run /personas.design first to create the implementation design"
     exit 1
 fi
 

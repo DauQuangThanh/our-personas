@@ -20,7 +20,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Load context**: Read IMPL_PLAN, `quickstart.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_SPEC template (already copied).
 
 3. **Verify prerequisites**: Ensure implementation plan and quickstart exist:
-   - `plan.md` exists with technical context
+   - `design.md` exists with technical context
    - `quickstart.md` exists with user workflows
    - Architecture and standards define E2E testing requirements
    - ERROR if required documents are missing
@@ -98,7 +98,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Expected results (what should happen at each step)
    - Priority (Critical, High, Medium, Low)
 
-3. **Reference plan.md for context**:
+3. **Reference design.md for context**:
    - Technical constraints affecting E2E tests
    - Performance expectations for user workflows
    - Platform/browser requirements
@@ -130,7 +130,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 ## Key rules
 
 - Use absolute paths
-- ERROR if plan.md or quickstart.md do not exist
+- ERROR if design.md or quickstart.md do not exist
 - **FOCUS ONLY ON E2E TESTS** - No unit, integration, contract, performance, or security tests
 - **ERROR if E2E strategy conflicts with standards** (e.g., different E2E framework than specified)
 - **ERROR if test environment doesn't match architecture** (e.g., missing required infrastructure)
@@ -146,7 +146,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
-6. /personas.plan          → Plan feature implementation with design
+6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec (YOU ARE HERE)
 8. /personas.taskify       → Break down into implementation tasks (NEXT STEP)
 9. /personas.analyze       → Analyze cross-artifact consistency

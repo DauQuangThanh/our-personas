@@ -4,7 +4,7 @@
         "personas.specify": true,
         "personas.architect": true,
         "personas.standardize": true,
-        "personas.plan": true,
+        "personas.design": true,
         "personas.taskify": true,
         "personas.implement": true
     },

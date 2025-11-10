@@ -13,7 +13,7 @@
   The /personas.checklist command MUST replace these with actual items based on:
   - User's specific checklist request
   - Feature requirements from spec.md
-  - Technical context from plan.md
+  - Technical context from design.md
   - Implementation details from taskify.md
   
   DO NOT keep these sample items in the generated checklist file.

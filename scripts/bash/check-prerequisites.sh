@@ -55,10 +55,10 @@ OPTIONS:
   --help, -h          Show this help message
 
 EXAMPLES:
-  # Check task prerequisites (plan.md required)
+  # Check task prerequisites (design.md required)
   ./check-prerequisites.sh --json
   
-  # Check implementation prerequisites (plan.md + taskify.md required)
+  # Check implementation prerequisites (design.md + taskify.md required)
   ./check-prerequisites.sh --json --require-tasks --include-tasks
   
   # Get feature paths only (no validation)
@@ -107,8 +107,8 @@ if [[ ! -d "$FEATURE_DIR" ]]; then
 fi
 
 if [[ ! -f "$IMPL_PLAN" ]]; then
-    echo "ERROR: plan.md not found in $FEATURE_DIR" >&2
-    echo "Run /personas.plan first to create the implementation plan." >&2
+    echo "ERROR: design.md not found in $FEATURE_DIR" >&2
+    echo "Run /personas.design first to create the implementation design." >&2
     exit 1
 fi
 

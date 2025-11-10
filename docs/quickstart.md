@@ -115,10 +115,10 @@ Use the `/personas.specify` command to describe what you want to build. Focus on
 
 ### 7. Create a Technical Implementation Plan
 
-Use the `/personas.plan` command to provide your tech stack and architecture choices.
+Use the `/personas.design` command to provide your tech stack and architecture choices.
 
 ```bash
-/personas.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
+/personas.design The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
 ```
 
 ### 8. Generate E2E Test Plan
@@ -291,7 +291,7 @@ Read the review and acceptance checklist, and check off each item in the checkli
 Be specific about implementation details for this feature:
 
 ```text
-/personas.plan For Feature 002, implement:
+/personas.design For Feature 002, implement:
 - .NET 8 Auth Service with in-memory user store (5 predefined users)
 - React frontend with user selection screen
 - PostgreSQL database for projects
