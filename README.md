@@ -344,6 +344,7 @@ Additional commands for improved quality and validation:
 | Command              | Description                                                           | When to Use |
 |----------------------|-----------------------------------------------------------------------|-------------|
 | `/personas.validate-specs` | Generate custom quality checklists for validating artifacts          | Any time: after specify, design, or tasks |
+| `/personas.validate-arch` | Generate custom quality checklists for validating architecture design | After architect, before standardize or design |
 
 ### Environment Variables
 

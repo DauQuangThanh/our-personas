@@ -245,7 +245,9 @@ Follow this execution flow:
    - Alignment status with ground rules and coding standards
    - **Checklist validation results**: Pass/fail status with details
    - **Readiness for planning**: Confirm if ready for `/personas.design` or needs updates
-   - **Next recommended step**: Run `/personas.standardize` to establish coding standards aligned with this architecture
+   - **Next recommended step**: 
+     - **Recommended**: Run `/personas.validate-arch` to generate custom architecture validation checklists
+     - **Alternative**: Run `/personas.standardize` to establish coding standards aligned with this architecture
    - Suggested commit message (e.g., `docs: establish architecture for [System Name] v1.0 (MVP microservices)`)
 
 ## Key Guidelines
@@ -349,17 +351,21 @@ After completing the architecture document and checklist validation:
 
 1. **Review checklist results**: Check `/d-docs/checklists/architecture.md` for any remaining issues
 2. **Commit architecture**: Use suggested commit message to save the architecture document
-3. **Establish coding standards**: Run `/personas.standardize` to create technology-specific coding standards that align with this architecture
+3. **Optional - Validate architecture**: Run `/personas.validate-arch` to generate custom architecture validation checklists for deeper quality assurance
+   - Creates focused checklists for specific architectural concerns (component design, security, deployment, data, performance)
+   - Complements the built-in architecture.md validation with targeted, context-specific checks
+   - Recommended for MVP and Production levels
+4. **Establish coding standards**: Run `/personas.standardize` to create technology-specific coding standards that align with this architecture
    - This ensures consistent development practices across all features
    - Standards will be based on the technology stack defined in this architecture
    - Required before running `/personas.design` to ensure implementation designs follow established standards
-4. **Review with stakeholders**: Get feedback from team, product, and ops
-5. **Document ADRs**: Create Architecture Decision Records for key choices
-6. **Update related docs**: Ensure README, design docs align with architecture
-7. **Ready for feature work**: After standards are established, proceed to `/personas.design` and `/personas.taskify` for feature development
-8. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
-9. **Establish monitoring**: Set up observability for quality attribute tracking
-10. **Create runbooks**: Document operational procedures for the architecture
+5. **Review with stakeholders**: Get feedback from team, product, and ops
+6. **Document ADRs**: Create Architecture Decision Records for key choices
+7. **Update related docs**: Ensure README, design docs align with architecture
+8. **Ready for feature work**: After standards are established, proceed to `/personas.design` and `/personas.taskify` for feature development
+9. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
+10. **Establish monitoring**: Set up observability for quality attribute tracking
+11. **Create runbooks**: Document operational procedures for the architecture
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
@@ -369,6 +375,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture (YOU ARE HERE)
+   ↳ /personas.validate-arch → Validate architecture (optional - recommended for MVP/Production)
 5. /personas.standardize   → Establish coding standards (NEXT STEP)
 6. /personas.design          → Plan feature implementation with design
 7. /personas.design-test   → Generate E2E test spec

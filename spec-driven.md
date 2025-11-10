@@ -103,7 +103,8 @@ A comprehensive set of commands that automate the entire development process:
 - **`/personas.design-test`**: Create E2E test scenarios from user workflows
 - **`/personas.taskify`**: Break down plans into executable task lists
 - **`/personas.analyze`**: Validate cross-artifact consistency
-- **`/personas.validate-specs`**: Generate quality validation checklists
+- **`/personas.validate-specs`**: Generate quality validation checklists for requirements
+- **`/personas.validate-arch`**: Generate quality validation checklists for architecture
 - **`/personas.implement`**: Execute implementation following task list
 - **`/personas.test`**: Run E2E tests and generate comprehensive reports
 
@@ -282,13 +283,23 @@ Executes E2E tests according to the test spec:
 
 ### The `/personas.validate-specs` Command
 
-Generates custom quality checklists for validating artifacts:
+Generates custom quality checklists for validating requirements artifacts:
 
 1. **Artifact-Specific Checklists**: Creates validation items appropriate for specifications, plans, or tasks
 2. **Quality Criteria**: Includes completeness, clarity, consistency, and feasibility checks
 3. **Product Level Awareness**: Tailors checklist requirements to Mock-up, PoC, MVP, or Production
 4. **Validation Support**: Provides structured framework for artifact review
 5. **Continuous Improvement**: Identifies areas for enhancement before proceeding
+
+### The `/personas.validate-arch` Command
+
+Generates custom quality checklists for validating architecture design:
+
+1. **Architecture-Specific Checklists**: Creates validation items for architecture documentation quality
+2. **ISO/IEC/IEEE 42010 Alignment**: Validates architectural views (Logical, Process, Deployment, Data)
+3. **Quality Attributes**: Ensures performance, security, scalability targets are quantified
+4. **Architectural Decisions**: Validates that rationale for key decisions is documented
+5. **Product Level Appropriate**: Adjusts validation rigor based on Mock-up/PoC/MVP/Production
 
 ### Example: Complete Workflow for Building a Task Management System
 

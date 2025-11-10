@@ -1294,7 +1294,8 @@ def init(
         "",
         f"○ [cyan]/personas.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/personas.design[/] if used)",
         f"○ [cyan]/personas.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/personas.taskify[/], before [cyan]/personas.implement[/])",
-        f"○ [cyan]/personas.validate-specs[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/personas.design[/])"
+        f"○ [cyan]/personas.validate-specs[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/personas.design[/])",
+        f"○ [cyan]/personas.validate-arch[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate architecture design documentation (after [cyan]/personas.architect[/])"
     ]
     enhancements_panel = Panel("\n".join(enhancement_lines), title="Enhancement Commands", border_style="cyan", padding=(1,2))
     console.print()
