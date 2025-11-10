@@ -245,7 +245,7 @@ Follow this execution flow:
    - Alignment status with ground rules and coding standards
    - **Checklist validation results**: Pass/fail status with details
    - **Readiness for planning**: Confirm if ready for `/personas.design` or needs updates
-   - **Next recommended step**: 
+   - **Next recommended step**:
      - **Recommended**: Run `/personas.validate-arch` to generate custom architecture validation checklists
      - **Alternative**: Run `/personas.standardize` to establish coding standards aligned with this architecture
    - Suggested commit message (e.g., `docs: establish architecture for [System Name] v1.0 (MVP microservices)`)

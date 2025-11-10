@@ -17,15 +17,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Goal: Detect and reduce ambiguity or missing decision points in the active feature specification and record the clarifications directly in the spec file.
 
-
 - After `/personas.specify` to resolve ambiguities before architecture/planning
 - Multiple times as needed when new clarifications emerge
 - Before `/personas.design` if specification has unresolved questions
-
-```
-
-```text
-```
 
 Execution steps:
 

@@ -47,4 +47,3 @@
 - Link to relevant architecture sections or documentation
 - Items are numbered sequentially starting with ARCH### for easy reference
 - Use markers: [Completeness], [Clarity], [Consistency], [Measurability], [Rationality], [Gap]
-
