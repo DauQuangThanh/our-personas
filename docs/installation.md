@@ -68,7 +68,7 @@ After initialization, you should see the following commands available in your AI
 
 - `/personas.specify` - Create specifications
 - `/personas.plan` - Generate implementation plans
-- `/personas.tasks` - Break down into actionable tasks
+- `/personas.taskify` - Break down into actionable tasks
 
 The `.personas/scripts` directory will contain both `.sh` and `.ps1` scripts.
 

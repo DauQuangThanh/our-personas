@@ -81,7 +81,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 4. **Load feature context**: Read from FEATURE_DIR:
    - spec.md: Feature requirements and scope
    - plan.md (if exists): Technical details, dependencies
-   - tasks.md (if exists): Implementation tasks
+   - taskify.md (if exists): Implementation tasks
 
    **Context Loading Strategy**:
    - Load only necessary portions relevant to active focus areas (avoid full-file dumping)
@@ -309,13 +309,13 @@ The `/personas.checklist` command can be run at multiple points in the workflow:
 **After planning (design quality checklist)**:
 
 ```text
-/personas.plan → /personas.checklist (YOU ARE HERE) → /personas.tasks
+/personas.plan → /personas.checklist (YOU ARE HERE) → /personas.taskify
 ```
 
 **Before implementation (pre-flight checklist)**:
 
 ```text
-/personas.tasks → /personas.checklist (YOU ARE HERE) → /personas.analyze → /personas.implement
+/personas.taskify → /personas.checklist (YOU ARE HERE) → /personas.analyze → /personas.implement
 ```
 
 **Complete workflow context**:
@@ -329,7 +329,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
 7. /personas.test-plan     → Generate E2E test plan
-8. /personas.tasks         → Break down into tasks
+8. /personas.taskify         → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report

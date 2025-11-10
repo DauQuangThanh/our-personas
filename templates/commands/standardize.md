@@ -269,7 +269,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 5. /personas.standardize   → Establish coding standards (YOU ARE HERE)
 6. /personas.plan          → Plan feature implementation with design (NEXT STEP)
 7. /personas.test-plan     → Generate E2E test plan
-8. /personas.tasks         → Break down into tasks
+8. /personas.taskify         → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report

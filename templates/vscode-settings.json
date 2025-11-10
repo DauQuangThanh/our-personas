@@ -5,7 +5,7 @@
         "personas.architect": true,
         "personas.standardize": true,
         "personas.plan": true,
-        "personas.tasks": true,
+        "personas.taskify": true,
         "personas.implement": true
     },
     "chat.tools.terminal.autoApprove": {

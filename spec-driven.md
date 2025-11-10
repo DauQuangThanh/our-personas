@@ -34,7 +34,7 @@ Throughout this process, research agents gather critical context. They investiga
 
 The `/personas.test-plan` command generates comprehensive E2E test scenarios from user workflows before any code is written. This ensures tests validate actual user value rather than implementation details. Test scenarios become part of the specification that validates implementations.
 
-The `/personas.tasks` command breaks down implementation plans into executable tasks with dependency management and parallelization markers. Tasks follow the test-first approach defined in the ground rules, ensuring tests are written before implementation code.
+The `/personas.taskify` command breaks down implementation plans into executable tasks with dependency management and parallelization markers. Tasks follow the test-first approach defined in the ground rules, ensuring tests are written before implementation code.
 
 The `/personas.analyze` command performs cross-artifact validation, checking alignment between ground rules, specifications, architecture, standards, plans, and tasks. It identifies gaps, contradictions, and missing details—providing a comprehensive readiness assessment before implementation begins.
 
@@ -101,7 +101,7 @@ A comprehensive set of commands that automate the entire development process:
 - **`/personas.standardize`**: Establish comprehensive coding standards
 - **`/personas.plan`**: Generate technical implementation plans
 - **`/personas.test-plan`**: Create E2E test scenarios from user workflows
-- **`/personas.tasks`**: Break down plans into executable task lists
+- **`/personas.taskify`**: Break down plans into executable task lists
 - **`/personas.analyze`**: Validate cross-artifact consistency
 - **`/personas.checklist`**: Generate quality validation checklists
 - **`/personas.implement`**: Execute implementation following task list
@@ -239,7 +239,7 @@ Generates comprehensive E2E test plans from user workflows:
 5. **Environment Requirements**: Documents infrastructure and CI/CD integration needs
 6. **Standards Alignment**: Ensures test strategy follows project testing standards
 
-### The `/personas.tasks` Command
+### The `/personas.taskify` Command
 
 Analyzes the plan and related design documents to generate an executable task list:
 
@@ -248,7 +248,7 @@ Analyzes the plan and related design documents to generate an executable task li
 3. **Parallelization**: Marks independent tasks `[P]` and outlines safe parallel groups
 4. **User Story Organization**: Groups tasks by user story for incremental delivery
 5. **Test-First Support**: Includes test tasks ordered before implementation when TDD is required
-6. **Output**: Writes `tasks.md` in the feature directory, ready for execution
+6. **Output**: Writes `taskify.md` in the feature directory, ready for execution
 
 ### The `/personas.analyze` Command
 
@@ -363,10 +363,10 @@ Total: ~20-25 hours of documentation and planning work
 # - specs/002-kanban-board/test-plan.md with comprehensive E2E scenarios
 
 # Step 9: Generate executable tasks (5 minutes)
-/personas.tasks
+/personas.taskify
 
 # This creates:
-# - specs/002-kanban-board/tasks.md with dependency-ordered task list
+# - specs/002-kanban-board/taskify.md with dependency-ordered task list
 
 # Step 10: Validate consistency (optional, 5 minutes)
 /personas.analyze
@@ -565,7 +565,7 @@ This prevents the common problem of specifications becoming unreadable code dump
 The workflow enforces test-driven development:
 
 ```text
-### File Creation Order (from tasks.md)
+### File Creation Order (from taskify.md)
 1. Create `contracts/` with API specifications
 2. Create test files in order: contract → integration → e2e → unit
 3. Create source files to make tests pass

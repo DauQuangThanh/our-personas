@@ -9,8 +9,8 @@
 #
 # OPTIONS:
 #   -Json               Output in JSON format
-#   -RequireTasks       Require tasks.md to exist (for implementation phase)
-#   -IncludeTasks       Include tasks.md in AVAILABLE_DOCS list
+#   -RequireTasks       Require taskify.md to exist (for implementation phase)
+#   -IncludeTasks       Include taskify.md in AVAILABLE_DOCS list
 #   -PathsOnly          Only output path variables (no validation)
 #   -Help, -h           Show help message
 
@@ -34,8 +34,8 @@ Consolidated prerequisite checking for Spec-Driven Development workflow.
 
 OPTIONS:
   -Json               Output in JSON format
-  -RequireTasks       Require tasks.md to exist (for implementation phase)
-  -IncludeTasks       Include tasks.md in AVAILABLE_DOCS list
+  -RequireTasks       Require taskify.md to exist (for implementation phase)
+  -IncludeTasks       Include taskify.md in AVAILABLE_DOCS list
   -PathsOnly          Only output path variables (no prerequisite validation)
   -Help, -h           Show this help message
 
@@ -43,7 +43,7 @@ EXAMPLES:
   # Check task prerequisites (plan.md required)
   .\check-prerequisites.ps1 -Json
   
-  # Check implementation prerequisites (plan.md + tasks.md required)
+  # Check implementation prerequisites (plan.md + taskify.md required)
   .\check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks
   
   # Get feature paths only (no validation)
@@ -98,10 +98,10 @@ if (-not (Test-Path $paths.IMPL_PLAN -PathType Leaf)) {
     exit 1
 }
 
-# Check for tasks.md if required
+# Check for taskify.md if required
 if ($RequireTasks -and -not (Test-Path $paths.TASKS -PathType Leaf)) {
-    Write-Output "ERROR: tasks.md not found in $($paths.FEATURE_DIR)"
-    Write-Output "Run /personas.tasks first to create the task list."
+    Write-Output "ERROR: taskify.md not found in $($paths.FEATURE_DIR)"
+    Write-Output "Run /personas.taskify first to create the task list."
     exit 1
 }
 
@@ -119,9 +119,9 @@ if ((Test-Path $paths.CONTRACTS_DIR) -and (Get-ChildItem -Path $paths.CONTRACTS_
 
 if (Test-Path $paths.QUICKSTART) { $docs += 'quickstart.md' }
 
-# Include tasks.md if requested and it exists
+# Include taskify.md if requested and it exists
 if ($IncludeTasks -and (Test-Path $paths.TASKS)) { 
-    $docs += 'tasks.md' 
+    $docs += 'taskify.md' 
 }
 
 # Output results
@@ -143,6 +143,6 @@ if ($Json) {
     Test-FileExists -Path $paths.QUICKSTART -Description 'quickstart.md' | Out-Null
     
     if ($IncludeTasks) {
-        Test-FileExists -Path $paths.TASKS -Description 'tasks.md' | Out-Null
+        Test-FileExists -Path $paths.TASKS -Description 'taskify.md' | Out-Null
     }
 }

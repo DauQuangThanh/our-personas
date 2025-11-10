@@ -1278,7 +1278,7 @@ def init(
     steps_lines.append("   2.1 [cyan]/personas.regulate[/] - Establish project principles")
     steps_lines.append("   2.2 [cyan]/personas.specify[/] - Create baseline specification")
     steps_lines.append("   2.3 [cyan]/personas.plan[/] - Create implementation plan")
-    steps_lines.append("   2.4 [cyan]/personas.tasks[/] - Generate actionable tasks")
+    steps_lines.append("   2.4 [cyan]/personas.taskify[/] - Generate actionable tasks")
     steps_lines.append("   2.5 [cyan]/personas.implement[/] - Execute implementation")
 
     steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
@@ -1289,7 +1289,7 @@ def init(
         "Optional commands that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]",
         "",
         f"○ [cyan]/personas.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/personas.plan[/] if used)",
-        f"○ [cyan]/personas.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/personas.tasks[/], before [cyan]/personas.implement[/])",
+        f"○ [cyan]/personas.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/personas.taskify[/], before [cyan]/personas.implement[/])",
         f"○ [cyan]/personas.checklist[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/personas.plan[/])"
     ]
     enhancements_panel = Panel("\n".join(enhancement_lines), title="Enhancement Commands", border_style="cyan", padding=(1,2))

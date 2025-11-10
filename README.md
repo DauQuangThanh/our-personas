@@ -181,10 +181,10 @@ Use **`/personas.test-plan`** to create a comprehensive E2E test plan based on u
 
 ### 9. Break down into tasks
 
-Use **`/personas.tasks`** to create an actionable task list from your implementation plan.
+Use **`/personas.taskify`** to create an actionable task list from your implementation plan.
 
 ```bash
-/personas.tasks
+/personas.taskify
 ```
 
 ### 10. Analyze for consistency (optional but recommended)
@@ -332,7 +332,7 @@ Essential commands for the Spec-Driven Development workflow (in recommended orde
 | `/personas.standardize`   | Establish coding standards, testing requirements, and quality practices | After architect: define implementation rules |
 | `/personas.plan`          | Create technical implementation plans with your chosen tech stack     | After standards: plan feature implementation |
 | `/personas.test-plan`     | Generate E2E test plan from user workflows in quickstart.md          | After plan: define E2E test scenarios |
-| `/personas.tasks`         | Generate actionable task lists for implementation                     | After test-plan: break down into steps |
+| `/personas.taskify`         | Generate actionable task lists for implementation                     | After test-plan: break down into steps |
 | `/personas.analyze`       | Cross-artifact consistency & coverage analysis                        | Optional: after tasks, before implement |
 | `/personas.implement`     | Execute all tasks to build the feature according to the plan         | After analyze: build the feature |
 | `/personas.test`          | Execute E2E tests and generate comprehensive test report              | After implement: validate user workflows |
@@ -466,7 +466,7 @@ personas init <project_name> --ai claude --ignore-agent-tools
 
 Go to the project folder and run your AI agent. In our example, we're using `claude`.
 
-You will know that things are configured correctly if you see the `/personas.regulate`, `/personas.specify`, `/personas.plan`, `/personas.test-plan`, `/personas.tasks`, `/personas.test`, and `/personas.implement` commands available.
+You will know that things are configured correctly if you see the `/personas.regulate`, `/personas.specify`, `/personas.plan`, `/personas.test-plan`, `/personas.taskify`, `/personas.test`, and `/personas.implement` commands available.
 
 The first step should be establishing your project's governing principles using the `/personas.regulate` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
@@ -758,15 +758,15 @@ This step creates a `test-plan.md` file in your feature specification directory 
 
 The generated test-plan.md ensures comprehensive E2E testing coverage aligned with your architecture and standards.
 
-### **STEP 10:** Generate task breakdown with /personas.tasks
+### **STEP 10:** Generate task breakdown with /personas.taskify
 
-With the test plan in place, you can now break down the implementation plan into specific, actionable tasks that can be executed in the correct order. Use the `/personas.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
+With the test plan in place, you can now break down the implementation plan into specific, actionable tasks that can be executed in the correct order. Use the `/personas.taskify` command to automatically generate a detailed task breakdown from your implementation plan:
 
 ```text
-/personas.tasks
+/personas.taskify
 ```
 
-This step creates a `tasks.md` file in your feature specification directory that contains:
+This step creates a `taskify.md` file in your feature specification directory that contains:
 
 - **Task breakdown organized by user story** - Each user story becomes a separate implementation phase with its own set of tasks
 - **Dependency management** - Tasks are ordered to respect dependencies between components (e.g., models before services, services before endpoints)
@@ -775,7 +775,7 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Test-driven development structure** - If tests are requested, test tasks are included and ordered to be written before implementation
 - **Checkpoint validation** - Each user story phase includes checkpoints to validate independent functionality
 
-The generated tasks.md provides a clear roadmap for the `/personas.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
+The generated taskify.md provides a clear roadmap for the `/personas.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
 
 ### **STEP 11:** Implementation
 
@@ -788,7 +788,7 @@ Once ready, use the `/personas.implement` command to execute your implementation
 The `/personas.implement` command will:
 
 - Validate that all prerequisites are in place (ground rules, spec, plan, and tasks)
-- Parse the task breakdown from `tasks.md`
+- Parse the task breakdown from `taskify.md`
 - Execute tasks in the correct order, respecting dependencies and parallel execution markers
 - Follow the TDD approach defined in your task plan
 - Provide progress updates and handle errors appropriately

@@ -9,8 +9,8 @@
 #
 # OPTIONS:
 #   --json              Output in JSON format
-#   --require-tasks     Require tasks.md to exist (for implementation phase)
-#   --include-tasks     Include tasks.md in AVAILABLE_DOCS list
+#   --require-tasks     Require taskify.md to exist (for implementation phase)
+#   --include-tasks     Include taskify.md in AVAILABLE_DOCS list
 #   --paths-only        Only output path variables (no validation)
 #   --help, -h          Show help message
 #
@@ -49,8 +49,8 @@ Consolidated prerequisite checking for Spec-Driven Development workflow.
 
 OPTIONS:
   --json              Output in JSON format
-  --require-tasks     Require tasks.md to exist (for implementation phase)
-  --include-tasks     Include tasks.md in AVAILABLE_DOCS list
+  --require-tasks     Require taskify.md to exist (for implementation phase)
+  --include-tasks     Include taskify.md in AVAILABLE_DOCS list
   --paths-only        Only output path variables (no prerequisite validation)
   --help, -h          Show this help message
 
@@ -58,7 +58,7 @@ EXAMPLES:
   # Check task prerequisites (plan.md required)
   ./check-prerequisites.sh --json
   
-  # Check implementation prerequisites (plan.md + tasks.md required)
+  # Check implementation prerequisites (plan.md + taskify.md required)
   ./check-prerequisites.sh --json --require-tasks --include-tasks
   
   # Get feature paths only (no validation)
@@ -112,10 +112,10 @@ if [[ ! -f "$IMPL_PLAN" ]]; then
     exit 1
 fi
 
-# Check for tasks.md if required
+# Check for taskify.md if required
 if $REQUIRE_TASKS && [[ ! -f "$TASKS" ]]; then
-    echo "ERROR: tasks.md not found in $FEATURE_DIR" >&2
-    echo "Run /personas.tasks first to create the task list." >&2
+    echo "ERROR: taskify.md not found in $FEATURE_DIR" >&2
+    echo "Run /personas.taskify first to create the task list." >&2
     exit 1
 fi
 
@@ -133,9 +133,9 @@ fi
 
 [[ -f "$QUICKSTART" ]] && docs+=("quickstart.md")
 
-# Include tasks.md if requested and it exists
+# Include taskify.md if requested and it exists
 if $INCLUDE_TASKS && [[ -f "$TASKS" ]]; then
-    docs+=("tasks.md")
+    docs+=("taskify.md")
 fi
 
 # Output results
@@ -161,6 +161,6 @@ else
     check_file "$QUICKSTART" "quickstart.md"
     
     if $INCLUDE_TASKS; then
-        check_file "$TASKS" "tasks.md"
+        check_file "$TASKS" "taskify.md"
     fi
 fi

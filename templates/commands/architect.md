@@ -356,7 +356,7 @@ After completing the architecture document and checklist validation:
 4. **Review with stakeholders**: Get feedback from team, product, and ops
 5. **Document ADRs**: Create Architecture Decision Records for key choices
 6. **Update related docs**: Ensure README, design docs align with architecture
-7. **Ready for feature work**: After standards are established, proceed to `/personas.plan` and `/personas.tasks` for feature development
+7. **Ready for feature work**: After standards are established, proceed to `/personas.plan` and `/personas.taskify` for feature development
 8. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
 9. **Establish monitoring**: Set up observability for quality attribute tracking
 10. **Create runbooks**: Document operational procedures for the architecture
@@ -372,7 +372,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 5. /personas.standardize   → Establish coding standards (NEXT STEP)
 6. /personas.plan          → Plan feature implementation with design
 7. /personas.test-plan     → Generate E2E test plan
-8. /personas.tasks         → Break down into tasks
+8. /personas.taskify         → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report

@@ -1,5 +1,5 @@
 ---
-description: Generate an actionable, dependency-ordered tasks.md for the feature based on available design artifacts.
+description: Generate an actionable, dependency-ordered taskify.md for the feature based on available design artifacts.
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json
   ps: scripts/powershell/check-prerequisites.ps1 -Json
@@ -33,7 +33,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Create parallel execution examples per user story
    - Validate task completeness (each user story has all needed tasks, independently testable)
 
-4. **Generate tasks.md**: Use `.personas/templates/tasks-template.md` as structure, fill with:
+4. **Generate taskify.md**: Use `.personas/templates/tasks-template.md` as structure, fill with:
    - Correct feature name from plan.md
    - Phase 1: Setup tasks (project initialization)
    - Phase 2: Foundational tasks (blocking prerequisites for all user stories)
@@ -46,7 +46,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Parallel execution examples per story
    - Implementation strategy section (MVP first, incremental delivery)
 
-5. **Report**: Output path to generated tasks.md and summary:
+5. **Report**: Output path to generated taskify.md and summary:
    - Total task count
    - Task count per user story
    - Parallel opportunities identified
@@ -56,7 +56,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Context for task generation: {ARGS}
 
-The tasks.md should be immediately executable - each task must be specific enough that an LLM can complete it without additional context.
+The taskify.md should be immediately executable - each task must be specific enough that an LLM can complete it without additional context.
 
 ## Task Generation Rules
 
@@ -141,7 +141,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
 7. /personas.test-plan     → Generate E2E test plan
-8. /personas.tasks         → Break down into tasks (YOU ARE HERE)
+8. /personas.taskify       → Break down into tasks (YOU ARE HERE)
 9. /personas.analyze       → Analyze cross-artifact consistency (NEXT STEP)
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report

@@ -131,10 +131,10 @@ Use `/personas.test-plan` to create comprehensive E2E test scenarios:
 
 ### 9. Break Down and Implement
 
-Use `/personas.tasks` to create an actionable task list, then use `/personas.implement` to build the feature:
+Use `/personas.taskify` to create an actionable task list, then use `/personas.implement` to build the feature:
 
 ```bash
-/personas.tasks
+/personas.taskify
 /personas.implement
 ```
 
@@ -310,7 +310,7 @@ Follow the architecture defined in memory/architecture.md and standards in memor
 #### Step 5: Break Down Into Tasks
 
 ```text
-/personas.tasks
+/personas.taskify
 ```
 
 #### Step 6: Validate and Implement

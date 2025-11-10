@@ -1,5 +1,5 @@
 ---
-description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and tasks.md after task generation.
+description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and taskify.md after task generation.
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks
   ps: scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks
@@ -15,7 +15,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Goal
 
-Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `plan.md`, `tasks.md`) and foundational documents (`ground-rules.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.tasks` has successfully produced a complete `tasks.md`.
+Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `plan.md`, `taskify.md`) and foundational documents (`ground-rules.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.taskify` has successfully produced a complete `taskify.md`.
 
 ## Operating Constraints
 
@@ -35,7 +35,7 @@ Run `{SCRIPT}` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_
 
 - SPEC = FEATURE_DIR/spec.md
 - PLAN = FEATURE_DIR/plan.md
-- TASKS = FEATURE_DIR/tasks.md
+- TASKS = FEATURE_DIR/taskify.md
 
 Abort with an error message if any required file is missing (instruct the user to run missing prerequisite command).
 For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
@@ -59,7 +59,7 @@ Load only the minimal necessary context from each artifact:
 - Phases
 - Technical constraints
 
-**From tasks.md:**
+**From taskify.md:**
 
 - Task IDs
 - Descriptions
@@ -206,7 +206,7 @@ At end of report, output a concise Next Actions block:
 
 - If CRITICAL issues exist: Recommend resolving before `/personas.implement`
 - If only LOW/MEDIUM: User may proceed, but provide improvement suggestions
-- Provide explicit command suggestions: e.g., "Run /personas.specify with refinement", "Run /personas.plan to adjust architecture", "Manually edit tasks.md to add coverage for 'performance-metrics'"
+- Provide explicit command suggestions: e.g., "Run /personas.specify with refinement", "Run /personas.plan to adjust architecture", "Manually edit taskify.md to add coverage for 'performance-metrics'"
 
 ### 8. Offer Remediation
 
@@ -240,13 +240,13 @@ Your response **MUST** suggest the user's next step, following the sequential or
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
 7. /personas.test-plan     → Generate E2E test plan
-8. /personas.tasks         → Break down into tasks
+8. /personas.taskify         → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency (YOU ARE HERE)
 10. /personas.implement    → Execute implementation (NEXT STEP)
 11. /personas.test         → Execute E2E tests and generate report
 ```
 
-**Note**: `/personas.analyze` should run AFTER `/personas.tasks` to validate the complete artifact chain (ground rules, architecture, standards, spec, plan, test-plan, tasks) for consistency and alignment before implementation begins.
+**Note**: `/personas.analyze` should run AFTER `/personas.taskify` to validate the complete artifact chain (ground rules, architecture, standards, spec, plan, test-plan, tasks) for consistency and alignment before implementation begins.
 
 ## Context
 

@@ -64,7 +64,7 @@
 				"personas.regulate": true,
 				"personas.specify": true,
 				"personas.plan": true,
-				"personas.tasks": true,
+				"personas.taskify": true,
 				"personas.implement": true
 			},
 		"chat.tools.terminal.autoApprove": {
