@@ -195,7 +195,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - ❌ References to code execution, user actions, system behavior
    - ❌ "Displays correctly", "works properly", "functions as expected"
    - ❌ "Click", "navigate", "render", "load", "execute"
-   - ❌ Test cases, test plans, QA procedures
+   - ❌ Test cases, test specs, QA procedures
    - ❌ Implementation details (frameworks, APIs, algorithms)
 
    **✅ REQUIRED PATTERNS** - These test requirements quality:
@@ -328,8 +328,8 @@ Your response **MUST** suggest the user's next step, following the sequential or
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
-7. /personas.test-plan     → Generate E2E test plan
-8. /personas.taskify         → Break down into tasks
+7. /personas.design-test   → Generate E2E test spec
+8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report

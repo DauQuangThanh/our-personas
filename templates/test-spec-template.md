@@ -3,7 +3,7 @@
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Plan**: [link to plan.md]
 **Input**: User workflows from `/specs/[###-feature-name]/quickstart.md`
 
-**Note**: This template is filled in by the `/personas.test-plan` command. See `.personas/templates/commands/test-plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/personas.design-test` command. See `.personas/templates/commands/design-test.md` for the execution workflow.
 
 ## Summary
 

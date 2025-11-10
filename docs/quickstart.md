@@ -123,10 +123,10 @@ Use the `/personas.plan` command to provide your tech stack and architecture cho
 
 ### 8. Generate E2E Test Plan
 
-Use `/personas.test-plan` to create comprehensive E2E test scenarios:
+Use `/personas.design-test` to create comprehensive E2E test scenarios:
 
 ```bash
-/personas.test-plan
+/personas.design-test
 ```
 
 ### 9. Break Down and Implement
@@ -304,7 +304,7 @@ Follow the architecture defined in memory/architecture.md and standards in memor
 #### Step 4: Generate Test Plan
 
 ```text
-/personas.test-plan
+/personas.design-test
 ```
 
 #### Step 5: Break Down Into Tasks

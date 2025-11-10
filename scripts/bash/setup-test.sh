@@ -37,14 +37,14 @@ check_feature_branch "$CURRENT_BRANCH" "$HAS_GIT" || exit 1
 mkdir -p "$FEATURE_DIR"
 
 # Define test-specific paths
-TEST_PLAN="$FEATURE_DIR/test-plan.md"
+TEST_SPEC="$FEATURE_DIR/test-spec.md"
 TEST_REPORT="$FEATURE_DIR/test-report.md"
 TEST_ARTIFACTS_DIR="$FEATURE_DIR/test-artifacts"
 
-# Check if test plan exists
-if [[ ! -f "$TEST_PLAN" ]]; then
-    echo "Error: Test plan not found at $TEST_PLAN"
-    echo "Please run /personas.test-plan first to create the test plan"
+# Check if test spec exists
+if [[ ! -f "$TEST_SPEC" ]]; then
+    echo "Error: Test spec not found at $TEST_SPEC"
+    echo "Please run /personas.design-test first to create the test spec"
     exit 1
 fi
 
@@ -68,10 +68,10 @@ fi
 
 # Output results
 if $JSON_MODE; then
-    printf '{"TEST_PLAN":"%s","TEST_REPORT":"%s","TEST_ARTIFACTS_DIR":"%s","SPECS_DIR":"%s","BRANCH":"%s","HAS_GIT":"%s"}\n' \
-        "$TEST_PLAN" "$TEST_REPORT" "$TEST_ARTIFACTS_DIR" "$FEATURE_DIR" "$CURRENT_BRANCH" "$HAS_GIT"
+    printf '{"TEST_SPEC":"%s","TEST_REPORT":"%s","TEST_ARTIFACTS_DIR":"%s","SPECS_DIR":"%s","BRANCH":"%s","HAS_GIT":"%s"}\n' \
+        "$TEST_SPEC" "$TEST_REPORT" "$TEST_ARTIFACTS_DIR" "$FEATURE_DIR" "$CURRENT_BRANCH" "$HAS_GIT"
 else
-    echo "TEST_PLAN: $TEST_PLAN"
+    echo "TEST_SPEC: $TEST_SPEC"
     echo "TEST_REPORT: $TEST_REPORT"
     echo "TEST_ARTIFACTS_DIR: $TEST_ARTIFACTS_DIR"
     echo "SPECS_DIR: $FEATURE_DIR"

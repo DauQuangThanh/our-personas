@@ -32,14 +32,14 @@ if (-not (Test-FeatureBranch -Branch $paths.CURRENT_BRANCH -HasGit $paths.HAS_GI
 New-Item -ItemType Directory -Path $paths.FEATURE_DIR -Force | Out-Null
 
 # Define test-specific paths
-$testPlan = Join-Path $paths.FEATURE_DIR 'test-plan.md'
+$testPlan = Join-Path $paths.FEATURE_DIR 'test-spec.md'
 $testReport = Join-Path $paths.FEATURE_DIR 'test-report.md'
 $testArtifactsDir = Join-Path $paths.FEATURE_DIR 'test-artifacts'
 
-# Check if test plan exists
+# Check if test spec exists
 if (-not (Test-Path $testPlan)) {
-    Write-Error "Test plan not found at $testPlan"
-    Write-Output "Please run /personas.test-plan first to create the test plan"
+    Write-Error "Test spec not found at $testPlan"
+    Write-Output "Please run /personas.design-test first to create the test spec"
     exit 1
 }
 
@@ -66,7 +66,7 @@ if (Test-Path $template) {
 # Output results
 if ($Json) {
     $result = [PSCustomObject]@{
-        TEST_PLAN = $testPlan
+        TEST_SPEC = $testPlan
         TEST_REPORT = $testReport
         TEST_ARTIFACTS_DIR = $testArtifactsDir
         SPECS_DIR = $paths.FEATURE_DIR
@@ -75,7 +75,7 @@ if ($Json) {
     }
     $result | ConvertTo-Json -Compress
 } else {
-    Write-Output "TEST_PLAN: $testPlan"
+    Write-Output "TEST_SPEC: $testPlan"
     Write-Output "TEST_REPORT: $testReport"
     Write-Output "TEST_ARTIFACTS_DIR: $testArtifactsDir"
     Write-Output "SPECS_DIR: $($paths.FEATURE_DIR)"

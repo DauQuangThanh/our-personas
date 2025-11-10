@@ -1,8 +1,8 @@
 ---
-description: Generate an E2E test plan from user workflows defined in quickstart.md, specifying test scenarios, test data, and test environment requirements.
+description: Generate an E2E test spec from user workflows defined in quickstart.md, specifying test scenarios, test data, and test environment requirements.
 scripts:
-  sh: scripts/bash/setup-test-plan.sh --json
-  ps: scripts/powershell/setup-test-plan.ps1 -Json
+  sh: scripts/bash/setup-design-test.sh --json
+  ps: scripts/powershell/setup-design-test.ps1 -Json
 ---
 
 ## User Input
@@ -15,9 +15,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for IMPL_PLAN, TEST_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for IMPL_PLAN, TEST_SPEC, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read IMPL_PLAN, `quickstart.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_PLAN template (already copied).
+2. **Load context**: Read IMPL_PLAN, `quickstart.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_SPEC template (already copied).
 
 3. **Verify prerequisites**: Ensure implementation plan and quickstart exist:
    - `plan.md` exists with technical context
@@ -25,7 +25,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Architecture and standards define E2E testing requirements
    - ERROR if required documents are missing
 
-4. **Execute E2E test planning workflow**: Follow the structure in TEST_PLAN template to:
+4. **Execute E2E test specning workflow**: Follow the structure in TEST_SPEC template to:
    - **Reference quickstart.md**: Extract user workflows and scenarios
    - **Reference Implementation Plan**: Understand technical context and constraints
    - **Reference Architecture**: Identify deployment environment and infrastructure
@@ -35,7 +35,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Define test data requirements for E2E scenarios
    - Define test environment requirements for E2E execution
 
-5. **Stop and report**: Command ends after E2E test plan generation. Report branch, TEST_PLAN path, and number of E2E test scenarios generated.
+5. **Stop and report**: Command ends after E2E test spec generation. Report branch, TEST_SPEC path, and number of E2E test scenarios generated.
 
 ## Phases
 
@@ -77,7 +77,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Architecture Check**: Confirm test environment matches deployment architecture
    - ERROR if strategy conflicts with architecture or standards
 
-**Output**: E2E test strategy section in test-plan.md
+**Output**: E2E test strategy section in design-test.md
 
 ### Phase 2: E2E Test Scenario Generation
 
@@ -103,7 +103,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Performance expectations for user workflows
    - Platform/browser requirements
 
-**Output**: E2E test scenarios in test-plan.md
+**Output**: E2E test scenarios in design-test.md
 
 ### Phase 3: Test Data & Environment Definition
 
@@ -125,7 +125,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - CI/CD integration requirements
    - Test isolation and cleanup strategy
 
-**Output**: Test data and environment specifications in test-plan.md
+**Output**: Test data and environment specifications in design-test.md
 
 ## Key rules
 
@@ -147,11 +147,11 @@ Your response **MUST** suggest the user's next step, following the sequential or
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
-7. /personas.test-plan     → Generate E2E test plan (YOU ARE HERE)
-8. /personas.taskify         → Break down into implementation tasks (NEXT STEP)
+7. /personas.design-test   → Generate E2E test spec (YOU ARE HERE)
+8. /personas.taskify       → Break down into implementation tasks (NEXT STEP)
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report
 ```
 
-**Note**: The test-plan command generates an E2E test plan ONLY. It does not execute tests. The `/personas.test` command will execute the E2E tests defined in this plan.
+**Note**: The design-test command generates an E2E test spec ONLY. It does not execute tests. The `/personas.test` command will execute the E2E tests defined in this plan.

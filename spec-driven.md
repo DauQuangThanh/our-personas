@@ -32,7 +32,7 @@ For individual features, the workflow repeats the specify-clarify cycle to creat
 
 Throughout this process, research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications. Organizational constraints from the ground rules seamlessly integrate into every specification and plan.
 
-The `/personas.test-plan` command generates comprehensive E2E test scenarios from user workflows before any code is written. This ensures tests validate actual user value rather than implementation details. Test scenarios become part of the specification that validates implementations.
+The `/personas.design-test` command generates comprehensive E2E test scenarios from user workflows before any code is written. This ensures tests validate actual user value rather than implementation details. Test scenarios become part of the specification that validates implementations.
 
 The `/personas.taskify` command breaks down implementation plans into executable tasks with dependency management and parallelization markers. Tasks follow the test-first approach defined in the ground rules, ensuring tests are written before implementation code.
 
@@ -40,7 +40,7 @@ The `/personas.analyze` command performs cross-artifact validation, checking ali
 
 Code generation through `/personas.implement` follows the validated task list, respecting dependencies and ground rules mandates. Domain concepts become data models. User stories become API endpoints. The implementation executes in the correct order, following TDD when required, with progress tracking throughout.
 
-Finally, `/personas.test` executes the E2E test plan, validating that implementations deliver the promised user value. Test results link back to workflows and requirements, providing complete traceability from specification through validation.
+Finally, `/personas.test` executes the E2E test spec, validating that implementations deliver the promised user value. Test results link back to workflows and requirements, providing complete traceability from specification through validation.
 
 The feedback loop extends beyond initial development. Production metrics and incidents don't just trigger hotfixes—they update specifications and ground rules principles for the next iteration. Performance bottlenecks become new quality attributes in the architecture. Security vulnerabilities become constraints in the standards. This continuous evolution transforms the traditional SDLC from a linear process into a living system where specifications, principles, and implementations co-evolve.
 
@@ -78,7 +78,7 @@ Fourth, SDD enables "what-if" exploration and parallel implementation experiment
 
 **Research-Driven Context**: Research agents gather critical context throughout the specification process, investigating technical options, performance implications, and organizational constraints. Decisions are informed by real data rather than assumptions.
 
-**Test-First Validation**: E2E test plans are generated from user workflows before implementation begins. Tests validate that implementations deliver promised user value, with complete traceability from requirements through test results.
+**Test-First Validation**: E2E test specs are generated from user workflows before implementation begins. Tests validate that implementations deliver promised user value, with complete traceability from requirements through test results.
 
 **Bidirectional Feedback**: Production reality informs specification evolution. Metrics, incidents, and operational learnings become inputs for specification refinement, ground rules updates, and architectural improvements.
 
@@ -100,7 +100,7 @@ A comprehensive set of commands that automate the entire development process:
 - **`/personas.architect`**: Define system architecture following ISO/IEC/IEEE 42010:2011
 - **`/personas.standardize`**: Establish comprehensive coding standards
 - **`/personas.plan`**: Generate technical implementation plans
-- **`/personas.test-plan`**: Create E2E test scenarios from user workflows
+- **`/personas.design-test`**: Create E2E test scenarios from user workflows
 - **`/personas.taskify`**: Break down plans into executable task lists
 - **`/personas.analyze`**: Validate cross-artifact consistency
 - **`/personas.checklist`**: Generate quality validation checklists
@@ -123,7 +123,7 @@ Structured templates that guide AI behavior toward high-quality outputs:
 - **Architecture documents**: ISO/IEC/IEEE 42010:2011 compliant system design
 - **Coding standards**: Technology-specific best practices
 - **Implementation plans**: Ground rules compliance and quality gates
-- **Test plans**: Workflow-based E2E scenarios
+- **Test specs**: Workflow-based E2E scenarios
 - **Task breakdowns**: Dependency-ordered with parallelization markers
 
 ### Automated Validation
@@ -228,9 +228,9 @@ Creates a comprehensive implementation plan aligned with architecture and standa
 5. **Detailed Documentation**: Generates supporting documents for data models, API contracts, and test scenarios
 6. **Quickstart Validation**: Produces a quickstart guide capturing key validation scenarios
 
-### The `/personas.test-plan` Command
+### The `/personas.design-test` Command
 
-Generates comprehensive E2E test plans from user workflows:
+Generates comprehensive E2E test specs from user workflows:
 
 1. **Workflow Analysis**: Extracts user workflows from the quickstart guide
 2. **Test Scenario Generation**: Creates test cases covering happy paths, edge cases, and error handling
@@ -272,10 +272,10 @@ Executes the implementation plan to build the feature:
 
 ### The `/personas.test` Command
 
-Executes E2E tests according to the test plan:
+Executes E2E tests according to the test spec:
 
-1. **Environment Validation**: Ensures test environment matches requirements from test-plan.md
-2. **Test Execution**: Runs E2E tests for all user workflows defined in the test plan
+1. **Environment Validation**: Ensures test environment matches requirements from design-test.md
+2. **Test Execution**: Runs E2E tests for all user workflows defined in the test spec
 3. **Artifact Capture**: Collects screenshots, videos, and traces for failures
 4. **Report Generation**: Creates comprehensive test-report.md with results and recommendations
 5. **Traceability**: Links test results back to workflows and requirements
@@ -302,7 +302,7 @@ Here's how the complete command workflow transforms traditional development:
 3. Create architecture documents (4-6 hours)
 4. Define coding standards (2-3 hours)
 5. Write technical specifications (3-4 hours)
-6. Create test plans (2 hours)
+6. Create test specs (2 hours)
 7. Break down into tasks manually (2-3 hours)
 8. Set up project structure manually (1 hour)
 Total: ~20-25 hours of documentation and planning work
@@ -356,11 +356,11 @@ Total: ~20-25 hours of documentation and planning work
 # - specs/002-kanban-board/contracts/ (API specs)
 # - specs/002-kanban-board/quickstart.md
 
-# Step 8: Generate E2E test plan (5 minutes)
-/personas.test-plan
+# Step 8: Generate E2E test spec (5 minutes)
+/personas.design-test
 
 # This creates:
-# - specs/002-kanban-board/test-plan.md with comprehensive E2E scenarios
+# - specs/002-kanban-board/design-test.md with comprehensive E2E scenarios
 
 # Step 9: Generate executable tasks (5 minutes)
 /personas.taskify
@@ -412,7 +412,7 @@ The true power of the command workflow lies not just in automation, but in how t
 The command sequence enforces proper abstraction levels and timing:
 
 ```text
-Regulate → Specify → Clarify → Architect → Standardize → Plan → Test-Plan → Tasks → Analyze → Implement → Test
+Regulate → Specify → Clarify → Architect → Standardize → Plan → Design-Test → Tasks → Analyze → Implement → Test
 ```
 
 This prevents common failures:
@@ -573,14 +573,14 @@ The workflow enforces test-driven development:
 
 This ordering constraint ensures the LLM thinks about testability and contracts before implementation, leading to more robust and verifiable code.
 
-The `/personas.test-plan` command creates comprehensive E2E scenarios before implementation begins, and `/personas.test` validates them after.
+The `/personas.design-test` command creates comprehensive E2E scenarios before implementation begins, and `/personas.test` validates them after.
 
 #### 11. **Cross-Artifact Consistency**
 
 The `/personas.analyze` command validates alignment across all artifacts:
 
 - Requirements in spec.md → Addressed in plan.md
-- User stories in spec.md → Test scenarios in test-plan.md
+- User stories in spec.md → Test scenarios in design-test.md
 - Architecture decisions → Referenced in plan.md
 - Ground rules → Applied in architecture and standards
 - Coding standards → Followed in plan and tasks

@@ -1,7 +1,7 @@
 # E2E Test Report: [FEATURE]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Test Plan**: [link to test-plan.md]
-**Input**: E2E test plan from `/specs/[###-feature-name]/test-plan.md`
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Test Plan**: [link to design-test.md]
+**Input**: E2E test spec from `/specs/[###-feature-name]/design-test.md`
 
 **Note**: This template is filled in by the `/personas.test` command. See `.personas/templates/commands/test.md` for the execution workflow.
 
@@ -29,30 +29,30 @@
 
 ## Test Plan Reference
 
-**Test Plan**: `/specs/[###-feature-name]/test-plan.md`
-**E2E Framework**: [From test-plan.md: Playwright, Cypress, or Selenium]
-**User Workflows**: [From quickstart.md via test-plan.md]
+**Test Plan**: `/specs/[###-feature-name]/design-test.md`
+**E2E Framework**: [From design-test.md: Playwright, Cypress, or Selenium]
+**User Workflows**: [From quickstart.md via design-test.md]
 
 ### Test Plan Compliance
 
 | Test Plan Requirement | Target | Actual | Status |
 |----------------------|--------|--------|--------|
-| E2E Framework | [Playwright from test-plan.md] | [Playwright 1.40] | [✅ PASS] |
-| Browser Coverage | [Chrome, Firefox from test-plan.md] | [Chrome, Firefox tested] | [✅ PASS] |
-| Critical Workflows | [All pass from test-plan.md] | [X/Y passed] | [✅ PASS / ❌ FAIL] |
+| E2E Framework | [Playwright from design-test.md] | [Playwright 1.40] | [✅ PASS] |
+| Browser Coverage | [Chrome, Firefox from design-test.md] | [Chrome, Firefox tested] | [✅ PASS] |
+| Critical Workflows | [All pass from design-test.md] | [X/Y passed] | [✅ PASS / ❌ FAIL] |
 | Test Environment | [Match architecture.md] | [Matches] | [✅ PASS] |
 
 ## Test Environment
 
-**Environment Configuration**: [From test-plan.md environment requirements]
+**Environment Configuration**: [From design-test.md environment requirements]
 
 | Component | Version | Status | URL/Details |
 |-----------|---------|--------|-------------|
 | [Application Server] | [v1.2.3] | [✅ Available] | [https://test.example.com] |
 | [Database] | [PostgreSQL 14] | [✅ Available] | [Test database seeded] |
-| [E2E Framework] | [Playwright 1.40] | [✅ Installed] | [From test-plan.md] |
+| [E2E Framework] | [Playwright 1.40] | [✅ Installed] | [From design-test.md] |
 
-**Test Data**: [From test-plan.md test data requirements]
+**Test Data**: [From design-test.md test data requirements]
 
 - User accounts loaded: [testuser001, testadmin]
 - Database seeded: [Yes, with test fixtures]
@@ -66,7 +66,7 @@
 
 ## E2E Test Results by Workflow
 
-**From test-plan.md**: E2E test scenarios organized by user workflow from quickstart.md
+**From design-test.md**: E2E test scenarios organized by user workflow from quickstart.md
 
 ### Workflow 1: [Workflow Name from quickstart.md]
 
@@ -77,7 +77,7 @@
 
 #### Test Scenario Results
 
-| Test ID | Scenario (from test-plan.md) | Priority | Browser | Status | Duration | Notes |
+| Test ID | Scenario (from design-test.md) | Priority | Browser | Status | Duration | Notes |
 |---------|----------------------------|----------|---------|--------|----------|-------|
 | E2E-001 | [Happy Path: User registration] | Critical | Chrome | [✅ PASS] | [2.3s] | [All steps passed] |
 | E2E-001 | [Happy Path: User registration] | Critical | Firefox | [❌ FAIL] | [3.1s] | [Validation error] |
@@ -88,7 +88,7 @@
 #### Failed Tests Detail
 
 **Test ID**: E2E-001 (Firefox)
-**Scenario**: [Happy Path: User registration from test-plan.md]
+**Scenario**: [Happy Path: User registration from design-test.md]
 **Error**: [Form validation error not displayed properly in Firefox]
 **Screenshot**: `/test-artifacts/e2e/E2E-001-firefox-fail.png`
 **Root Cause**: [CSS issue with error message display in Firefox]
@@ -159,10 +159,10 @@
 
 | Workflow | Priority | Test Coverage | Status |
 |----------|----------|---------------|--------|
-| [User Registration] | High | [4 scenarios from test-plan.md] | [✅ Tested] |
-| [User Login] | High | [3 scenarios from test-plan.md] | [✅ Tested] |
-| [Create Resource] | High | [5 scenarios from test-plan.md] | [✅ Tested] |
-| [Edit Resource] | Medium | [4 scenarios from test-plan.md] | [✅ Tested] |
+| [User Registration] | High | [4 scenarios from design-test.md] | [✅ Tested] |
+| [User Login] | High | [3 scenarios from design-test.md] | [✅ Tested] |
+| [Create Resource] | High | [5 scenarios from design-test.md] | [✅ Tested] |
+| [Edit Resource] | Medium | [4 scenarios from design-test.md] | [✅ Tested] |
 
 ### Workflows Not Tested
 
@@ -173,9 +173,9 @@
 
 ### Test Scenarios Coverage
 
-**From test-plan.md**: [X total scenarios defined]
+**From design-test.md**: [X total scenarios defined]
 
-| Scenario Type | Planned (from test-plan.md) | Executed | Pass Rate |
+| Scenario Type | Planned (from design-test.md) | Executed | Pass Rate |
 |---------------|---------------------------|----------|-----------|
 | Happy Path | [X] | [X] | [100%] |
 | Edge Cases | [Y] | [Y] | [90%] |
@@ -268,15 +268,15 @@ All E2E test artifacts are stored in: `/specs/[###-feature-name]/test-artifacts/
   - Block deployment
   - Fix: Address all critical failures
   - Investigate: Root causes and impacts
-  - Suggest: Review and update test-plan.md if workflows changed
+  - Suggest: Review and update design-test.md if workflows changed
 
 ## Appendix
 
 ### Test Plan Traceability
 
-**Test Plan**: `/specs/[###-feature-name]/test-plan.md`
+**Test Plan**: `/specs/[###-feature-name]/design-test.md`
 
-| Workflow (from test-plan.md) | Scenarios Planned | Scenarios Executed | Pass Rate |
+| Workflow (from design-test.md) | Scenarios Planned | Scenarios Executed | Pass Rate |
 |------------------------------|-------------------|-------------------|-----------|
 | [Workflow 1] | [4] | [4] | [75%] |
 | [Workflow 2] | [3] | [3] | [100%] |
@@ -285,7 +285,7 @@ All E2E test artifacts are stored in: `/specs/[###-feature-name]/test-artifacts/
 
 ### References
 
-- **Test Plan**: `/specs/[###-feature-name]/test-plan.md`
+- **Test Plan**: `/specs/[###-feature-name]/design-test.md`
 - **User Workflows**: `/specs/[###-feature-name]/quickstart.md`
 - **Implementation Plan**: `/specs/[###-feature-name]/plan.md`
 - **Architecture**: `/d-docs/architecture.md`

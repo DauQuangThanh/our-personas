@@ -1,5 +1,5 @@
 ---
-description: Execute E2E tests according to the test plan and generate a comprehensive test report capturing results, coverage, and quality metrics.
+description: Execute E2E tests according to the test spec and generate a comprehensive test report capturing results, coverage, and quality metrics.
 scripts:
   sh: scripts/bash/setup-test.sh --json
   ps: scripts/powershell/setup-test.ps1 -Json
@@ -15,24 +15,21 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for TEST_PLAN, TEST_REPORT, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for TEST_SPEC, TEST_REPORT, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read TEST_PLAN, `quickstart.md`, `plan.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
+2. **Load context**: Read TEST_SPEC, `quickstart.md`, `plan.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
 
-3. **Verify prerequisites**: Ensure test plan exists and contains:
-   - E2E test strategy definition (framework, browser coverage)
-   - E2E test scenarios from user workflows
-   - Test data requirements
-   - Test environment configuration
-   - ERROR if test-plan.md is missing or incomplete
+3. **Verify prerequisites**: Verify test prerequisites before execution:
+   - ERROR if design-test.md is missing or incomplete
+   - Verify quickstart.md exists (source of user workflows)
 
-4. **Execute E2E test workflow**: Follow the test plan to:
+4. **Execute E2E test workflow**: Follow the test spec to:
    - **Reference Test Plan**: Load E2E test scenarios and test strategy
    - Verify test environment is running and accessible
-   - Execute E2E tests according to test-plan scenarios
+   - Execute E2E tests according to design-test scenarios
    - Collect test results (pass/fail, duration, errors)
    - Capture test artifacts (screenshots, videos, traces)
-   - **Verify alignment with test-plan**: Compare actual execution with test-plan scenarios
+   - **Verify alignment with design-test**: Compare actual execution with design-test scenarios
    - Generate test report with results and recommendations
 
 5. **Stop and report**: Command ends after E2E test execution and report generation. Report branch, TEST_REPORT path, test results summary, and recommendations for next steps.
@@ -41,37 +38,40 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ### Phase 0: Pre-Test Validation
 
-1. **Verify test environment setup**:
-   - From test-plan.md: Required infrastructure (application server, database, services)
-   - From test-plan.md: Test data availability
-   - From test-plan.md: E2E framework installed
-   - Environment is accessible (URLs reachable)
-   - ERROR if environment doesn't match test-plan requirements
+2. **Verify test environment** (from design-test.md):
+   - **Reference design-test.md for requirements**
+   - **Verify alignment with design-test**: Compare actual execution with design-test scenarios
+   - From design-test.md: Required infrastructure (application server, database, services)
+   - From design-test.md: Test data availability
+   - From design-test.md: E2E framework installed
+   - Verify test environment matches design-test requirements
+   - ERROR if environment doesn't match design-test requirements
 
 2. **Validate test prerequisites**:
    - Implementation code is deployed to test environment
    - Test fixtures and data are loaded
-   - E2E test framework is installed (from test-plan.md)
+   3. **Verify E2E test framework** (from design-test.md):
+   - E2E test framework is installed (from design-test.md)
+   - Browser drivers are available
+   - Test utilities and libraries are ready
    - Browser/platform requirements met
    - ERROR if prerequisites not met
 
 **Output**: Environment validation report
 
-### Phase 1: E2E Test Execution
+### Phase 2: E2E Test Execution
 
-**Prerequisites:** Phase 0 environment validation complete
+**Prerequisites:** Phase 1 environment verification complete
 
-1. **Execute E2E test scenarios** (from test-plan.md):
-   - Run E2E tests using framework specified in test-plan (Playwright/Cypress/Selenium)
-   - Execute tests in order of priority (Critical → High → Medium → Low)
-   - For each test scenario from test-plan.md:
-     - Set up preconditions
-     - Execute test steps
-     - Verify expected results
-     - Capture screenshots/videos on failure
-     - Clean up test data
-   - **Reference test-plan.md**: E2E test scenarios and user workflows
+1. **Execute E2E test scenarios** (from design-test.md):
+   - Run E2E tests using framework specified in design-test (Playwright/Cypress/Selenium)
+   - Execute critical user workflows first
+   - For each test scenario from design-test.md:
+     * Run test against application
+     * Capture screenshots/videos on failure
+     * Log test execution results
    - **Reference quickstart.md**: User workflows being tested
+   - **Reference design-test.md**: E2E test scenarios and user workflows
 
 2. **Collect test results**:
    - Pass/fail status for each test
@@ -95,8 +95,8 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Performance issues (slow workflows)
    - Common failure patterns
 
-2. **Compare with test-plan expectations**:
-   - **Reference test-plan.md**: Expected test scenarios
+2. **Compare with design-test expectations**:
+   - **Reference design-test.md**: Expected test scenarios
    - All planned scenarios executed?
    - Any scenarios skipped?
    - Test execution environment as planned?
@@ -124,13 +124,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Document test coverage**:
    - User workflows tested (from quickstart.md)
    - User workflows not tested
-   - Coverage against test-plan scenarios
+   - Coverage against design-test scenarios
 
 3. **Generate recommendations**:
    - Tests to fix (failed tests)
    - Workflows to investigate (consistent failures)
    - Performance issues to address
-   - **Reference test-plan.md**: Additional scenarios to add
+   - **Reference design-test.md**: Additional scenarios to add
    - Environment issues to resolve
 
 4. **Create artifacts inventory**:
@@ -145,13 +145,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 ## Key rules
 
 - Use absolute paths
-- ERROR if test-plan.md does not exist
-- ERROR if test environment doesn't match test-plan requirements
+- ERROR if design-test.md does not exist
+- ERROR if test environment doesn't match design-test requirements
 - ERROR if E2E framework is not installed or configured
 - **FOCUS ONLY ON E2E TESTS** - No unit, integration, contract, performance, or security tests
 - **WARN if tests fail** (not ERROR - report failures and suggest fixes)
 - **WARN if test environment differs from architecture** (document differences)
-- Ensure test report references test-plan for traceability (which scenarios were executed)
+- Ensure test report references design-test for traceability (which scenarios were executed)
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
@@ -163,11 +163,11 @@ Your response **MUST** suggest the user's next step, following the sequential or
 4. /personas.architect     → Define system architecture
 5. /personas.standardize   → Establish coding standards
 6. /personas.plan          → Plan feature implementation with design
-7. /personas.test-plan     → Generate E2E test plan
-8. /personas.taskify         → Break down into tasks
+7. /personas.design-test   → Generate E2E test spec
+8. /personas.taskify       → Break down into tasks
 9. /personas.analyze       → Analyze cross-artifact consistency
 10. /personas.implement    → Execute implementation
 11. /personas.test         → Execute E2E tests and generate report (YOU ARE HERE)
 ```
 
-**Note**: The test command executes E2E tests ONLY according to the test plan created by `/personas.test-plan`. It runs the tests and generates a test report.
+**Note**: The test command executes E2E tests ONLY according to the test spec created by `/personas.design-test`. It runs the tests and generates a test report.
