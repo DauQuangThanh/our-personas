@@ -1277,13 +1277,13 @@ def init(
 
     steps_lines.append("   2.1 [cyan]/personas.regulate[/] - Establish project ground rules")
     steps_lines.append("   2.2 [cyan]/personas.specify[/] - Create baseline specification")
-    steps_lines.append("   2.3 [cyan]/personas.architect[/] - Create software architecture design")
-    steps_lines.append("   2.4 [cyan]/personas.standardize[/] - Create project coding standards")
-    steps_lines.append("   2.5 [cyan]/personas.design[/] - Design implementation plan")
-    steps_lines.append("   2.6 [cyan]/personas.design-test[/] - Write E2E test specification")
+    steps_lines.append("   2.3 [cyan]/personas.architect[/] - Compose software architecture design")
+    steps_lines.append("   2.4 [cyan]/personas.standardize[/] - Develop project coding standards")
+    steps_lines.append("   2.5 [cyan]/personas.design[/] - Design the implementation plan")
+    steps_lines.append("   2.6 [cyan]/personas.design-test[/] - Build E2E test specification")
     steps_lines.append("   2.7 [cyan]/personas.taskify[/] - Generate actionable tasks")
     steps_lines.append("   2.8 [cyan]/personas.implement[/] - Execute implementation")
-    steps_lines.append("   2.9 [cyan]/personas.test[/] - Execute E2E test scenario")
+    steps_lines.append("   2.9 [cyan]/personas.test[/] - Perform E2E test scenario")
 
     steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
     console.print()
