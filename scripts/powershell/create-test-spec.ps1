@@ -11,7 +11,7 @@ $ErrorActionPreference = 'Stop'
 
 # Show help if requested
 if ($Help) {
-    Write-Output "Usage: ./setup-design-test.ps1 [-Json] [-Help]"
+    Write-Output "Usage: ./create-test-spec.ps1 [-Json] [-Help]"
     Write-Output "  -Json     Output results in JSON format"
     Write-Output "  -Help     Show this help message"
     exit 0

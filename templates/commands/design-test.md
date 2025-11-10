@@ -1,8 +1,8 @@
 ---
 description: Generate an E2E test spec from user workflows defined in quickstart.md, specifying test scenarios, test data, and test environment requirements.
 scripts:
-  sh: scripts/bash/setup-design-test.sh --json
-  ps: scripts/powershell/setup-design-test.ps1 -Json
+  sh: scripts/bash/create-test-spec.sh --json
+  ps: scripts/powershell/create-test-spec.ps1 -Json
 ---
 
 ## User Input
