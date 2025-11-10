@@ -237,13 +237,37 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 6. **Structure Reference**: Generate the checklist following the canonical template in `templates/checklist-arch-template.md` if available, otherwise use: H1 title, purpose/created/product-level meta lines, `##` category sections containing `- [ ] ARCH### <architecture item>` lines with globally incrementing IDs starting at ARCH001.
 
-7. **Report**: Output full path to created checklist, item count, and remind user that each run creates a new file. Summarize:
+7. **Execute checklist validation**: After generating the checklist, systematically validate the architecture documentation against each checklist item:
+   - Read the generated checklist file
+   - For each checklist item (ARCH001, ARCH002, etc.):
+     - Extract the validation question and quality dimension
+     - Review the referenced architecture section (if `[Arch §X.Y]` specified)
+     - Evaluate whether the architecture documentation meets the quality criteria
+     - Mark item as `[x]` if criterion is met, or leave as `[ ]` if not met
+     - Add inline comments/findings explaining the assessment (e.g., "✓ Clearly documented in §4.1" or "⚠ Missing specific metrics")
+     - For `[Gap]` items, note whether the architectural element is documented or missing
+   - Update the checklist file with completion status and findings
+   - Track pass/fail count and identify critical gaps
+
+8. **Generate validation summary**: After executing all checklist items:
+   - Calculate completion rate (items passed / total items)
+   - List critical gaps that must be addressed (failed items marked as high priority)
+   - List recommendations for architecture documentation improvements
+   - Identify sections needing clarification or expansion
+   - Assess overall architecture documentation readiness for next phase
+
+9. **Report**: Output full path to completed checklist, validation results summary. Report:
+   - Checklist file path and total items count
+   - Validation completion rate (e.g., "28/35 items passed (80%)")
    - Product level detected/specified (Mock-up/PoC/MVP/Production)
-   - Focus areas selected (which architectural views/concerns)
-   - Validation depth level
-   - Audience (architecture reviewer, technical lead, etc.)
-   - Any explicit user-specified must-have items incorporated
-   - Suggest next step: review and address checklist items before `/personas.design`
+   - Focus areas validated (which architectural views/concerns)
+   - Critical gaps identified (high-priority failed items)
+   - Recommendations for architecture improvements
+   - Overall assessment: Ready for next phase / Needs updates
+   - Suggest next step based on results:
+     - If ≥90% passed: Proceed to `/personas.standardize` or `/personas.design`
+     - If 70-89% passed: Address medium-priority gaps, then proceed
+     - If <70% passed: Address critical gaps and re-run validation
 
 **Important**: Each `/personas.validate-arch` command invocation creates a checklist file using short, descriptive names. This allows:
 

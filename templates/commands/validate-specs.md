@@ -208,11 +208,36 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 6. **Structure Reference**: Generate the checklist following the canonical template in `templates/checklist-spec-template.md` for title, meta section, category headings, and ID formatting. If template is unavailable, use: H1 title, purpose/created meta lines, `##` category sections containing `- [ ] CHK### <requirement item>` lines with globally incrementing IDs starting at CHK001.
 
-7. **Report**: Output full path to created checklist, item count, and remind user that each run creates a new file. Summarize:
-   - Focus areas selected
-   - Depth level
-   - Actor/timing
-   - Any explicit user-specified must-have items incorporated
+7. **Execute checklist validation**: After generating the checklist, systematically validate the requirements documentation against each checklist item:
+   - Read the generated checklist file
+   - For each checklist item (CHK001, CHK002, etc.):
+     - Extract the validation question and quality dimension
+     - Review the referenced spec/design section (if `[Spec §X.Y]` or `[Design §X.Y]` specified)
+     - Evaluate whether the requirements meet the quality criteria
+     - Mark item as `[x]` if criterion is met, or leave as `[ ]` if not met
+     - Add inline comments/findings explaining the assessment (e.g., "✓ Clearly specified in §FR-3" or "⚠ Vague requirement needs quantification")
+     - For `[Gap]` items, note whether the requirement is documented or missing
+   - Update the checklist file with completion status and findings
+   - Track pass/fail count and identify critical requirements gaps
+
+8. **Generate validation summary**: After executing all checklist items:
+   - Calculate completion rate (items passed / total items)
+   - List critical gaps that must be addressed (failed items marked as high priority)
+   - List requirements that need clarification or refinement
+   - Identify missing requirements or scenarios
+   - Assess overall requirements quality and readiness for next phase
+
+9. **Report**: Output full path to completed checklist, validation results summary. Report:
+   - Checklist file path and total items count
+   - Validation completion rate (e.g., "32/40 items passed (80%)")
+   - Focus areas validated
+   - Critical gaps identified (high-priority failed items)
+   - Requirements needing clarification or refinement
+   - Overall assessment: Ready for next phase / Needs updates
+   - Suggest next step based on results:
+     - If ≥90% passed: Proceed to next workflow step (e.g., `/personas.design`, `/personas.taskify`, or `/personas.implement`)
+     - If 70-89% passed: Address medium-priority gaps, then proceed
+     - If <70% passed: Address critical gaps and re-run validation
 
 **Important**: Each `/personas.validate-specs` command invocation creates a checklist file using short, descriptive names unless file already exists. This allows:
 
