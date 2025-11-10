@@ -1,5 +1,5 @@
 ---
-description: Generate a custom checklist to validate architecture design quality and completeness.
+description: Generate and run a custom checklist to validate architecture design quality and completeness.
 scripts:
   sh: scripts/bash/check-prerequisites.sh --json
   ps: scripts/powershell/check-prerequisites.ps1 -Json
