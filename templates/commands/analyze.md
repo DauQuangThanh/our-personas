@@ -15,13 +15,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Goal
 
-Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `plan.md`, `tasks.md`) and foundational documents (`constitution.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.tasks` has successfully produced a complete `tasks.md`.
+Identify inconsistencies, duplications, ambiguities, and underspecified items across the core artifacts (`spec.md`, `plan.md`, `tasks.md`) and foundational documents (`ground-rules.md`, `architecture.md`, `standards.md`) before implementation. This command MUST run only after `/personas.tasks` has successfully produced a complete `tasks.md`.
 
 ## Operating Constraints
 
 **STRICTLY READ-ONLY**: Do **not** modify any files. Output a structured analysis report. Offer an optional remediation plan (user must explicitly approve before any follow-up editing commands would be invoked manually).
 
-**Constitution Authority**: The project constitution (`/memory/constitution.md`) is **non-negotiable** within this analysis scope. Constitution conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit constitution update outside `/personas.analyze`.
+**Ground Rules Authority**: The project ground rules (`/memory/ground-rules.md`) is **non-negotiable** within this analysis scope. Ground rules conflicts are automatically CRITICAL and require adjustment of the spec, plan, or tasks—not dilution, reinterpretation, or silent ignoring of the principle. If a principle itself needs to change, that must occur in a separate, explicit ground rules update outside `/personas.analyze`.
 
 **Architecture Authority**: The system architecture (`/d-docs/architecture.md`) defines the **technical framework** and component boundaries. Conflicts with architectural decisions (component design, communication patterns, technology stack) are HIGH severity and require alignment.
 
@@ -67,9 +67,9 @@ Load only the minimal necessary context from each artifact:
 - Parallel markers [P]
 - Referenced file paths
 
-**From constitution:**
+**From ground rules:**
 
-- Load `/memory/constitution.md` for principle validation
+- Load `/memory/ground-rules.md` for principle validation
 
 **From architecture (if exists):**
 
@@ -97,7 +97,7 @@ Create internal representations (do not include raw artifacts in output):
 - **Requirements inventory**: Each functional + non-functional requirement with a stable key (derive slug based on imperative phrase; e.g., "User can upload file" → `user-can-upload-file`)
 - **User story/action inventory**: Discrete user actions with acceptance criteria
 - **Task coverage mapping**: Map each task to one or more requirements or stories (inference by keyword / explicit reference patterns like IDs or key phrases)
-- **Constitution rule set**: Extract principle names and MUST/SHOULD normative statements
+- **Ground rules rule set**: Extract principle names and MUST/SHOULD normative statements
 - **Architecture constraints**: Extract component definitions, technology choices, communication patterns, and quality targets (if architecture.md exists)
 - **Standards requirements**: Extract mandatory testing, security, and code quality requirements (if standards.md exists)
 
@@ -121,10 +121,10 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - User stories missing acceptance criteria alignment
 - Tasks referencing files or components not defined in spec/plan
 
-#### D. Constitution Alignment
+#### D. Ground Rules Alignment
 
 - Any requirement or plan element conflicting with a MUST principle
-- Missing mandated sections or quality gates from constitution
+- Missing mandated sections or quality gates from ground rules
 
 #### E. Architecture Alignment (if architecture.md exists)
 
@@ -161,7 +161,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 
 Use this heuristic to prioritize findings:
 
-- **CRITICAL**: Violates constitution MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
+- **CRITICAL**: Violates ground rules MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
 - **HIGH**: Violates architecture (wrong component, incompatible tech stack), duplicate or conflicting requirement, ambiguous security/performance attribute, untestable acceptance criterion
 - **MEDIUM**: Violates standards (missing tests, inadequate coverage), terminology drift, missing non-functional task coverage, underspecified edge case
 - **LOW**: Style/wording improvements, minor redundancy not affecting execution order
@@ -183,7 +183,7 @@ Output a Markdown report (no file writes) with the following structure:
 | Requirement Key | Has Task? | Task IDs | Notes |
 |-----------------|-----------|----------|-------|
 
-**Constitution Alignment Issues:** (if any)
+**Ground Rules Alignment Issues:** (if any)
 
 **Architecture Alignment Issues:** (if architecture.md exists and issues found)
 
@@ -225,7 +225,7 @@ Ask the user: "Would you like me to suggest concrete remediation edits for the t
 
 - **NEVER modify files** (this is read-only analysis)
 - **NEVER hallucinate missing sections** (if absent, report them accurately)
-- **Prioritize constitution violations** (these are always CRITICAL)
+- **Prioritize ground rules violations** (these are always CRITICAL)
 - **Use examples over exhaustive rules** (cite specific instances, not generic patterns)
 - **Report zero issues gracefully** (emit success report with coverage statistics)
 
@@ -233,7 +233,7 @@ Ask the user: "Would you like me to suggest concrete remediation edits for the t
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 
 ```text
-1. /personas.constitution  → Establish project principles
+1. /personas.regulate      → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture
@@ -246,7 +246,7 @@ Your response **MUST** suggest the user's next step, following the sequential or
 11. /personas.test         → Execute E2E tests and generate report
 ```
 
-**Note**: `/personas.analyze` should run AFTER `/personas.tasks` to validate the complete artifact chain (constitution, architecture, standards, spec, plan, test-plan, tasks) for consistency and alignment before implementation begins.
+**Note**: `/personas.analyze` should run AFTER `/personas.tasks` to validate the complete artifact chain (ground rules, architecture, standards, spec, plan, test-plan, tasks) for consistency and alignment before implementation begins.
 
 ## Context
 

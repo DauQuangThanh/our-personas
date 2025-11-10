@@ -79,7 +79,7 @@
 
 ## Alignment & Consistency
 
-- [ ] Architecture aligns with project constitution (if exists)
+- [ ] Architecture aligns with project ground rules (if exists)
 - [ ] Architecture supports coding standards (if exists)
 - [ ] No conflicts with existing documentation
 - [ ] Technology choices consistent across documents

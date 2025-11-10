@@ -60,13 +60,13 @@
 
 		// Personas settings for Github Copilot
 		"git.autofetch": true,
-		"chat.promptFilesRecommendations": {
-			"personas.constitution": true,
-			"personas.specify": true,
-			"personas.plan": true,
-			"personas.tasks": true,
-			"personas.implement": true
-		},
+			"chat.promptFilesRecommendations": {
+				"personas.regulate": true,
+				"personas.specify": true,
+				"personas.plan": true,
+				"personas.tasks": true,
+				"personas.implement": true
+			},
 		"chat.tools.terminal.autoApprove": {
 			".personas/scripts/bash/": true,
 			".personas/scripts/powershell/": true

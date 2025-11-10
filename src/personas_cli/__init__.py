@@ -1275,7 +1275,7 @@ def init(
 
     steps_lines.append(f"{step_num}. Start using slash commands with your AI agent(s):")
 
-    steps_lines.append("   2.1 [cyan]/personas.constitution[/] - Establish project principles")
+    steps_lines.append("   2.1 [cyan]/personas.regulate[/] - Establish project principles")
     steps_lines.append("   2.2 [cyan]/personas.specify[/] - Create baseline specification")
     steps_lines.append("   2.3 [cyan]/personas.plan[/] - Create implementation plan")
     steps_lines.append("   2.4 [cyan]/personas.tasks[/] - Generate actionable tasks")

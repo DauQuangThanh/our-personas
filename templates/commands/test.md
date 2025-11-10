@@ -157,7 +157,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 
 ```text
-1. /personas.constitution  → Establish project principles
+1. /personas.regulate      → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture

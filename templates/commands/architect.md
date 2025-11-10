@@ -12,7 +12,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are updating the software architecture document at `/d-docs/architecture.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[System Name]`, `[briefly describe the system's purpose]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for the project architecture, and (c) ensure consistency with the project constitution and coding standards.
+You are updating the software architecture document at `/d-docs/architecture.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[System Name]`, `[briefly describe the system's purpose]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for the project architecture, and (c) ensure consistency with the project ground rules and coding standards.
 
 Follow this execution flow:
 
@@ -93,9 +93,9 @@ Follow this execution flow:
    - Add concrete examples where helpful
 
 5. **Consistency with other project documents**:
-   - Read `/memory/constitution.md` if it exists
+   - Read `/memory/ground-rules.md` if it exists
    - Read `/d-docs/standards.md` if it exists
-   - Ensure architecture aligns with constitutional principles
+   - Ensure architecture aligns with ground rules principles
    - Ensure architecture supports coding standards
    - Flag any conflicts between documents
    - Verify technology choices are consistent across documents
@@ -175,7 +175,7 @@ Follow this execution flow:
    - Key components and their interactions
    - Quality attributes prioritized
    - Infrastructure approach defined
-   - Alignment with constitution and coding standards
+   - Alignment with ground rules and coding standards
    - Architectural patterns applied
    - Follow-up TODOs if any information deferred
 
@@ -242,7 +242,7 @@ Follow this execution flow:
    - Components and their interactions
    - Quality attributes and targets
    - Infrastructure and deployment approach
-   - Alignment status with constitution and coding standards
+   - Alignment status with ground rules and coding standards
    - **Checklist validation results**: Pass/fail status with details
    - **Readiness for planning**: Confirm if ready for `/personas.plan` or needs updates
    - **Next recommended step**: Run `/personas.standardize` to establish coding standards aligned with this architecture
@@ -339,7 +339,7 @@ The architecture document is complete when:
 - [ ] Design patterns identified and applied
 - [ ] Security considerations addressed
 - [ ] Scalability approach documented
-- [ ] Aligned with project constitution and coding standards
+- [ ] Aligned with project ground rules and coding standards
 - [ ] No template comments or placeholders remain
 - [ ] Document reads as cohesive project documentation
 
@@ -365,7 +365,7 @@ After completing the architecture document and checklist validation:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 
 ```text
-1. /personas.constitution  → Establish project principles
+1. /personas.regulate      → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture (YOU ARE HERE)

@@ -12,7 +12,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are updating the project coding standard at `/d-docs/standards.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[FRONTEND_FRAMEWORK]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for full-stack development, and (c) ensure consistency with the project constitution.
+You are updating the project coding standard at `/d-docs/standards.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[FRONTEND_FRAMEWORK]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for full-stack development, and (c) ensure consistency with the project ground rules.
 
 Follow this execution flow:
 
@@ -101,11 +101,11 @@ Follow this execution flow:
    - Tailor content to detected technology stack
    - Remove sections not applicable to the project (e.g., frontend sections for backend-only projects)
 
-5. **Consistency with project constitution** (if exists):
-   - Read `/memory/constitution.md` if it exists
-   - Ensure coding standards align with constitutional principles
-   - Flag any conflicts between constitution and coding standards
-   - Ensure testing requirements match constitution's test-first mandates
+5. **Consistency with project ground rules** (if exists):
+   - Read `/memory/ground-rules.md` if it exists
+   - Ensure coding standards align with ground rules principles
+   - Flag any conflicts between ground rules and coding standards
+   - Ensure testing requirements match ground rules' test-first mandates
    - Verify version control and review processes align
 
 6. **Technology-specific recommendations**:
@@ -148,7 +148,7 @@ Follow this execution flow:
    - Version change: old → new
    - Technology stack detected
    - Sections filled vs. removed (and why)
-   - Alignment with constitution (if exists)
+   - Alignment with ground rules (if exists)
    - Tool recommendations based on stack
    - Follow-up TODOs if any placeholders deferred
 
@@ -170,7 +170,7 @@ Follow this execution flow:
     - Key standards established (frontend, backend, testing, security)
     - Tools and frameworks configured
     - Any sections removed as not applicable
-    - Alignment status with project constitution
+    - Alignment status with project ground rules
     - Suggested commit message (e.g., `docs: establish coding standard v1.0.0 (full-stack guidelines)`)
 
 ## Key Guidelines
@@ -242,7 +242,7 @@ The coding standard is complete when:
 - [ ] Review process documented
 - [ ] Exception handling process clear
 - [ ] Governance and amendment process specified
-- [ ] Aligned with project constitution (if exists)
+- [ ] Aligned with project ground rules (if exists)
 - [ ] Version and dates correctly set
 - [ ] No template comments or placeholders remain
 
@@ -262,7 +262,7 @@ After completing the coding standard:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
 
 ```text
-1. /personas.constitution  → Establish project principles
+1. /personas.regulate      → Establish project principles
 2. /personas.specify       → Create feature specifications
 3. /personas.clarify       → Clarify requirements (optional)
 4. /personas.architect     → Define system architecture

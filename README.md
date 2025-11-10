@@ -85,10 +85,10 @@ uvx --from git+https://github.com/dauquangthanh/our-personas.git personas init <
 
 Launch your AI assistant in the project directory. The `/personas.*` commands are available in the assistant.
 
-Use the **`/personas.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+Use the **`/personas.regulate`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```bash
-/personas.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
+/personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
 ### 3. Define system overview (recommended for new projects)
@@ -325,8 +325,8 @@ Essential commands for the Spec-Driven Development workflow (in recommended orde
 
 | Command                  | Description                                                           | When to Use |
 |--------------------------|-----------------------------------------------------------------------|-------------|
-| `/personas.constitution`  | Create or update project governing principles and development guidelines | First step: establish project values |
-| `/personas.specify`       | Define what you want to build (requirements and user stories)        | After constitution: define features |
+| `/personas.regulate`     | Create or update project governing principles and development guidelines | First step: establish project values |
+| `/personas.specify`      | Define what you want to build (requirements and user stories)        | After ground rules: define features |
 | `/personas.clarify`       | Clarify underspecified areas through structured questioning           | Optional: after specify, before architect |
 | `/personas.architect`     | Define system architecture, components, and infrastructure            | After clarify: establish technical framework |
 | `/personas.standardize`   | Establish coding standards, testing requirements, and quality practices | After architect: define implementation rules |
@@ -466,15 +466,15 @@ personas init <project_name> --ai claude --ignore-agent-tools
 
 Go to the project folder and run your AI agent. In our example, we're using `claude`.
 
-You will know that things are configured correctly if you see the `/personas.constitution`, `/personas.specify`, `/personas.plan`, `/personas.test-plan`, `/personas.tasks`, `/personas.test`, and `/personas.implement` commands available.
+You will know that things are configured correctly if you see the `/personas.regulate`, `/personas.specify`, `/personas.plan`, `/personas.test-plan`, `/personas.tasks`, `/personas.test`, and `/personas.implement` commands available.
 
-The first step should be establishing your project's governing principles using the `/personas.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+The first step should be establishing your project's governing principles using the `/personas.regulate` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
 ```text
-/personas.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
+/personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
-This step creates or updates the `.personas/memory/constitution.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `.personas/memory/ground-rules.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create system overview (recommended for new projects)
 
@@ -550,7 +550,7 @@ At this stage, your project folder contents should resemble the following:
 ```text
 └── .personas
     ├── memory
-    │  └── constitution.md
+    │  └── ground-rules.md
     ├── scripts
     │  ├── check-prerequisites.sh
     │  ├── common.sh
@@ -670,7 +670,7 @@ The output of this step will include a number of implementation detail documents
 .
 ├── CLAUDE.md
 ├── memory
-│  └── constitution.md
+│  └── ground-rules.md
 ├── scripts
 │  ├── check-prerequisites.sh
 │  ├── common.sh
@@ -738,7 +738,7 @@ This helps refine the implementation plan and helps you avoid potential blind sp
 You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
 
 >[!NOTE]
->Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+>Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](base/memory/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
 
 ### **STEP 9:** Generate E2E test plan with /personas.test-plan
 
@@ -787,7 +787,7 @@ Once ready, use the `/personas.implement` command to execute your implementation
 
 The `/personas.implement` command will:
 
-- Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
+- Validate that all prerequisites are in place (ground rules, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`
 - Execute tasks in the correct order, respecting dependencies and parallel execution markers
 - Follow the TDD approach defined in your task plan

@@ -18,31 +18,31 @@ The development team focuses in on their creativity, experimentation, their crit
 
 ## The SDD Workflow in Practice
 
-The workflow begins with establishing foundational principles through the `/personas.constitution` command. These principles become the immutable DNA of the project, guiding every subsequent decision. What might take days of meetings and documentation in traditional development happens in minutes of focused principle definition.
+The workflow begins with establishing foundational principles through the `/personas.regulate` command. These principles become the immutable DNA of the project, guiding every subsequent decision. What might take days of meetings and documentation in traditional development happens in minutes of focused principle definition.
 
 For greenfield projects, the workflow continues with a system overview that catalogues all planned features. This comprehensive view enables architectural decisions that consider the entire system scope rather than designing in a vacuum. The `/personas.specify` command transforms vague ideas into structured feature lists with high-level requirements.
 
 The `/personas.clarify` command then resolves ambiguities through structured questioning. The AI identifies edge cases, asks targeted questions, and helps define precise acceptance criteria. This step prevents costly rework downstream by ensuring clear requirements before technical planning begins.
 
-With requirements clarified, the `/personas.architect` command establishes system architecture following ISO/IEC/IEEE 42010:2011 standards. This defines components, technology stack, quality attributes, and infrastructure approach—all while respecting the constitutional principles. The architecture undergoes automated validation through quality checklists, catching issues before they cascade into implementation.
+With requirements clarified, the `/personas.architect` command establishes system architecture following ISO/IEC/IEEE 42010:2011 standards. This defines components, technology stack, quality attributes, and infrastructure approach—all while respecting the ground rules principles. The architecture undergoes automated validation through quality checklists, catching issues before they cascade into implementation.
 
 The `/personas.standardize` command then establishes comprehensive coding standards aligned with the architecture. These standards ensure consistent practices across frontend, backend, testing, security, performance, and DevOps. Every standard is measurable and enforceable, with automated checks integrated into CI/CD pipelines.
 
-For individual features, the workflow repeats the specify-clarify cycle to create detailed specifications. The `/personas.plan` command then generates implementation plans that map requirements to technical decisions—all guided by the architecture and standards established earlier. Every technology choice has documented rationale. Every architectural decision traces back through the artifact chain: plan → architecture → constitution.
+For individual features, the workflow repeats the specify-clarify cycle to create detailed specifications. The `/personas.plan` command then generates implementation plans that map requirements to technical decisions—all guided by the architecture and standards established earlier. Every technology choice has documented rationale. Every architectural decision traces back through the artifact chain: plan → architecture → ground rules.
 
-Throughout this process, research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications. Organizational constraints from the constitution seamlessly integrate into every specification and plan.
+Throughout this process, research agents gather critical context. They investigate library compatibility, performance benchmarks, and security implications. Organizational constraints from the ground rules seamlessly integrate into every specification and plan.
 
 The `/personas.test-plan` command generates comprehensive E2E test scenarios from user workflows before any code is written. This ensures tests validate actual user value rather than implementation details. Test scenarios become part of the specification that validates implementations.
 
-The `/personas.tasks` command breaks down implementation plans into executable tasks with dependency management and parallelization markers. Tasks follow the test-first approach defined in the constitution, ensuring tests are written before implementation code.
+The `/personas.tasks` command breaks down implementation plans into executable tasks with dependency management and parallelization markers. Tasks follow the test-first approach defined in the ground rules, ensuring tests are written before implementation code.
 
-The `/personas.analyze` command performs cross-artifact validation, checking alignment between constitution, specifications, architecture, standards, plans, and tasks. It identifies gaps, contradictions, and missing details—providing a comprehensive readiness assessment before implementation begins.
+The `/personas.analyze` command performs cross-artifact validation, checking alignment between ground rules, specifications, architecture, standards, plans, and tasks. It identifies gaps, contradictions, and missing details—providing a comprehensive readiness assessment before implementation begins.
 
-Code generation through `/personas.implement` follows the validated task list, respecting dependencies and constitutional mandates. Domain concepts become data models. User stories become API endpoints. The implementation executes in the correct order, following TDD when required, with progress tracking throughout.
+Code generation through `/personas.implement` follows the validated task list, respecting dependencies and ground rules mandates. Domain concepts become data models. User stories become API endpoints. The implementation executes in the correct order, following TDD when required, with progress tracking throughout.
 
 Finally, `/personas.test` executes the E2E test plan, validating that implementations deliver the promised user value. Test results link back to workflows and requirements, providing complete traceability from specification through validation.
 
-The feedback loop extends beyond initial development. Production metrics and incidents don't just trigger hotfixes—they update specifications and constitutional principles for the next iteration. Performance bottlenecks become new quality attributes in the architecture. Security vulnerabilities become constraints in the standards. This continuous evolution transforms the traditional SDLC from a linear process into a living system where specifications, principles, and implementations co-evolve.
+The feedback loop extends beyond initial development. Production metrics and incidents don't just trigger hotfixes—they update specifications and ground rules principles for the next iteration. Performance bottlenecks become new quality attributes in the architecture. Security vulnerabilities become constraints in the standards. This continuous evolution transforms the traditional SDLC from a linear process into a living system where specifications, principles, and implementations co-evolve.
 
 ## Why SDD Matters Now
 
@@ -50,19 +50,19 @@ Four trends make SDD not just possible but necessary:
 
 First, AI capabilities have reached a threshold where natural language specifications can reliably generate working code across multiple assistants. The Our Personas toolkit supports over a dozen AI agents—from Claude Code and GitHub Copilot to Cursor, Gemini, Windsurf, and more. This multi-agent approach recognizes that different teams prefer different tools, and the methodology should work across all of them. This isn't about replacing developers—it's about amplifying their effectiveness by automating the mechanical translation from specification to implementation while letting them choose their preferred AI assistant. It amplifies exploration and creativity, supports "start-over" easily, and empowers addition, subtraction, and critical thinking.
 
-Second, software complexity continues to grow exponentially. Modern systems integrate dozens of services, frameworks, and dependencies. Keeping all these pieces aligned with original intent through manual processes becomes increasingly difficult. SDD provides systematic alignment through hierarchical artifact chains—where constitutional principles guide architecture, architecture guides standards, standards guide plans, and plans guide implementation. This creates traceable decisions at every level, with automated validation ensuring consistency. Frameworks may evolve to provide AI-first support, not human-first support, or architect around reusable components.
+Second, software complexity continues to grow exponentially. Modern systems integrate dozens of services, frameworks, and dependencies. Keeping all these pieces aligned with original intent through manual processes becomes increasingly difficult. SDD provides systematic alignment through hierarchical artifact chains—where ground rules principles guide architecture, architecture guides standards, standards guide plans, and plans guide implementation. This creates traceable decisions at every level, with automated validation ensuring consistency. Frameworks may evolve to provide AI-first support, not human-first support, or architect around reusable components.
 
 Third, the pace of change accelerates. Requirements change far more rapidly today than ever before. Pivoting is no longer exceptional—it's expected. Modern product development demands rapid iteration based on user feedback, market conditions, and competitive pressures. Traditional development treats these changes as disruptions. Each pivot requires manually propagating changes through documentation, design, and code. The result is either slow, careful updates that limit velocity, or fast, reckless changes that accumulate technical debt.
 
-SDD transforms requirement changes from obstacles into normal workflow. When specifications drive implementation, pivots become systematic regenerations rather than manual rewrites. Change a constitutional principle, and architecture adapts. Modify architecture, and plans update. Update a user story, and implementation regenerates. The hierarchical workflow means changes cascade through validated artifacts rather than spreading chaos through the codebase. This isn't just about initial development—it's about maintaining engineering velocity through inevitable changes.
+SDD transforms requirement changes from obstacles into normal workflow. When specifications drive implementation, pivots become systematic regenerations rather than manual rewrites. Change a ground rules principle, and architecture adapts. Modify architecture, and plans update. Update a user story, and implementation regenerates. The hierarchical workflow means changes cascade through validated artifacts rather than spreading chaos through the codebase. This isn't just about initial development—it's about maintaining engineering velocity through inevitable changes.
 
 Fourth, SDD enables "what-if" exploration and parallel implementation experiments. With specifications as the source of truth, teams can generate multiple implementations from the same requirements—exploring different technology stacks, architectural patterns, or optimization targets. "What if we built this as serverless instead of microservices?" becomes a regeneration exercise rather than a rewrite project. "How would this feature work if we prioritized mobile-first?" becomes a specification adjustment that flows through the workflow. This experimental capacity transforms development from a one-shot commitment into a continuous exploration of the solution space.
 
 ## Core Principles
 
-**Constitutional Governance**: The constitution becomes the immutable foundation that guides all development. Project principles, quality standards, and architectural constraints are established first and inform every subsequent decision. This provides consistency across time, teams, and implementations.
+**Ground Rules Governance**: The ground rules become the immutable foundation that guides all development. Project principles, quality standards, and architectural constraints are established first and inform every subsequent decision. This provides consistency across time, teams, and implementations.
 
-**Hierarchical Artifact Chain**: Development follows a validated sequence where each artifact builds on the previous: Constitution → Architecture → Standards → Specification → Plan → Tasks → Implementation → Tests. Each level provides constraints and guidance for the next, creating traceable decisions throughout.
+**Hierarchical Artifact Chain**: Development follows a validated sequence where each artifact builds on the previous: Ground Rules → Architecture → Standards → Specification → Plan → Tasks → Implementation → Tests. Each level provides constraints and guidance for the next, creating traceable decisions throughout.
 
 **Specifications as the Lingua Franca**: Feature specifications become the primary communication artifact. Code becomes their expression in a particular language and framework. Maintaining software means evolving specifications, with implementation as the continuously regenerated output.
 
@@ -80,7 +80,7 @@ Fourth, SDD enables "what-if" exploration and parallel implementation experiment
 
 **Test-First Validation**: E2E test plans are generated from user workflows before implementation begins. Tests validate that implementations deliver promised user value, with complete traceability from requirements through test results.
 
-**Bidirectional Feedback**: Production reality informs specification evolution. Metrics, incidents, and operational learnings become inputs for specification refinement, constitutional updates, and architectural improvements.
+**Bidirectional Feedback**: Production reality informs specification evolution. Metrics, incidents, and operational learnings become inputs for specification refinement, ground rules updates, and architectural improvements.
 
 **Multi-Agent Flexibility**: The methodology works across diverse AI assistants—Claude Code, GitHub Copilot, Cursor, Gemini, Windsurf, and more. Teams choose their preferred tools while maintaining consistent structure and practices.
 
@@ -94,7 +94,7 @@ The Our Personas toolkit provides a complete implementation of Spec-Driven Devel
 
 A comprehensive set of commands that automate the entire development process:
 
-- **`/personas.constitution`**: Establish project principles and governing constraints
+- **`/personas.regulate`**: Establish project principles and governing constraints
 - **`/personas.specify`**: Create structured feature specifications with automated branching
 - **`/personas.clarify`**: Resolve ambiguities through structured questioning
 - **`/personas.architect`**: Define system architecture following ISO/IEC/IEEE 42010:2011
@@ -122,7 +122,7 @@ Structured templates that guide AI behavior toward high-quality outputs:
 - **Feature specifications**: Focus on what/why, defer how
 - **Architecture documents**: ISO/IEC/IEEE 42010:2011 compliant system design
 - **Coding standards**: Technology-specific best practices
-- **Implementation plans**: Constitutional compliance and quality gates
+- **Implementation plans**: Ground rules compliance and quality gates
 - **Test plans**: Workflow-based E2E scenarios
 - **Task breakdowns**: Dependency-ordered with parallelization markers
 
@@ -131,20 +131,20 @@ Structured templates that guide AI behavior toward high-quality outputs:
 Continuous quality assurance through automated checks:
 
 - **Architecture checklists**: Validate system design against quality criteria
-- **Cross-artifact analysis**: Ensure consistency between constitution, specs, architecture, plans, and tasks
-- **Constitutional compliance**: Verify adherence to project principles
+- **Cross-artifact analysis**: Ensure consistency between ground rules, specs, architecture, plans, and tasks
+- **Ground rules compliance**: Verify adherence to project principles
 - **Completeness checking**: Identify missing details or ambiguous requirements
 
 ### Hierarchical Workflow
 
 Enforced sequence that ensures proper foundations:
 
-1. **Constitution**: Immutable principles guide all decisions
-2. **Architecture**: System design respects constitutional constraints
+1. **Ground Rules**: Immutable principles guide all decisions
+2. **Architecture**: System design respects ground rules constraints
 3. **Standards**: Coding practices align with architecture
 4. **Specification**: Features define user value within architectural context
 5. **Planning**: Implementation respects standards and architecture
-6. **Tasks**: Breakdown follows test-first approach from constitution
+6. **Tasks**: Breakdown follows test-first approach from ground rules
 7. **Implementation**: Code generation respects entire artifact chain
 8. **Testing**: Validation confirms user value delivery
 
@@ -163,7 +163,7 @@ The key is treating the entire development process—from principles through imp
 
 The SDD methodology is significantly enhanced through a comprehensive set of commands that automate the entire development workflow from principles establishment to implementation execution:
 
-### The `/personas.constitution` Command
+### The `/personas.regulate` Command
 
 The foundational command that establishes your project's governing principles and development guidelines:
 
@@ -202,7 +202,7 @@ Defines system architecture following ISO/IEC/IEEE 42010:2011 standards:
 3. **Quality Attributes**: Defines measurable targets for performance, availability, scalability, and security
 4. **Product Level Awareness**: Tailors architectural complexity to product maturity (Mock-up, PoC, MVP, Production)
 5. **Stakeholder Concerns**: Addresses concerns of all stakeholders through multiple architectural views
-6. **Constitutional Alignment**: Ensures architecture respects project principles and constraints
+6. **Ground rules Alignment**: Ensures architecture respects project principles and constraints
 7. **Quality Validation**: Includes automated checklist validation against architecture quality criteria
 
 ### The `/personas.standardize` Command
@@ -222,7 +222,7 @@ Establishes comprehensive coding standards for full-stack development:
 Creates a comprehensive implementation plan aligned with architecture and standards:
 
 1. **Specification Analysis**: Reads and understands the feature requirements, user stories, and acceptance criteria
-2. **Constitutional Compliance**: Ensures alignment with project constitution and architectural principles
+2. **Ground-rules Compliance**: Ensures alignment with project ground rules and architectural principles
 3. **Standards Adherence**: Follows coding standards for technology choices and implementation approach
 4. **Technical Translation**: Converts business requirements into technical architecture and implementation details
 5. **Detailed Documentation**: Generates supporting documents for data models, API contracts, and test scenarios
@@ -254,7 +254,7 @@ Analyzes the plan and related design documents to generate an executable task li
 
 Validates consistency and coverage across all specification artifacts:
 
-1. **Cross-Artifact Analysis**: Checks alignment between constitution, spec, architecture, standards, plan, and tasks
+1. **Cross-Artifact Analysis**: Checks alignment between ground rules, spec, architecture, standards, plan, and tasks
 2. **Coverage Verification**: Ensures all requirements are addressed in implementation plan
 3. **Consistency Checking**: Identifies contradictions or misalignments between documents
 4. **Gap Identification**: Highlights missing details or incomplete sections
@@ -264,7 +264,7 @@ Validates consistency and coverage across all specification artifacts:
 
 Executes the implementation plan to build the feature:
 
-1. **Prerequisite Validation**: Ensures all required documents (constitution, spec, plan, tasks) exist
+1. **Prerequisite Validation**: Ensures all required documents (ground rules, spec, plan, tasks) exist
 2. **Task Execution**: Processes tasks in dependency order, respecting parallelization markers
 3. **TDD Enforcement**: Follows test-first approach when defined in the task plan
 4. **Progress Tracking**: Provides updates as tasks are completed
@@ -312,10 +312,10 @@ Total: ~20-25 hours of documentation and planning work
 
 ```bash
 # Step 1: Establish project principles (10 minutes)
-/personas.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
+/personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 
 # This creates:
-# - .personas/memory/constitution.md with project values and constraints
+# - .personas/memory/ground-rules.md with project values and constraints
 
 # Step 2: Define system overview for greenfield project (10 minutes)
 /personas.specify Create "Taskify" - team productivity platform with projects, Kanban boards, real-time collaboration, and analytics
@@ -392,11 +392,11 @@ Total: ~20-25 hours of documentation and planning work
 
 The command workflow doesn't just save time—it enforces architectural discipline and quality:
 
-1. **Constitutional Governance**: Every decision traces back to established principles
+1. **Ground Rules Governance**: Every decision traces back to established principles
 2. **Architectural Consistency**: System design guides all feature implementations
 3. **Standards Compliance**: Coding practices are uniform across the entire codebase
 4. **No Forgotten Details**: Templates ensure comprehensive coverage from requirements to testing
-5. **Traceable Decisions**: Every technical choice links back through plan → architecture → constitution
+5. **Traceable Decisions**: Every technical choice links back through plan → architecture → ground rules
 6. **Living Documentation**: Specifications stay in sync with code because they drive implementation
 7. **Quality Validation**: Automated checklist validation catches issues before implementation
 8. **Rapid Iteration**: Change requirements at any level and regenerate downstream artifacts in minutes
@@ -412,7 +412,7 @@ The true power of the command workflow lies not just in automation, but in how t
 The command sequence enforces proper abstraction levels and timing:
 
 ```text
-Constitution → Specify → Clarify → Architect → Standardize → Plan → Test-Plan → Tasks → Analyze → Implement → Test
+Regulate → Specify → Clarify → Architect → Standardize → Plan → Test-Plan → Tasks → Analyze → Implement → Test
 ```
 
 This prevents common failures:
@@ -424,7 +424,7 @@ This prevents common failures:
 
 The workflow ensures that:
 
-- **Principles precede decisions**: Constitution defines "why" before any "how"
+- **Principles precede decisions**: Ground rules define "why" before any "how"
 - **Architecture precedes implementation**: System design guides feature development
 - **Standards precede coding**: Consistent practices applied uniformly
 - **Planning precedes execution**: Detailed roadmap before building
@@ -448,15 +448,15 @@ The architecture command then bridges the gap:
 - Standards establish implementation practices
 - Plan applies technologies to specific features
 
-#### 3. **Constitutional Compliance Gates**
+#### 3. **Ground Rules Compliance Gates**
 
-The constitution acts as the immutable foundation that all other documents must respect:
+The ground rules act as the immutable foundation that all other documents must respect:
 
 ```text
-Every decision in architecture, standards, plan, and implementation must align with constitutional principles.
+Every decision in architecture, standards, plan, and implementation must align with ground rules.
 ```
 
-For example, if the constitution mandates:
+For example, if the ground rules mandate:
 
 - **Article I: Library-First Principle** → Plan must structure features as libraries
 - **Article III: Test-First Imperative** → Tasks must include tests before implementation
@@ -464,9 +464,9 @@ For example, if the constitution mandates:
 
 The workflow automatically enforces these principles:
 
-- Architecture checklist validates constitutional compliance
-- Plan references constitutional articles for decisions
-- Tasks follow test-first mandate from constitution
+- Architecture checklist validates ground rules compliance
+- Plan references ground rules for decisions
+- Tasks follow test-first mandate from ground rules
 - Implementation cannot proceed without passing gates
 
 #### 4. **Forcing Explicit Uncertainty Markers**
@@ -582,7 +582,7 @@ The `/personas.analyze` command validates alignment across all artifacts:
 - Requirements in spec.md → Addressed in plan.md
 - User stories in spec.md → Test scenarios in test-plan.md
 - Architecture decisions → Referenced in plan.md
-- Constitutional principles → Applied in architecture and standards
+- Ground rules → Applied in architecture and standards
 - Coding standards → Followed in plan and tasks
 
 This creates a web of accountability where every artifact reinforces and validates the others.
@@ -602,7 +602,7 @@ This stops the LLM from adding "nice to have" features that complicate implement
 
 These constraints work together to produce a complete development workflow that is:
 
-- **Principled**: Constitution provides unchanging foundation
+- **Principled**: Ground rules provide unchanging foundation
 - **Complete**: Checklists ensure nothing is forgotten
 - **Unambiguous**: Forced clarification markers highlight uncertainties
 - **Testable**: Test-first thinking baked into the process
@@ -615,13 +615,13 @@ These constraints work together to produce a complete development workflow that 
 
 The templates transform the LLM from a creative writer into a disciplined systems engineer, channeling its capabilities toward producing consistently high-quality, executable specifications and implementations that truly drive development from principles through delivery.
 
-## The Constitutional Foundation: Enforcing Architectural Discipline
+## The Foundational Rules: Enforcing Architectural Discipline
 
-At the heart of SDD lies a constitution—a set of immutable principles that govern how specifications become code. The constitution (`memory/constitution.md`) acts as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
+At the heart of SDD lies a ground-rule set of immutable principles that govern how specifications become code. The ground rules (`memory/ground-rules.md`) act as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
 
 ### The Nine Articles of Development
 
-The constitution defines nine articles that shape every aspect of the development process:
+The ground rules define nine articles that shape every aspect of the development process:
 
 #### Article I: Library-First Principle
 
@@ -690,7 +690,7 @@ Tests MUST use realistic environments:
 
 This ensures generated code works in practice, not just in theory.
 
-### Constitutional Enforcement Through Templates
+### Ground Rules Enforcement Through Templates
 
 The implementation plan template operationalizes these articles through concrete checkpoints:
 
@@ -713,37 +713,37 @@ These gates act as compile-time checks for architectural principles. The LLM can
 
 ### The Power of Immutable Principles
 
-The constitution's power lies in its immutability. While implementation details can evolve, the core principles remain constant. This provides:
+The ground rules' power lies in its immutability. While implementation details can evolve, the core principles remain constant. This provides:
 
 1. **Consistency Across Time**: Code generated today follows the same principles as code generated next year
 2. **Consistency Across LLMs**: Different AI models produce architecturally compatible code
 3. **Architectural Integrity**: Every feature reinforces rather than undermines the system design
 4. **Quality Guarantees**: Test-first, library-first, and simplicity principles ensure maintainable code
 
-### Constitutional Evolution
+### Ground Rules Evolution
 
 While principles are immutable, their application can evolve:
 
 ```text
 Section 4.2: Amendment Process
-Modifications to this constitution require:
+Modifications to this ground-rules file require:
 - Explicit documentation of the rationale for change
 - Review and approval by project maintainers
 - Backwards compatibility assessment
 ```
 
-This allows the methodology to learn and improve while maintaining stability. The constitution shows its own evolution with dated amendments, demonstrating how principles can be refined based on real-world experience.
+This allows the methodology to learn and improve while maintaining stability. The ground rules file shows its own evolution with dated amendments, demonstrating how principles can be refined based on real-world experience.
 
 ### Beyond Rules: A Development Philosophy
 
-The constitution isn't just a rulebook—it's a philosophy that shapes how LLMs think about code generation:
+The ground rules file isn't just a rulebook—it's a philosophy that shapes how LLMs think about code generation:
 
 - **Observability Over Opacity**: Everything must be inspectable through CLI interfaces
 - **Simplicity Over Cleverness**: Start simple, add complexity only when proven necessary
 - **Integration Over Isolation**: Test in real environments, not artificial ones
 - **Modularity Over Monoliths**: Every feature is a library with clear boundaries
 
-By embedding these principles into the specification and planning process, SDD ensures that generated code isn't just functional—it's maintainable, testable, and architecturally sound. The constitution transforms AI from a code generator into an architectural partner that respects and reinforces system design principles.
+By embedding these principles into the specification and planning process, SDD ensures that generated code isn't just functional—it's maintainable, testable, and architecturally sound. The ground rules transform AI from a code generator into an architectural partner that respects and reinforces system design principles.
 
 ## The Transformation
 
