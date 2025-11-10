@@ -127,7 +127,7 @@ AGENT_CONFIG = {
         "requires_cli": True,
     },
     "codebuddy": {
-        "name": "CodeBuddy",
+        "name": "CodeBuddy CLI",
         "folder": ".codebuddy/",
         "install_url": "https://www.codebuddy.ai/cli",
         "requires_cli": True,
