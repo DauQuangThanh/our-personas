@@ -17,15 +17,20 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for IMPL_PLAN, TEST_SPEC, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read IMPL_PLAN, `quickstart.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_SPEC template (already copied).
+2. **Load company principles** (if they exist):
+   - Read `/d-docs/company/testing/testing-principles.md` if it exists
+   - Apply company-wide testing principles when designing E2E tests
+   - Ensure test strategy aligns with company testing standards
 
-3. **Verify prerequisites**: Ensure implementation plan and quickstart exist:
+3. **Load context**: Read IMPL_PLAN, `quickstart.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_SPEC template (already copied).
+
+4. **Verify prerequisites**: Ensure implementation plan and quickstart exist:
    - `design.md` exists with technical context
    - `quickstart.md` exists with user workflows
    - Architecture and standards define E2E testing requirements
    - ERROR if required documents are missing
 
-4. **Execute E2E test specning workflow**: Follow the structure in TEST_SPEC template to:
+5. **Execute E2E test specning workflow**: Follow the structure in TEST_SPEC template to:
    - **Reference quickstart.md**: Extract user workflows and scenarios
    - **Reference Implementation Plan**: Understand technical context and constraints
    - **Reference Architecture**: Identify deployment environment and infrastructure
@@ -35,7 +40,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Define test data requirements for E2E scenarios
    - Define test environment requirements for E2E execution
 
-5. **Stop and report**: Command ends after E2E test spec generation. Report branch, TEST_SPEC path, and number of E2E test scenarios generated.
+6. **Stop and report**: Command ends after E2E test spec generation. Report branch, TEST_SPEC path, and number of E2E test scenarios generated.
 
 ## Phases
 

@@ -40,7 +40,43 @@ Run `{SCRIPT}` once from repo root and parse JSON for FEATURE_DIR and AVAILABLE_
 Abort with an error message if any required file is missing (instruct the user to run missing prerequisite command).
 For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-### 2. Load Artifacts (Progressive Disclosure)
+### 2. Load Company Principles
+
+Load organizational governance principles from `/d-docs/company/` (if exists):
+
+- **Architecture Principles**: `/d-docs/company/architecture/architecture-principles.md`
+  - Component design standards
+  - Technology stack guidelines
+  - Communication patterns
+  - Quality attribute targets
+
+- **Requirements Principles**: `/d-docs/company/requirements/requirements-principles.md`
+  - Requirements quality standards
+  - Documentation requirements
+  - Acceptance criteria guidelines
+  - Traceability requirements
+
+- **Design Principles**: `/d-docs/company/design/design-principles.md`
+  - Design decision documentation standards
+  - Technical design patterns
+  - Phase breakdown guidelines
+  - Dependency management
+
+- **Coding Principles**: `/d-docs/company/coding/coding-principles.md`
+  - Code quality standards
+  - Testing requirements
+  - Security practices
+  - Documentation standards
+
+- **Testing Principles**: `/d-docs/company/testing/testing-principles.md`
+  - Test coverage requirements
+  - Test scenario standards
+  - Test automation guidelines
+  - Quality gates
+
+Apply these company principles throughout the analysis to validate compliance with organizational governance.
+
+### 3. Load Artifacts (Progressive Disclosure)
 
 Load only the minimal necessary context from each artifact:
 
@@ -90,7 +126,7 @@ Load only the minimal necessary context from each artifact:
   - Documentation requirements
   - CI/CD and deployment practices
 
-### 3. Build Semantic Models
+### 4. Build Semantic Models
 
 Create internal representations (do not include raw artifacts in output):
 
@@ -100,8 +136,9 @@ Create internal representations (do not include raw artifacts in output):
 - **Ground rules rule set**: Extract principle names and MUST/SHOULD normative statements
 - **Architecture constraints**: Extract component definitions, technology choices, communication patterns, and quality targets (if architecture.md exists)
 - **Standards requirements**: Extract mandatory testing, security, and code quality requirements (if standards.md exists)
+- **Company principles alignment**: Extract company-specific governance requirements from loaded principles (if company principles exist)
 
-### 4. Detection Passes (Token-Efficient Analysis)
+### 5. Detection Passes (Token-Efficient Analysis)
 
 Focus on high-signal findings. Limit to 50 findings total; aggregate remainder in overflow summary.
 
@@ -126,7 +163,15 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - Any requirement or plan element conflicting with a MUST principle
 - Missing mandated sections or quality gates from ground rules
 
-#### E. Architecture Alignment (if architecture.md exists)
+#### E. Company Principles Alignment (if company principles exist)
+
+- **Architecture Principles**: Plan or tasks conflicting with company architecture standards
+- **Requirements Principles**: Requirements not meeting company quality standards or traceability requirements
+- **Design Principles**: Design decisions not following company design patterns or documentation standards
+- **Coding Principles**: Tasks not reflecting company code quality or testing requirements
+- **Testing Principles**: Test scenarios or coverage not meeting company testing standards
+
+#### F. Architecture Alignment (if architecture.md exists)
 
 - Plan or tasks referencing components not defined in architecture
 - Technology choices conflicting with architecture's technology stack
@@ -135,7 +180,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - Quality targets in spec not aligned with architecture's targets
 - Data model in plan conflicting with architecture's data strategy
 
-#### F. Standards Compliance (if standards.md exists)
+#### G. Standards Compliance (if standards.md exists)
 
 - Tasks missing required testing tasks (unit tests, integration tests)
 - Testing coverage targets not met in task breakdown
@@ -144,29 +189,29 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - Documentation tasks missing when required by standards
 - CI/CD tasks not aligned with standards' deployment practices
 
-#### G. Coverage Gaps
+#### H. Coverage Gaps
 
 - Requirements with zero associated tasks
 - Tasks with no mapped requirement/story
 - Non-functional requirements not reflected in tasks (e.g., performance, security)
 
-#### H. Inconsistency
+#### I. Inconsistency
 
 - Terminology drift (same concept named differently across files)
 - Data entities referenced in plan but absent in spec (or vice versa)
 - Task ordering contradictions (e.g., integration tasks before foundational setup tasks without dependency note)
 - Conflicting requirements (e.g., one requires Next.js while other specifies Vue)
 
-### 5. Severity Assignment
+### 6. Severity Assignment
 
 Use this heuristic to prioritize findings:
 
-- **CRITICAL**: Violates ground rules MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
-- **HIGH**: Violates architecture (wrong component, incompatible tech stack), duplicate or conflicting requirement, ambiguous security/performance attribute, untestable acceptance criterion
+- **CRITICAL**: Violates ground rules MUST, violates company principles MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
+- **HIGH**: Violates architecture (wrong component, incompatible tech stack), duplicate or conflicting requirement, ambiguous security/performance attribute, untestable acceptance criterion, violates company principles SHOULD
 - **MEDIUM**: Violates standards (missing tests, inadequate coverage), terminology drift, missing non-functional task coverage, underspecified edge case
 - **LOW**: Style/wording improvements, minor redundancy not affecting execution order
 
-### 6. Produce Compact Analysis Report
+### 7. Produce Compact Analysis Report
 
 Output a Markdown report (no file writes) with the following structure:
 
@@ -184,6 +229,8 @@ Output a Markdown report (no file writes) with the following structure:
 |-----------------|-----------|----------|-------|
 
 **Ground Rules Alignment Issues:** (if any)
+
+**Company Principles Alignment Issues:** (if company principles exist and issues found)
 
 **Architecture Alignment Issues:** (if architecture.md exists and issues found)
 

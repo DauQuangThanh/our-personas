@@ -94,8 +94,9 @@ Follow this execution flow:
 
 5. **Consistency with other project documents**:
    - Read `/memory/ground-rules.md` if it exists
+   - Read `/d-docs/company/architecture/architecture-principles.md` if it exists (company-wide architecture principles)
    - Read `/d-docs/standards.md` if it exists
-   - Ensure architecture aligns with ground rules principles
+   - Ensure architecture aligns with ground rules principles and company architecture principles
    - Ensure architecture supports coding standards
    - Flag any conflicts between documents
    - Verify technology choices are consistent across documents

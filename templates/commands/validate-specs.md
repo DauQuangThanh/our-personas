@@ -78,7 +78,12 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Map focus selections to category scaffolding
    - Infer any missing context from spec/design/tasks (do NOT hallucinate)
 
-4. **Load feature context**: Read from FEATURE_DIR:
+4. **Load company requirements principles**: Read `/d-docs/company/requirements/requirements-principles.md` (if exists):
+   - Apply company-specific requirements standards and quality criteria
+   - Use company principles to inform checklist generation
+   - Align validation with organizational requirements governance
+
+5. **Load feature context**: Read from FEATURE_DIR:
    - spec.md: Feature requirements and scope
    - design.md (if exists): Technical details, dependencies
    - taskify.md (if exists): Implementation tasks
@@ -89,7 +94,12 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Use progressive disclosure: add follow-on retrieval only if gaps detected
    - If source docs are large, generate interim summary items instead of embedding raw text
 
-5. **Generate checklist** - Create "Unit Tests for Requirements":
+6. **Load company requirements principles**: Read `/d-docs/company/requirements/requirements-principles.md` (if exists):
+   - Apply company-specific requirements standards and quality criteria
+   - Use company principles to inform checklist generation
+   - Align validation with organizational requirements governance
+
+7. **Generate checklist** - Create "Unit Tests for Requirements":
    - Create `FEATURE_DIR/checklists/` directory if it doesn't exist
    - Generate unique checklist filename:
      - Use short, descriptive name based on domain (e.g., `ux.md`, `api.md`, `security.md`)
@@ -105,6 +115,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Consistency**: Do requirements align with each other?
    - **Measurability**: Can requirements be objectively verified?
    - **Coverage**: Are all scenarios/edge cases addressed?
+   - **Company Principles Alignment**: Do requirements comply with company requirements principles?
 
    **Category Structure** - Group items by requirement quality dimensions:
    - **Requirement Completeness** (Are all necessary requirements documented?)
@@ -206,9 +217,9 @@ You **MUST** consider the user input before proceeding (if not empty).
    - ✅ "Are [edge cases/scenarios] addressed in requirements?"
    - ✅ "Does the spec define [missing aspect]?"
 
-6. **Structure Reference**: Generate the checklist following the canonical template in `templates/checklist-spec-template.md` for title, meta section, category headings, and ID formatting. If template is unavailable, use: H1 title, purpose/created meta lines, `##` category sections containing `- [ ] CHK### <requirement item>` lines with globally incrementing IDs starting at CHK001.
+8. **Structure Reference**: Generate the checklist following the canonical template in `templates/checklist-spec-template.md` for title, meta section, category headings, and ID formatting. If template is unavailable, use: H1 title, purpose/created meta lines, `##` category sections containing `- [ ] CHK### <requirement item>` lines with globally incrementing IDs starting at CHK001.
 
-7. **Execute checklist validation**: After generating the checklist, systematically validate the requirements documentation against each checklist item:
+9. **Execute checklist validation**: After generating the checklist, systematically validate the requirements documentation against each checklist item:
    - Read the generated checklist file
    - For each checklist item (CHK001, CHK002, etc.):
      - Extract the validation question and quality dimension
@@ -220,24 +231,24 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Update the checklist file with completion status and findings
    - Track pass/fail count and identify critical requirements gaps
 
-8. **Generate validation summary**: After executing all checklist items:
-   - Calculate completion rate (items passed / total items)
-   - List critical gaps that must be addressed (failed items marked as high priority)
-   - List requirements that need clarification or refinement
-   - Identify missing requirements or scenarios
-   - Assess overall requirements quality and readiness for next phase
+10. **Generate validation summary**: After executing all checklist items:
+    - Calculate completion rate (items passed / total items)
+    - List critical gaps that must be addressed (failed items marked as high priority)
+    - List requirements that need clarification or refinement
+    - Identify missing requirements or scenarios
+    - Assess overall requirements quality and readiness for next phase
 
-9. **Report**: Output full path to completed checklist, validation results summary. Report:
-   - Checklist file path and total items count
-   - Validation completion rate (e.g., "32/40 items passed (80%)")
-   - Focus areas validated
-   - Critical gaps identified (high-priority failed items)
-   - Requirements needing clarification or refinement
-   - Overall assessment: Ready for next phase / Needs updates
-   - Suggest next step based on results:
-     - If ≥90% passed: Proceed to next workflow step (e.g., `/personas.design`, `/personas.taskify`, or `/personas.implement`)
-     - If 70-89% passed: Address medium-priority gaps, then proceed
-     - If <70% passed: Address critical gaps and re-run validation
+11. **Report**: Output full path to completed checklist, validation results summary. Report:
+    - Checklist file path and total items count
+    - Validation completion rate (e.g., "32/40 items passed (80%)")
+    - Focus areas validated
+    - Critical gaps identified (high-priority failed items)
+    - Requirements needing clarification or refinement
+    - Overall assessment: Ready for next phase / Needs updates
+    - Suggest next step based on results:
+      - If ≥90% passed: Proceed to next workflow step (e.g., `/personas.design`, `/personas.taskify`, or `/personas.implement`)
+      - If 70-89% passed: Address medium-priority gaps, then proceed
+      - If <70% passed: Address critical gaps and re-run validation
 
 **Important**: Each `/personas.validate-specs` command invocation creates a checklist file using short, descriptive names unless file already exists. This allows:
 

@@ -20,7 +20,12 @@ Follow this execution flow:
    - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
    - Note: This template is designed for full-stack development covering frontend, backend, testing, security, performance, DevOps, and database standards.
 
-2. **Detect project technology stack**:
+2. **Load company principles** (if they exist):
+   - Read `/d-docs/company/coding/coding-principles.md` if it exists
+   - Apply company-wide coding principles when defining project standards
+   - Ensure standards align with company coding requirements and best practices
+
+3. **Detect project technology stack**:
    - Check for `package.json` (Node.js/JavaScript/TypeScript)
    - Check for `requirements.txt` or `pyproject.toml` (Python)
    - Check for `go.mod` (Go)
@@ -31,7 +36,7 @@ Follow this execution flow:
    - Check existing documentation (README.md, architecture.md, design.md) for tech stack details
    - If multiple technologies detected, ask user which is primary/secondary
 
-3. **Collect/derive values for placeholders**:
+4. **Collect/derive values for placeholders**:
    - **Project Information**:
      - `PROJECT_NAME`: From repo name, README, or user input
      - `STANDARD_VERSION`: Start at 1.0.0 or increment from existing
@@ -90,7 +95,7 @@ Follow this execution flow:
      - `AMENDMENT_PROCESS`: How to update standards
      - `COMPLIANCE_VERIFICATION`: Compliance checking methods
 
-4. **Draft the updated coding standard content**:
+5. **Draft the updated coding standard content**:
    - Replace every placeholder with concrete text (no bracketed tokens left)
    - Preserve heading hierarchy and structure
    - Ensure each section has:
@@ -101,14 +106,15 @@ Follow this execution flow:
    - Tailor content to detected technology stack
    - Remove sections not applicable to the project (e.g., frontend sections for backend-only projects)
 
-5. **Consistency with project ground rules** (if exists):
+6. **Consistency with project ground rules** (if exists):
    - Read `/memory/ground-rules.md` if it exists
-   - Ensure coding standards align with ground rules principles
-   - Flag any conflicts between ground rules and coding standards
+   - Ensure coding standards align with ground rules
+   - Ensure standards support company coding principles (if loaded)
+   - Flag any conflicts between ground rules, company principles, and coding standards
    - Ensure testing requirements match ground rules' test-first mandates
    - Verify version control and review processes align
 
-6. **Technology-specific recommendations**:
+7. **Technology-specific recommendations**:
    - **Node.js/TypeScript**:
      - ESLint + Prettier configuration
      - TypeScript strict mode

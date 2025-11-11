@@ -17,13 +17,18 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for TEST_SPEC, TEST_REPORT, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read TEST_SPEC, `quickstart.md`, `design.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
+2. **Load company principles** (if they exist):
+   - Read `/d-docs/company/testing/testing-principles.md` if it exists
+   - Apply company-wide testing principles when executing tests
+   - Ensure test execution aligns with company testing standards
 
-3. **Verify prerequisites**: Verify test prerequisites before execution:
+3. **Load context**: Read TEST_SPEC, `quickstart.md`, `design.md`, `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load TEST_REPORT template (already copied).
+
+4. **Verify prerequisites**: Verify test prerequisites before execution:
    - ERROR if design-test.md is missing or incomplete
    - Verify quickstart.md exists (source of user workflows)
 
-4. **Execute E2E test workflow**: Follow the test spec to:
+5. **Execute E2E test workflow**: Follow the test spec to:
    - **Reference Test Plan**: Load E2E test scenarios and test strategy
    - Verify test environment is running and accessible
    - Execute E2E tests according to design-test scenarios
@@ -32,7 +37,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Verify alignment with design-test**: Compare actual execution with design-test scenarios
    - Generate test report with results and recommendations
 
-5. **Stop and report**: Command ends after E2E test execution and report generation. Report branch, TEST_REPORT path, test results summary, and recommendations for next steps.
+6. **Stop and report**: Command ends after E2E test execution and report generation. Report branch, TEST_REPORT path, test results summary, and recommendations for next steps.
 
 ## Phases
 
