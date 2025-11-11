@@ -8,13 +8,13 @@
 
 Spec-Driven Development (SDD) reverses the traditional coding hierarchy. Instead of specifications being mere guides, they become **executable assets** that directly generate working implementations. Code no longer precedes the spec; the spec is the implementation.
 
-## Getting Started
+## 🎬 Getting Started
 
 - [Installation Guide](installation.md)
 - [Quick Start Guide](quickstart.md)
 - [Local Development](local-development.md)
 
-## Core Philosophy
+## 🧠 Core Philosophy
 
 Spec-Driven Development is a structured process that emphasizes:
 
@@ -23,7 +23,7 @@ Spec-Driven Development is a structured process that emphasizes:
 - **Multi-step refinement** rather than one-shot code generation from prompts
 - **Heavy reliance** on advanced AI model capabilities for specification interpretation
 
-## Development Phases
+## 🧑‍💻 Development Phases
 
 | Phase | Focus | Key Activities |
 |-------|-------|----------------|
@@ -31,7 +31,7 @@ Spec-Driven Development is a structured process that emphasizes:
 | **Creative Exploration** | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple technology stacks & architectures</li><li>Experiment with UX patterns</li></ul> |
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add features iteratively</li><li>Modernize legacy systems</li><li>Adapt processes</li></ul> |
 
-## Experimental Goals
+## 🧪 Experimental Goals
 
 Our research and experimentation focus on:
 
@@ -57,10 +57,10 @@ Our research and experimentation focus on:
 - Provide robust iterative feature development workflows
 - Extend processes to handle upgrades and modernization tasks
 
-## Contributing
+## 🎊 Contributing
 
 Please see our [Contributing Guide](https://github.com/dauquangthanh/our-personas/blob/main/CONTRIBUTING.md) for information on how to contribute to this project.
 
-## Support
+## 🎈 Support
 
 For support, please check our [Support Guide](https://github.com/dauquangthanh/our-personas/blob/main/SUPPORT.md) or open an issue on GitHub.
