@@ -1,9 +1,100 @@
 # [PROJECT_NAME] Coding Standard
 <!-- Example: E-Commerce Platform Coding Standard, Healthcare API Coding Standard, etc. -->
 
-## Full-Stack Development Principles
+## Template Usage Guidelines
 
-### I. Frontend Standards
+**Section Requirements**: This template contains both mandatory and optional sections. Remove optional sections that don't apply to your project rather than leaving them as placeholders.
+
+### Mandatory Sections (Always Required)
+
+- **Technology-Specific Standards**: At least one of Frontend OR Backend standards (remove sections not applicable to your project)
+- **Code Style**: Linting, formatting, and code organization rules
+- **Security Standards**: Input validation, data protection, dependency management (critical for all projects)
+- **Version Control**: Branching strategy and commit conventions
+
+### Optional Sections (Include When Relevant)
+
+- **Frontend Standards (Entire Section I)**: Remove entirely for backend-only projects (APIs, microservices, CLI tools, workers)
+- **Backend Standards (Entire Section II)**: Remove entirely for frontend-only projects (static sites, SPAs with external APIs, mock-ups)
+- **Testing Requirements**: Include for production systems; omit for early prototypes, demos, or proof-of-concept projects
+- **Documentation Standards**: Include for team projects or production systems; omit for personal projects or short-lived experiments
+- **Performance Standards**: Include when performance is critical (high-traffic apps, real-time systems); omit for internal tools or low-traffic applications
+- **DevOps & Deployment (CI/CD, Infrastructure)**: Include for deployed applications; omit for libraries, CLI tools, or local-only projects
+- **Review Process**: Include for team projects with code reviews; omit for solo development
+- **Exception Process**: Include for mature projects with established standards; omit for new projects or experimental codebases
+- **Documentation Requirements (in Exception Process)**: Include when exceptions need formal tracking; omit for flexible/agile environments
+- **Compliance Verification**: Include for regulated industries or enterprise projects; omit for startups or non-critical applications
+
+### Project Type Guidelines
+
+**Mock-up (Frontend Only)**:
+
+- Keep: Frontend Standards, Code Style, Version Control
+- Remove: Backend Standards, Testing Requirements, Performance Standards, DevOps & Deployment, Exception Process, Compliance Verification
+- Focus: UI/UX patterns, component structure, basic styling
+- Testing: Optional, visual regression only if needed
+
+**Proof of Concept (PoC)**:
+
+- Keep: Frontend/Backend (as applicable), Code Style, Security Standards (basic), Version Control
+- Remove: Performance Standards, Exception Process, Compliance Verification
+- Optional: Testing Requirements (basic smoke tests), Documentation Standards (minimal)
+- Focus: Technical feasibility, core functionality demonstration
+- Deployment: Manual/simple deployment acceptable
+
+**Minimum Viable Product (MVP)**:
+
+- Keep: All applicable technology standards, Code Style, Security Standards, Version Control, Testing Requirements (core paths)
+- Optional: Performance Standards (basic benchmarks), DevOps & Deployment (basic CI/CD), Documentation Standards
+- Remove: Exception Process, Compliance Verification (unless required by domain)
+- Focus: Essential features, maintainable code, basic security
+- Testing: Unit tests for critical paths, basic integration tests
+
+**Production Systems**:
+
+- Keep: All sections that apply to your context
+- Customize based on regulatory requirements, scale, and team size
+- Focus: Comprehensive quality, security, performance, monitoring
+- Testing: Full coverage (unit, integration, E2E), performance testing
+- Required: Security audits, monitoring, incident response
+
+**Backend-Only Systems** (APIs, Microservices, Workers, CLI Tools):
+
+- Keep: Backend Standards, Code Style, Security Standards, Database Standards, Version Control
+- Remove: Frontend Standards (entire Section I)
+- Optional based on maturity: Testing, Performance, DevOps, Monitoring
+- Focus: API design, data layer, service architecture
+
+**Frontend-Only Projects** (Static Sites, SPAs, Component Libraries):
+
+- Keep: Frontend Standards, Code Style, Security Standards (client-side), Version Control
+- Remove: Backend Standards (entire Section II), Database Standards (Section VII)
+- Optional based on maturity: Testing (visual, unit), Performance (bundle size, loading), DevOps (build/deploy)
+- Focus: Component architecture, state management, UI/UX patterns
+
+### When to Remove Optional Sections
+
+**Early-Stage Projects** (Prototypes, POCs, MVPs):
+
+- Remove: Exception Process, Compliance Verification
+- Minimal: Testing Requirements (smoke tests only), Performance Standards (basic targets)
+- Keep: Code Style, Security Standards (basics), Version Control
+
+**Solo Developer Projects**:
+
+- Remove: Review Process, Exception Process, Documentation Requirements
+- Keep: Code Style, Testing (if applicable), Security Standards
+- Simplify: Version Control (basic branching), DevOps (simple deployment)
+
+**Internal Tools / Low-Traffic Apps**:
+
+- Remove: Performance Standards, Compliance Verification
+- Optional: DevOps & Deployment (if manually deployed)
+- Keep: Code Style, Security Standards, Testing Requirements, Version Control
+
+## Development Standards
+
+### I. Frontend Standards (Optional - Remove for backend-only projects)
 
 #### [FRONTEND_FRAMEWORK]
 
@@ -84,7 +175,7 @@ File Organization:
 - Assets: Images in kebab-case: user-avatar-placeholder.png
 -->
 
-### II. Backend Standards
+### II. Backend Standards (Optional - Remove for frontend-only projects)
 
 #### [BACKEND_FRAMEWORK]
 
@@ -151,7 +242,7 @@ File Organization:
 - Cyclomatic complexity: Max 10
 -->
 
-#### Testing Requirements
+#### Testing Requirements (Optional - Remove if not applicable)
 
 [TESTING_REQUIREMENTS]
 <!-- Example:
@@ -164,7 +255,7 @@ File Organization:
 - TDD encouraged: Write tests first for critical business logic
 -->
 
-#### Documentation Standards
+#### Documentation Standards (Optional - Remove if not applicable)
 
 [DOCUMENTATION_STANDARDS]
 <!-- Example:
@@ -211,7 +302,7 @@ File Organization:
 - No deprecated or unmaintained packages
 -->
 
-### V. Performance Standards
+### V. Performance Standards (Optional - Remove if not applicable)
 
 #### Frontend Performance
 
@@ -237,6 +328,11 @@ File Organization:
 - Connection pooling for database and external services
 -->
 
+### VII. Database & Data Standards (Optional - Remove if no database)
+
+#### Schema Design
+-->
+
 #### Monitoring & Observability
 
 [MONITORING_STANDARDS]
@@ -249,7 +345,7 @@ File Organization:
 - Health checks: /health and /ready endpoints
 -->
 
-### VI. DevOps & Deployment
+### VI. DevOps & Deployment (Optional - Remove if not applicable)
 
 #### Version Control
 
@@ -346,7 +442,7 @@ File Organization:
 - Audit logging for all data modifications
 -->
 
-## Code Review Guidelines
+## Code Review Guidelines (Optional - Remove if not applicable)
 
 ### Review Checklist
 
@@ -376,7 +472,7 @@ File Organization:
 - 24-hour review SLA for non-urgent PRs
 -->
 
-## Exception Process
+## Exception Process (Optional - Remove if not applicable)
 
 ### When to Deviate
 
@@ -389,7 +485,7 @@ File Organization:
 - Exceptions reviewed quarterly for remediation opportunities
 -->
 
-### Documentation Requirements
+### Documentation Requirements (Optional - Remove if not applicable)
 
 [EXCEPTION_DOCUMENTATION]
 <!-- Example:
@@ -424,7 +520,7 @@ File Organization:
 - Grace period for adopting new standards
 -->
 
-### Compliance Verification
+### Compliance Verification (Optional - Remove if not applicable)
 
 [COMPLIANCE_VERIFICATION]
 <!-- Example:
