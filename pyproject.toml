@@ -1,6 +1,6 @@
 [project]
 name = "personas-cli"
-version = "0.0.20"
+version = "0.1.2"
 description = "Personas CLI, part of Our Personas (Organizing Us Rapidly). A tool to bootstrap your projects for Spec-Driven Development (SDD) and speed-up software development."
 requires-python = ">=3.11"
 dependencies = [
