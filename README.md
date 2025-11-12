@@ -74,6 +74,29 @@ Run directly without installing:
 uvx --from git+https://github.com/dauquangthanh/our-personas.git personas init <PROJECT_NAME>
 ```
 
+#### Option 3: Clone source code and run
+
+```bash
+# Clone source code
+git clone https://github.com/DauQuangThanh/our-personas.git
+cd our-personas
+
+# Create & activate virtual env (uv auto-manages .venv)
+uv venv
+source .venv/bin/activate  # or on Windows PowerShell: .venv\Scripts\Activate.ps1
+
+# Install project in editable mode
+uv pip install -e .
+
+
+# Specify custom template path
+python -m src.personas_cli init demo --local-templates --template-path /path/to/our-personas # Use . for current folder. The commandline supports relative path
+
+# Use environment variables for convenience
+export PERSONAS_USE_LOCAL_TEMPLATES=1
+export PERSONAS_TEMPLATE_PATH=/Users/you/our-personas
+```
+
 **Benefits of persistent installation:**
 
 - Tool stays installed and available in PATH
