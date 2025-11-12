@@ -32,6 +32,7 @@ import tempfile
 import shutil
 import shlex
 import json
+import re
 from pathlib import Path
 from typing import Optional, Tuple
 
@@ -637,6 +638,387 @@ def merge_json_files(existing_path: Path, new_content: dict, verbose: bool = Fal
 
     return merged
 
+
+def rewrite_paths_in_content(content: str) -> str:
+    """Rewrite paths in file content to match release structure.
+    Mirrors the logic from .github/workflows/scripts/create-release-packages.sh
+    """
+    # Apply path transformations
+    content = re.sub(r'(/?)memory/', r'.personas/memory/', content)
+    content = re.sub(r'(/?)scripts/', r'.personas/scripts/', content)
+    content = re.sub(r'(/?)templates/', r'.personas/templates/', content)
+    content = re.sub(r'(/?)d-docs/', r'd-docs/', content)
+    return content
+
+
+def generate_command_from_template(
+    template_path: Path,
+    agent: str,
+    script_variant: str,
+    arg_format: str,
+    output_format: str
+) -> Tuple[str, str]:
+    """Generate a command file from a template.
+
+    Returns: (description, processed_content)
+
+    Mirrors the generate_commands() function from create-release-packages.sh
+    """
+    # Read template content
+    content = template_path.read_text(encoding='utf-8')
+
+    # Normalize line endings
+    content = content.replace('\r\n', '\n').replace('\r', '\n')
+
+    # Extract YAML frontmatter
+    description = ""
+    script_command = ""
+    agent_script_command = ""
+
+    # Parse frontmatter
+    lines = content.split('\n')
+    in_frontmatter = False
+    in_scripts = False
+    in_agent_scripts = False
+    body_start_idx = 0
+
+    for idx, line in enumerate(lines):
+        if line.strip() == '---':
+            if not in_frontmatter:
+                in_frontmatter = True
+                body_start_idx = idx + 1
+            else:
+                # End of frontmatter
+                body_start_idx = idx + 1
+                break
+        elif in_frontmatter:
+            # Parse frontmatter fields
+            if line.startswith('description:'):
+                description = line.split('description:', 1)[1].strip()
+            elif line.strip() == 'scripts:':
+                in_scripts = True
+                in_agent_scripts = False
+            elif line.strip() == 'agent_scripts:':
+                in_agent_scripts = True
+                in_scripts = False
+            elif in_scripts and line.strip().startswith(f'{script_variant}:'):
+                script_command = line.split(f'{script_variant}:', 1)[1].strip()
+            elif in_agent_scripts and line.strip().startswith(f'{script_variant}:'):
+                agent_script_command = line.split(f'{script_variant}:', 1)[1].strip()
+            elif line and not line.startswith(' ') and not line.startswith('\t') and ':' in line:
+                # New top-level field, reset script parsing
+                in_scripts = False
+                in_agent_scripts = False
+
+    # Get body content (everything after frontmatter)
+    body = '\n'.join(lines[body_start_idx:])
+
+    # Replace placeholders
+    if script_command:
+        body = body.replace('{SCRIPT}', script_command)
+    if agent_script_command:
+        body = body.replace('{AGENT_SCRIPT}', agent_script_command)
+
+    body = body.replace('{ARGS}', arg_format)
+    body = body.replace('__AGENT__', agent)
+
+    # Apply path rewriting
+    body = rewrite_paths_in_content(body)
+
+    # Remove scripts: and agent_scripts: sections from frontmatter for final output
+    # Reconstruct without these sections
+    final_lines = []
+    in_frontmatter = False
+    skip_scripts = False
+
+    for line in lines[:body_start_idx]:
+        if line.strip() == '---':
+            if not in_frontmatter:
+                in_frontmatter = True
+                final_lines.append(line)
+            else:
+                in_frontmatter = False
+                final_lines.append(line)
+        elif in_frontmatter:
+            if line.strip() in ('scripts:', 'agent_scripts:'):
+                skip_scripts = True
+                continue
+            elif line and not line.startswith(' ') and not line.startswith('\t') and ':' in line:
+                # New top-level field
+                skip_scripts = False
+                final_lines.append(line)
+            elif not skip_scripts:
+                final_lines.append(line)
+        else:
+            final_lines.append(line)
+
+    # Reconstruct final content
+    if final_lines:
+        processed_content = '\n'.join(final_lines) + '\n' + body
+    else:
+        processed_content = body
+
+    return description, processed_content
+
+
+def copy_local_template(
+    project_path: Path,
+    ai_assistant: str,
+    script_type: str,
+    is_current_dir: bool = False,
+    *,
+    verbose: bool = True,
+    tracker: StepTracker | None = None,
+    template_source: Path = None,
+    debug: bool = False
+) -> Path:
+    """Copy templates from local repository instead of downloading from GitHub.
+
+    Mirrors the logic from .github/workflows/scripts/create-release-packages.sh
+    to ensure local development matches production releases.
+
+    Returns project_path. Uses tracker if provided (with keys: locate, copy, generate-commands, cleanup)
+    """
+
+    # Determine source directory
+    if template_source is None:
+        # Try to find the repository root by looking for pyproject.toml
+        source_dir = Path(__file__).parent.parent.parent  # src/personas_cli/__init__.py -> root
+        if not (source_dir / "pyproject.toml").exists():
+            raise RuntimeError(
+                "Could not locate repository root. Please use --template-path to specify the source directory."
+            )
+    else:
+        source_dir = Path(template_source).resolve()
+        if not source_dir.exists():
+            raise RuntimeError(f"Template path does not exist: {source_dir}")
+
+    if tracker:
+        tracker.start("locate", f"using {source_dir.name}")
+        tracker.complete("locate", f"{source_dir}")
+    elif verbose:
+        console.print(f"[cyan]Using local templates from:[/cyan] {source_dir}")
+
+    if tracker:
+        tracker.add("copy", "Copy base structure")
+        tracker.start("copy")
+    elif verbose:
+        console.print("[cyan]Copying template structure...[/cyan]")
+
+    try:
+        # Create .personas subdirectory structure (matching release process)
+        personas_dir = project_path / ".personas"
+        if not is_current_dir:
+            project_path.mkdir(parents=True, exist_ok=True)
+        personas_dir.mkdir(parents=True, exist_ok=True)
+
+        copied_count = 0
+
+        # Copy memory/ to .personas/memory/
+        memory_src = source_dir / "memory"
+        if memory_src.exists():
+            memory_dst = personas_dir / "memory"
+            shutil.copytree(memory_src, memory_dst, dirs_exist_ok=True)
+            copied_count += 1
+            if debug and verbose:
+                console.print("[dim]Copied memory -> .personas/memory[/dim]")
+
+        # Copy scripts/ (filtered by variant) to .personas/scripts/
+        scripts_src = source_dir / "scripts"
+        if scripts_src.exists():
+            scripts_dst = personas_dir / "scripts"
+            scripts_dst.mkdir(parents=True, exist_ok=True)
+
+            # Copy variant-specific scripts
+            if script_type == "sh":
+                bash_src = scripts_src / "bash"
+                if bash_src.exists():
+                    bash_dst = scripts_dst / "bash"
+                    shutil.copytree(bash_src, bash_dst, dirs_exist_ok=True)
+                    copied_count += 1
+                    if debug and verbose:
+                        console.print("[dim]Copied scripts/bash -> .personas/scripts/bash[/dim]")
+            elif script_type == "ps":
+                ps_src = scripts_src / "powershell"
+                if ps_src.exists():
+                    ps_dst = scripts_dst / "powershell"
+                    shutil.copytree(ps_src, ps_dst, dirs_exist_ok=True)
+                    copied_count += 1
+                    if debug and verbose:
+                        console.print("[dim]Copied scripts/powershell -> .personas/scripts/powershell[/dim]")
+
+            # Copy any top-level script files
+            for item in scripts_src.iterdir():
+                if item.is_file():
+                    shutil.copy2(item, scripts_dst / item.name)
+
+        # Copy templates/ (excluding commands/ and vscode-settings.json) to .personas/templates/
+        templates_src = source_dir / "templates"
+        if templates_src.exists():
+            templates_dst = personas_dir / "templates"
+            templates_dst.mkdir(parents=True, exist_ok=True)
+
+            for item in templates_src.rglob('*'):
+                if item.is_file():
+                    # Skip commands and vscode-settings.json
+                    rel_path = item.relative_to(templates_src)
+                    if 'commands' in rel_path.parts or item.name == 'vscode-settings.json':
+                        continue
+
+                    dest_file = templates_dst / rel_path
+                    dest_file.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(item, dest_file)
+
+            copied_count += 1
+            if debug and verbose:
+                console.print("[dim]Copied templates -> .personas/templates[/dim]")
+
+        # Copy d-docs/ to root of project (not inside .personas)
+        ddocs_src = source_dir / "d-docs"
+        if ddocs_src.exists():
+            ddocs_dst = project_path / "d-docs"
+            shutil.copytree(ddocs_src, ddocs_dst, dirs_exist_ok=True)
+            copied_count += 1
+            if debug and verbose:
+                console.print("[dim]Copied d-docs -> root[/dim]")
+
+        if tracker:
+            tracker.complete("copy", f"{copied_count} directories copied")
+        elif verbose:
+            console.print(f"[green]Copied {copied_count} base directories[/green]")
+
+        # Generate agent-specific commands
+        if tracker:
+            tracker.add("generate-commands", "Generate agent commands")
+            tracker.start("generate-commands")
+        elif verbose:
+            console.print(f"[cyan]Generating {ai_assistant} commands...[/cyan]")
+
+        commands_src = templates_src / "commands"
+        if commands_src.exists():
+            # Define agent-specific configuration
+            agent_configs = {
+                'claude': {'dir': '.claude/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'gemini': {'dir': '.gemini/commands', 'format': 'toml', 'args': '{{args}}'},
+                'copilot': {'dir': '.github/prompts', 'format': 'prompt.md', 'args': '$ARGUMENTS'},
+                'cursor-agent': {'dir': '.cursor/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'qwen': {'dir': '.qwen/commands', 'format': 'toml', 'args': '{{args}}'},
+                'opencode': {'dir': '.opencode/command', 'format': 'md', 'args': '$ARGUMENTS'},
+                'windsurf': {'dir': '.windsurf/workflows', 'format': 'md', 'args': '$ARGUMENTS'},
+                'codex': {'dir': '.codex/prompts', 'format': 'md', 'args': '$ARGUMENTS'},
+                'kilocode': {'dir': '.kilocode/workflows', 'format': 'md', 'args': '$ARGUMENTS'},
+                'auggie': {'dir': '.augment/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'roo': {'dir': '.roo/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'codebuddy': {'dir': '.codebuddy/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'amp': {'dir': '.agents/commands', 'format': 'md', 'args': '$ARGUMENTS'},
+                'q': {'dir': '.amazonq/prompts', 'format': 'md', 'args': '$ARGUMENTS'},
+            }
+
+            config = agent_configs.get(ai_assistant)
+            if config:
+                output_dir = project_path / config['dir']
+                output_dir.mkdir(parents=True, exist_ok=True)
+
+                command_count = 0
+                for template_file in commands_src.glob('*.md'):
+                    try:
+                        description, processed_content = generate_command_from_template(
+                            template_file,
+                            ai_assistant,
+                            script_type,
+                            config['args'],
+                            config['format']
+                        )
+
+                        # Determine output filename and format
+                        base_name = template_file.stem
+                        if config['format'] == 'toml':
+                            # TOML format for gemini/qwen
+                            output_file = output_dir / f"personas.{base_name}.toml"
+                            # Escape backslashes for TOML
+                            processed_content = processed_content.replace('\\', '\\\\')
+                            toml_content = f'description = "{description}"\n\n'
+                            toml_content += 'prompt = """\n'
+                            toml_content += processed_content
+                            toml_content += '\n"""'
+                            output_file.write_text(toml_content, encoding='utf-8')
+                        elif config['format'] == 'prompt.md':
+                            output_file = output_dir / f"personas.{base_name}.prompt.md"
+                            output_file.write_text(processed_content, encoding='utf-8')
+                        else:  # md
+                            output_file = output_dir / f"personas.{base_name}.md"
+                            output_file.write_text(processed_content, encoding='utf-8')
+
+                        command_count += 1
+                    except Exception as e:
+                        if debug:
+                            console.print(f"[yellow]Warning processing {template_file.name}:[/yellow] {e}")
+
+                if tracker:
+                    tracker.complete("generate-commands", f"{command_count} commands generated")
+                elif verbose:
+                    console.print(f"[green]Generated {command_count} commands[/green]")
+            else:
+                if tracker:
+                    tracker.error("generate-commands", f"unknown agent: {ai_assistant}")
+                else:
+                    console.print(f"[yellow]Warning: Unknown agent configuration for {ai_assistant}[/yellow]")
+
+        # Special handling for copilot: copy vscode-settings.json
+        if ai_assistant == 'copilot':
+            vscode_settings_src = source_dir / "templates" / "vscode-settings.json"
+            if vscode_settings_src.exists():
+                vscode_dir = project_path / ".vscode"
+                vscode_dir.mkdir(parents=True, exist_ok=True)
+                vscode_settings_dst = vscode_dir / "settings.json"
+
+                if vscode_settings_dst.exists():
+                    # Merge with existing settings
+                    handle_vscode_settings(vscode_settings_src, vscode_settings_dst, Path("settings.json"), verbose, tracker)
+                else:
+                    shutil.copy2(vscode_settings_src, vscode_settings_dst)
+                    if debug and verbose:
+                        console.print("[dim]Copied .vscode/settings.json[/dim]")
+
+        # Copy agent-specific documentation if exists
+        agent_templates_dir = source_dir / "agent_templates"
+        if agent_templates_dir.exists():
+            if ai_assistant == 'gemini':
+                gemini_doc = agent_templates_dir / "gemini" / "GEMINI.md"
+                if gemini_doc.exists():
+                    shutil.copy2(gemini_doc, project_path / "GEMINI.md")
+            elif ai_assistant == 'qwen':
+                qwen_doc = agent_templates_dir / "qwen" / "QWEN.md"
+                if qwen_doc.exists():
+                    shutil.copy2(qwen_doc, project_path / "QWEN.md")
+
+        if verbose and not tracker:
+            if is_current_dir:
+                console.print("[cyan]Template files merged into current directory[/cyan]")
+            else:
+                console.print(f"[cyan]Template structure created in {project_path}[/cyan]")
+
+    except Exception as e:
+        if tracker:
+            tracker.error("copy", str(e))
+        else:
+            if verbose:
+                console.print(f"[red]Error copying template:[/red] {e}")
+                if debug:
+                    console.print(Panel(str(e), title="Copy Error", border_style="red"))
+
+        if not is_current_dir and project_path.exists() and len(list(project_path.iterdir())) == 0:
+            # Only remove if we created an empty directory
+            project_path.rmdir()
+        raise typer.Exit(1)
+
+    if tracker:
+        tracker.add("cleanup", "Cleanup")
+        tracker.complete("cleanup", "no temporary files")
+
+    return project_path
+
+
 def download_template_from_github(ai_assistant: str, download_dir: Path, *, script_type: str = "sh", verbose: bool = True, show_progress: bool = True, client: httpx.Client = None, debug: bool = False, github_token: str = None) -> Tuple[Path, dict]:
     repo_owner = "dauquangthanh"
     repo_name = "our-personas"
@@ -953,6 +1335,8 @@ def init(
     skip_tls: bool = typer.Option(False, "--skip-tls", help="Skip SSL/TLS verification (not recommended)"),
     debug: bool = typer.Option(False, "--debug", help="Show verbose diagnostic output for network and extraction failures"),
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
+    local_templates: bool = typer.Option(False, "--local-templates", help="Use local templates from repository instead of downloading from GitHub (for development)"),
+    template_path: str = typer.Option(None, "--template-path", help="Path to local template directory (defaults to repo root if --local-templates is used)"),
 ):
     """
     Initialize a new Personas Project from the latest template.
@@ -980,6 +1364,20 @@ def init(
     """
 
     show_banner()
+
+    # Check for environment variable to use local templates
+    if not local_templates:
+        local_templates_env = os.getenv("PERSONAS_USE_LOCAL_TEMPLATES", "").lower() in ("1", "true", "yes")
+        if local_templates_env:
+            local_templates = True
+            console.print("[cyan]PERSONAS_USE_LOCAL_TEMPLATES detected - using local templates[/cyan]")
+
+    # Check for template path from environment
+    if template_path is None:
+        env_template_path = os.getenv("PERSONAS_TEMPLATE_PATH")
+        if env_template_path:
+            template_path = env_template_path
+            console.print(f"[cyan]Using PERSONAS_TEMPLATE_PATH: {template_path}[/cyan]")
 
     if project_name == ".":
         here = True
@@ -1165,17 +1563,32 @@ def init(
 
                 # For first AI, create the project; for subsequent ones, merge into existing
                 is_merge = idx > 0 or here
-                download_and_extract_template(
-                    project_path,
-                    selected_ai,
-                    selected_script,
-                    is_merge,
-                    verbose=False,
-                    tracker=ai_tracker,
-                    client=local_client,
-                    debug=debug,
-                    github_token=github_token
-                )
+
+                if local_templates:
+                    # Use local templates instead of downloading from GitHub
+                    copy_local_template(
+                        project_path,
+                        selected_ai,
+                        selected_script,
+                        is_merge,
+                        verbose=False,
+                        tracker=ai_tracker,
+                        template_source=Path(template_path) if template_path else None,
+                        debug=debug
+                    )
+                else:
+                    # Download from GitHub (default behavior)
+                    download_and_extract_template(
+                        project_path,
+                        selected_ai,
+                        selected_script,
+                        is_merge,
+                        verbose=False,
+                        tracker=ai_tracker,
+                        client=local_client,
+                        debug=debug,
+                        github_token=github_token
+                    )
 
             ensure_executable_scripts(project_path, tracker=tracker)
 

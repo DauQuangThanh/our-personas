@@ -29,6 +29,100 @@ If you prefer invoking the script file style (uses shebang):
 python src/personas_cli/__init__.py init demo-project --script ps
 ```
 
+### 2a. Additional CLI Options
+
+The `init` command supports additional flags for advanced use cases:
+
+```bash
+# Force initialization in non-empty directory (skip confirmation)
+python -m src.personas_cli init --here --force --ai claude
+
+# Enable debug output for troubleshooting network/download issues
+python -m src.personas_cli init demo-project --ai gemini --debug
+
+# Explicitly provide GitHub token (avoids rate limiting)
+python -m src.personas_cli init demo-project --github-token ghp_xxx...
+# Or use environment variables: GH_TOKEN or GITHUB_TOKEN
+export GITHUB_TOKEN=ghp_xxx...
+python -m src.personas_cli init demo-project --ai claude
+```
+
+### 2b. Supported AI Assistants
+
+The CLI supports 14 AI assistants. Use `--ai` flag with any of these values:
+
+| Value | Assistant | Folder | Requires CLI Tool |
+|-------|-----------|--------|-------------------|
+| `copilot` | GitHub Copilot | `.github/` | No |
+| `claude` | Claude Code | `.claude/` | Yes |
+| `gemini` | Gemini CLI | `.gemini/` | Yes |
+| `cursor-agent` | Cursor | `.cursor/` | No |
+| `qwen` | Qwen Code | `.qwen/` | Yes |
+| `opencode` | opencode | `.opencode/` | Yes |
+| `codex` | Codex CLI | `.codex/` | Yes |
+| `windsurf` | Windsurf | `.windsurf/` | No |
+| `kilocode` | Kilo Code | `.kilocode/` | No |
+| `auggie` | Auggie CLI | `.augment/` | Yes |
+| `codebuddy` | CodeBuddy CLI | `.codebuddy/` | Yes |
+| `roo` | Roo Code | `.roo/` | No |
+| `q` | Amazon Q Developer | `.amazonq/` | Yes |
+| `amp` | Amp | `.agents/` | Yes |
+
+**Note**: If "Requires CLI Tool" is Yes, the CLI will check for the tool's installation. Use `--ignore-agent-tools` to skip these checks during development.
+
+### 2c. Using Local Templates (Development)
+
+When developing the CLI or templates locally, you can skip GitHub downloads and use local files directly. This mirrors the same pre-processing logic from `.github/workflows/scripts/create-release-packages.sh`.
+
+```bash
+# Auto-detect repo root and use local files
+python -m src.personas_cli init demo --local-templates --ai claude --script sh
+
+# Specify custom template path
+python -m src.personas_cli init demo --local-templates --template-path /path/to/our-personas --ai gemini
+
+# Use environment variables for convenience
+export PERSONAS_USE_LOCAL_TEMPLATES=1
+export PERSONAS_TEMPLATE_PATH=/Users/you/our-personas
+python -m src.personas_cli init demo --ai claude
+
+# With editable install
+uv pip install -e .
+export PERSONAS_USE_LOCAL_TEMPLATES=1
+personas init test-project --ai copilot --script ps
+
+# Initialize in current directory with local templates
+python -m src.personas_cli init --here --local-templates --ai claude --script sh
+```
+
+**What happens with local templates:**
+
+The CLI replicates the release packaging process locally:
+
+- Creates `.personas/` subdirectory containing:
+  - `memory/` → `.personas/memory/`
+  - `scripts/bash/` or `scripts/powershell/` → `.personas/scripts/`
+  - `templates/` (excluding commands) → `.personas/templates/`
+- Copies `d-docs/` to project root
+- Generates agent-specific commands from `templates/commands/*.md`:
+  - Extracts YAML frontmatter (description, script commands)
+  - Replaces placeholders: `{SCRIPT}`, `{AGENT_SCRIPT}`, `{ARGS}`, `__AGENT__`
+  - Rewrites paths to match `.personas/` structure
+  - Outputs to agent-specific folders (`.claude/commands/`, `.github/prompts/`, etc.)
+- Handles agent-specific files (e.g., `.vscode/settings.json` for copilot)
+
+**Benefits:**
+
+- ⚡ **Faster** - No network delays or GitHub rate limits
+- 🔒 **Offline** - Works without internet connection
+- 🎯 **Accurate** - Test template changes immediately before release
+- ♾️ **Consistent** - Matches production release structure exactly
+
+**Environment Variables:**
+
+- `PERSONAS_USE_LOCAL_TEMPLATES=1` - Enable local template mode
+- `PERSONAS_TEMPLATE_PATH=/path/to/repo` - Custom source location
+
 ## 3. Use Editable Install (Isolated Environment)
 
 Create an isolated environment using `uv` so dependencies resolve exactly like end users get them:
@@ -149,6 +243,12 @@ personas init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
 | Local uvx run (abs path) | `uvx --from /mnt/c/GitHub/our-personas personas ...` |
 | Git branch uvx | `uvx --from git+URL@branch personas ...` |
 | Build wheel | `uv build` |
+| Force init in current dir | `personas init --here --force --ai claude` |
+| Debug network issues | `personas init demo --debug` |
+| With GitHub token | `personas init demo --github-token $GITHUB_TOKEN` |
+| Use local templates | `python -m src.personas_cli init demo --local-templates --ai claude` |
+| Local templates + custom path | `personas init demo --local-templates --template-path /path/to/repo` |
+| Local templates via env var | `PERSONAS_USE_LOCAL_TEMPLATES=1 personas init demo` |
 
 ## 11. Cleaning Up
 
@@ -167,6 +267,9 @@ rm -rf .venv dist build *.egg-info
 | Git step skipped | You passed `--no-git` or Git not installed |
 | Wrong script type downloaded | Pass `--script sh` or `--script ps` explicitly |
 | TLS errors on corporate network | Try `--skip-tls` (not for production) |
+| GitHub API rate limit exceeded | Set `GH_TOKEN` or `GITHUB_TOKEN` env var, or use `--github-token` |
+| Need to skip merge confirmation | Use `--force` flag with `--here` option |
+| Download/extraction failing | Use `--debug` flag to see detailed error information |
 
 ## 13. Next Steps
 
