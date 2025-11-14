@@ -328,18 +328,18 @@ Total: ~20-25 hours of documentation and planning work
 # This creates:
 # - .personas/memory/ground-rules.md with project values and constraints
 
-# Step 2: Define system overview for greenfield project (10 minutes)
-/personas.specify Create "Taskify" - team productivity platform with projects, Kanban boards, real-time collaboration, and analytics
+# Step 2: Create feature specification (5 minutes)
+/personas.specify Feature 001: Kanban board with drag-and-drop, task assignment, commenting, and real-time updates
 
 # This creates:
-# - Branch "001-system-overview"
-# - specs/001-system-overview/spec.md with complete feature list
+# - Branch "001-kanban-board"
+# - specs/001-kanban-board/spec.md
 
 # Step 3: Clarify ambiguous areas (optional, 5 minutes)
 /personas.clarify
 
 # Step 4: Define system architecture (15 minutes)
-/personas.architect Microservices architecture: Auth, Project, Task, Notification services. PostgreSQL for data, Redis for cache, RabbitMQ for async, SignalR for real-time. Kubernetes on Azure.
+/personas.architect Design system architecture for "Taskify" based on Feature 001 requirements. Use microservices: Auth, Project, Task, Notification services. PostgreSQL for data, Redis for cache, RabbitMQ for async, SignalR for real-time. Kubernetes on Azure.
 
 # This creates:
 # - d-docs/architecture.md with complete system design
@@ -351,45 +351,38 @@ Total: ~20-25 hours of documentation and planning work
 # This creates:
 # - d-docs/standards.md with comprehensive development guidelines
 
-# Step 6: Create individual feature specification (5 minutes)
-/personas.specify Kanban board with drag-and-drop, task assignment, commenting, and real-time updates
-
-# This creates:
-# - Branch "002-kanban-board"
-# - specs/002-kanban-board/spec.md
-
-# Step 7: Create implementation plan (10 minutes)
+# Step 6: Create implementation plan (10 minutes)
 /personas.design Use Blazor Server for UI, SignalR for real-time, REST API for CRUD operations, EF Core for data access
 
 # This creates:
-# - specs/002-kanban-board/design.md
-# - specs/002-kanban-board/data-model.md
-# - specs/002-kanban-board/contracts/ (API specs)
-# - specs/002-kanban-board/quickstart.md
+# - specs/001-kanban-board/design.md
+# - specs/001-kanban-board/data-model.md
+# - specs/001-kanban-board/contracts/ (API specs)
+# - specs/001-kanban-board/quickstart.md
 
-# Step 8: Generate E2E test spec (5 minutes)
+# Step 7: Generate E2E test spec (5 minutes)
 /personas.design-test
 
 # This creates:
-# - specs/002-kanban-board/design-test.md with comprehensive E2E scenarios
+# - specs/001-kanban-board/design-test.md with comprehensive E2E scenarios
 
-# Step 9: Generate executable tasks (5 minutes)
+# Step 8: Generate executable tasks (5 minutes)
 /personas.taskify
 
 # This creates:
-# - specs/002-kanban-board/tasks.md with dependency-ordered task list
+# - specs/001-kanban-board/tasks.md with dependency-ordered task list
 
-# Step 10: Validate consistency (optional, 5 minutes)
+# Step 9: Validate consistency (optional, 5 minutes)
 /personas.analyze
 
-# Step 11: Execute implementation (varies by feature complexity)
+# Step 10: Execute implementation (varies by feature complexity)
 /personas.implement
 
-# Step 12: Execute E2E tests (varies)
+# Step 11: Execute E2E tests (varies)
 /personas.test
 
 # This creates:
-# - specs/002-kanban-board/test-report.md with test results
+# - specs/001-kanban-board/test-report.md with test results
 ```
 
 **Time Comparison:**

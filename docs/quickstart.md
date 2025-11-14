@@ -10,18 +10,21 @@ This guide will help you get started with Spec-Driven Development using Our Pers
 
 1. **Install Personas** - Bootstrap your project structure
 2. **Establish Principles** - Define project values with `/personas.regulate`
-3. **Create System Overview** - List all features and requirements (Feature 001)
-4. **Define Architecture** - Design system based on Feature 001
-5. **Set Standards** - Establish coding and testing practices
-6. **Implement Features** - Build features 002, 003, 004... iteratively
+3. **Specify Features** - Create detailed specifications with `/personas.specify`
+4. **Clarify Requirements** - Resolve ambiguities with `/personas.clarify` (optional)
+5. **Define Architecture** - Design system architecture with `/personas.architect`
+6. **Set Standards** - Establish coding and testing practices with `/personas.standardize`
+7. **Design & Implement** - Create plans and build features iteratively
 
 ### For Existing Projects (Adding Features)
 
 1. **Install Personas** - Bootstrap your project structure
 2. **Establish Principles** - Define project values with `/personas.regulate` (if not done)
-3. **Define Architecture** - Document existing architecture with `/personas.architect` (if not done)
-4. **Set Standards** - Document current standards with `/personas.standardize` (if not done)
-5. **Implement Features** - Add new features using the spec-plan-implement cycle
+3. **Specify Features** - Create feature specifications with `/personas.specify`
+4. **Clarify Requirements** - Resolve ambiguities with `/personas.clarify` (optional)
+5. **Update Architecture** - Update architecture if needed with `/personas.architect`
+6. **Update Standards** - Update standards if needed with `/personas.standardize`
+7. **Design & Implement** - Create plans and build features
 
 ## The Complete Process
 
@@ -48,39 +51,28 @@ Use `/personas.regulate` to define your project's governing principles:
 /personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
-### 3. Create System Overview (For New Projects)
+### 3. Create Feature Specifications
 
-For greenfield projects, create a comprehensive system overview before defining architecture:
+Use `/personas.specify` to create detailed feature specifications:
 
 ```bash
-/personas.specify Create [Your Project Name] - [brief description].
-
-COMPLETE FEATURE LIST:
-1. [Feature 1 name and description]
-2. [Feature 2 name and description]
-3. [Feature 3 name and description]
-...
-
-HIGH-LEVEL REQUIREMENTS:
-- Scale: [expected users, data volume, concurrent operations]
-- Security: [authentication, authorization, encryption needs]
-- Performance: [response time targets, throughput requirements]
-- Compliance: [regulatory requirements like GDPR, HIPAA, etc.]
-- Integrations: [third-party services needed]
-
-This system overview will guide architecture decisions. Do not implement yet.
+/personas.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page.
 ```
 
-This creates `.personas/specs/001-system-overview/spec.md` that serves as the blueprint for your architecture.
+### 4. Clarify Requirements (Optional)
 
-**Skip this step** if you're adding features to an existing system with established architecture.
-
-### 4. Define System Architecture
-
-Use `/personas.architect` to establish your system's architecture. **If you created a system overview (Feature 001), reference it:**
+Use `/personas.clarify` to resolve ambiguities:
 
 ```bash
-/personas.architect Based on the features in specs/001-system-overview/spec.md, design a system architecture using:
+/personas.clarify
+```
+
+### 5. Define System Architecture
+
+Use `/personas.architect` to establish your system's architecture:
+
+```bash
+/personas.architect Design a system architecture using:
 - [List appropriate architectural patterns and components]
 - [Database and storage choices]
 - [Communication patterns]
@@ -95,23 +87,13 @@ For simpler applications:
 /personas.architect Design a single-page application with local storage, using a modular component architecture
 ```
 
-### 5. Establish Coding Standards
+### 6. Establish Coding Standards
 
 Use `/personas.standardize` to define coding practices and quality standards:
 
 ```bash
 /personas.standardize Configure standards for [tech stack], [test framework], [coverage target]%, [linters/formatters], and [CI/CD approach]
 ```
-
-### 6. Create Individual Feature Specifications
-
-Use the `/personas.specify` command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
-
-```bash
-/personas.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
-```
-
-**Note**: This step creates detailed specifications for individual features. Each feature gets its own branch and spec directory (002-feature-name, 003-feature-name, etc., since 001 is the system overview).
 
 ### 7. Create a Technical Implementation Plan
 
@@ -163,39 +145,34 @@ Here's a complete example of building a team productivity platform from scratch.
 - Security: RBAC, input validation, audit logging
 ```
 
-#### Step 2: Create System Overview (Feature 001)
+#### Step 2: Specify First Feature
 
 ```text
-/personas.specify Create "Taskify" - a team productivity platform.
+/personas.specify Feature 001: Basic user authentication and project creation.
 
-COMPLETE FEATURE LIST:
-1. Multi-tenant workspace management
-2. User authentication and authorization (roles: admin, PM, engineer)
-3. Project management (create, archive, permissions)
-4. Kanban boards with drag-and-drop
-5. Task management (create, assign, comment, move, tags)
-6. Real-time collaboration (live updates, presence indicators)
-7. File attachments (images, documents)
-8. Advanced search and filtering (by assignee, status, tags, dates)
-9. Activity feed and notifications (in-app, email, push)
-10. Analytics dashboard (velocity, burndown, team metrics)
-11. Mobile-responsive UI
-12. REST API for integrations
-
-HIGH-LEVEL REQUIREMENTS:
-- Scale: 1000 concurrent users, 10K projects, 100K tasks
-- Security: SSO support, RBAC, audit logging, data encryption at rest
-- Performance: <200ms API response time, <100ms real-time update latency
-- Compliance: GDPR-compliant data handling, SOC 2 considerations
-- Integrations: Slack notifications, Microsoft Teams, Jira import/export
-
-This is Feature 001 (System Overview) for architecture planning. Do not implement yet.
+This is a simplified first feature focusing on:
+- User login (5 predefined users: 1 PM, 4 engineers)
+- No password required (user selection only)
+- Create and list projects
+- Basic project permissions
 ```
 
-#### Step 3: Define Architecture
+#### Step 3: Clarify and Refine
 
 ```text
-/personas.architect Based on the features in specs/001-system-overview/spec.md, design:
+/personas.clarify
+```
+
+After clarification, add any refinements:
+
+```text
+Each project should have 3 sample projects created with basic metadata.
+```
+
+#### Step 4: Define Architecture
+
+```text
+/personas.architect Design a system architecture for "Taskify" based on Feature 001 requirements:
 
 ARCHITECTURE:
 - Microservices: Auth Service, Project Service, Task Service, Notification Service, Analytics Service
@@ -225,14 +202,15 @@ DATA FLOWS:
 - Search: Task Service → Elasticsearch sync → Search Service
 ```
 
-#### Step 4: Set Standards
+#### Step 4: Establish Coding Standards
 
 ```text
-/personas.standardize
+/personas.standardize Configure standards for:
 
 TECHNOLOGY STACK:
 - Backend: .NET 8 with ASP.NET Core
 - Frontend: React 18 with TypeScript
+- Database: PostgreSQL 15
 - Testing: xUnit (backend), Vitest + React Testing Library (frontend), Playwright (E2E)
 
 QUALITY STANDARDS:
@@ -256,10 +234,12 @@ CI/CD:
 
 ### Phase 2: Implement First Feature
 
-#### Step 1: Define Feature 002
+**Note**: After establishing ground rules, architecture, and standards, you can now implement features using the full workflow.
+
+#### Step 1: Design Feature Plan
 
 ```text
-/personas.specify Feature 002: Basic user authentication and project creation.
+/personas.design Use Blazor Server for UI, SignalR for real-time, REST API for CRUD operations, EF Core for data access
 
 This is a simplified first feature focusing on:
 - User login (5 predefined users: 1 PM, 4 engineers)

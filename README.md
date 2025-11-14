@@ -114,62 +114,37 @@ Use the **`/personas.regulate`** command to create your project's governing prin
 /personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
-### 3. Define system overview (recommended for new projects)
+### 3. Create feature specifications
 
-Before diving into individual features, create a comprehensive system overview that lists all planned features and high-level requirements. This is especially important for greenfield projects where you need to design the architecture based on the complete feature set.
-
-```bash
-/personas.specify Create a comprehensive system overview for [your project name].
-
-FEATURES:
-1. [Feature 1 name and brief description]
-2. [Feature 2 name and brief description]
-3. [Feature 3 name and brief description]
-...
-
-HIGH-LEVEL REQUIREMENTS:
-- Expected scale (users, data volume, concurrent operations)
-- Performance targets
-- Security requirements
-- Compliance needs
-- Integration requirements
-
-This system overview will guide architecture decisions in the next step.
-```
-
-This creates a "Feature 001" specification (`.personas/specs/001-system-overview/spec.md`) that serves as the foundation for architectural design. You can skip this step if you're adding features to an existing system with established architecture.
-
-### 4. Create feature specifications
-
-Use the **`/personas.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+Use the **`/personas.specify`** command to create detailed feature specifications. Focus on the **what** and **why**, not the tech stack.
 
 ```bash
 /personas.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
 ```
 
-**Note**: For individual features in an existing project, use `/personas.specify` as shown above. For new projects, consider creating a system overview first (see Step 3).
+**Note**: The `/personas.specify` command creates detailed specifications for individual features. Define architecture and standards after specification.
 
-### 5. Clarify requirements (optional but recommended)
+### 4. Clarify requirements (optional but recommended)
 
-Use **`/personas.clarify`** to resolve any ambiguities in your specification before planning.
+Use **`/personas.clarify`** to resolve any ambiguities in your specification before architecture planning.
 
 ```bash
 /personas.clarify
 ```
 
-### 6. Define system architecture
+### 5. Define system architecture
 
-Use **`/personas.architect`** to establish your system's overall architecture, components, and infrastructure. **This step is critical for new projects and should be based on your system overview (Feature 001) if you created one.**
+Use **`/personas.architect`** to establish your system's overall architecture, components, and infrastructure based on your feature specifications.
 
 ```bash
 /personas.architect Design a single-page application with local storage, using a modular component architecture with clear separation between UI and data layers
 ```
 
-For larger systems with multiple features defined in your system overview:
+For larger systems with multiple features:
 
 ```bash
-/personas.architect Based on the features in specs/001-system-overview/spec.md, design a system architecture using:
-- Microservices for: [list key services based on your features]
+/personas.architect Design a system architecture with:
+- Microservices for: [list key services based on your requirements]
 - API Gateway for routing
 - [Database choice] for data persistence
 - [Cache/messaging technologies]
@@ -178,7 +153,7 @@ For larger systems with multiple features defined in your system overview:
 Include component interactions, data flows, and scalability considerations for the expected load.
 ```
 
-### 7. Establish coding standards
+### 6. Establish coding standards
 
 Use **`/personas.standardize`** to define coding practices, testing requirements, and quality standards.
 
@@ -500,44 +475,19 @@ The first step should be establishing your project's governing principles using 
 
 This step creates or updates the `.personas/memory/ground-rules.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
-### **STEP 2:** Create system overview (recommended for new projects)
+### **STEP 2:** Create feature specifications
 
-For greenfield projects, create a comprehensive system overview before defining architecture. This helps you understand the full scope and design appropriate architecture:
+Use the `/personas.specify` command to create detailed functional specifications for individual features. The command creates a specification document focused on a specific feature's requirements, user stories, and acceptance criteria.
+
+>[!IMPORTANT]
+>Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
+
+An example prompt for an individual feature:
 
 ```text
-/personas.specify Create "Taskify" - a team productivity platform.
-
-COMPLETE FEATURE LIST:
-1. Multi-tenant workspace management
-2. User authentication and authorization (roles: admin, PM, engineer)
-3. Project management (create, archive, permissions)
-4. Kanban boards with drag-and-drop
-5. Task management (create, assign, comment, move)
-6. Real-time collaboration (live updates, presence)
-7. File attachments
-8. Search and filtering
-9. Activity feed and notifications
-10. Analytics dashboard
-11. Mobile-responsive UI
-12. API for integrations
-
-HIGH-LEVEL REQUIREMENTS:
-- Scale: 1000 concurrent users, 10K projects, 100K tasks
-- Security: SSO, RBAC, audit logging, data encryption
-- Performance: <200ms API response time, real-time updates <100ms latency
-- Compliance: GDPR, SOC 2
-- Integrations: Slack, Microsoft Teams, Jira
-
-This system overview will guide architecture decisions. Do not implement yet - this is for scoping and architecture planning.
-```
-
-This creates `.personas/specs/001-system-overview/spec.md` that serves as the blueprint for your architecture.
-
-**Skip this step** if you're adding features to an existing system with established architecture.
-
-### **STEP 3:** Create individual feature specifications
-
-With your project principles (and optionally system overview) established, you can now create detailed functional specifications for individual features. Use the `/personas.specify` command and then provide the concrete requirements for the feature you want to develop.
+Develop Taskify, a team productivity platform. It should allow users to create projects, add team members,
+assign tasks, comment and move tasks between boards in Kanban style. In this initial phase for this feature,
+let's call it "Create Taskify," let's have multiple users but the users will be declared ahead of time, predefined.
 
 >[!IMPORTANT]
 >Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
@@ -590,7 +540,7 @@ At this stage, your project folder contents should resemble the following:
         └── tasks-template.md
 ```
 
-### **STEP 4:** Functional specification clarification (optional but recommended)
+### **STEP 3:** Clarify requirements (optional but recommended)
 
 With the baseline specification created, you can clarify any requirements that were not captured properly in the first attempt.
 
@@ -618,12 +568,12 @@ Read the review and acceptance checklist, and check off each item in the checkli
 
 It's important to use the interaction with the AI agent as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
-### **STEP 5:** Define system architecture (recommended before planning)
+### **STEP 4:** Define system architecture
 
-Before creating detailed implementation plans, establish your system's overall architecture using the `/personas.architect` command. **If you created a system overview (Feature 001), base your architecture on those features:**
+After creating and clarifying feature specifications, establish your system's overall architecture using the `/personas.architect` command:
 
 ```text
-/personas.architect Based on the features defined in specs/001-system-overview/spec.md, design a system architecture using:
+/personas.architect Design a system architecture using:
 - Microservices: Auth Service, Project Service, Task Service, Notification Service
 - API Gateway with authentication/authorization
 - PostgreSQL for transactional data
@@ -641,7 +591,7 @@ Include:
 - Performance targets: <200ms API response, <100ms real-time updates
 ```
 
-For simpler applications without a system overview:
+For simpler applications:
 
 ```text
 /personas.architect Design a single-page application with local storage, using a modular component architecture with clear separation between UI and data layers.
@@ -658,9 +608,9 @@ This step creates the `.personas/memory/architecture.md` file that documents:
 
 The architecture serves as the technical framework that guides all subsequent implementation planning.
 
-### **STEP 6:** Establish coding standards (recommended before planning)
+### **STEP 5:** Establish coding standards
 
-After defining your architecture, establish consistent coding practices using the `/personas.standardize` command:
+After defining architecture, establish consistent coding practices using the `/personas.standardize` command:
 
 ```text
 /personas.standardize Configure standards for .NET 8 with xUnit for testing, 80% code coverage requirement, 
@@ -678,9 +628,9 @@ This step creates the `.personas/memory/standards.md` file that defines:
 
 The standards ensure consistent implementation quality across all features.
 
-### **STEP 7:** Generate a plan
+### **STEP 6:** Create implementation plan
 
-You can now be specific about the tech stack and other technical requirements. You can use the `/personas.design` command that is built into the project template with a prompt like this:
+With specifications, architecture, and standards in place, create a detailed technical implementation plan using the `/personas.design` command:
 
 ```text
 We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use
@@ -745,28 +695,9 @@ That's way too untargeted research. The research needs to help you solve a speci
 >[!NOTE]
 >Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
 
-### **STEP 8:** Have Claude Code validate the plan
+### **STEP 7:** Generate E2E test spec with /personas.design-test
 
-With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
-
-```text
-Now I want you to go and audit the implementation plan and the implementation detail files.
-Read through it with an eye on determining whether or not there is a sequence of tasks that you need
-to be doing that are obvious from reading this. Because I don't know if there's enough here. For example,
-when I look at the core implementation, it would be useful to reference the appropriate places in the implementation
-details where it can find the information as it walks through each step in the core implementation or in the refinement.
-```
-
-This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
-
-You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
-
->[!NOTE]
->Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](base/memory/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
-
-### **STEP 9:** Generate E2E test spec with /personas.design-test
-
-With the implementation plan validated, generate a comprehensive E2E test spec based on user workflows. Use the `/personas.design-test` command to automatically create test scenarios from your quickstart guide:
+With the implementation plan created, generate a comprehensive E2E test spec based on user workflows. Use the `/personas.design-test` command to automatically create test scenarios from your quickstart guide:
 
 ```text
 /personas.design-test
@@ -782,7 +713,7 @@ This step creates a `design-test.md` file in your feature specification director
 
 The generated design-test.md ensures comprehensive E2E testing coverage aligned with your architecture and standards.
 
-### **STEP 10:** Generate task breakdown with /personas.taskify
+### **STEP 8:** Generate task breakdown with /personas.taskify
 
 With the test spec in place, you can now break down the implementation plan into specific, actionable tasks that can be executed in the correct order. Use the `/personas.taskify` command to automatically generate a detailed task breakdown from your implementation plan:
 
@@ -800,6 +731,33 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Checkpoint validation** - Each user story phase includes checkpoints to validate independent functionality
 
 The generated tasks.md provides a clear roadmap for the `/personas.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
+
+### **STEP 9:** Have Claude Code validate the plan (optional)
+
+With the plan, test spec, and tasks in place, you can optionally have Claude Code run through everything to make sure that there are no missing pieces. You can use a prompt like this:
+
+```text
+Now I want you to go and audit the implementation plan and the implementation detail files.
+Read through it with an eye on determining whether or not there is a sequence of tasks that you need
+to be doing that are obvious from reading this. Because I don't know if there's enough here. For example,
+when I look at the core implementation, it would be useful to reference the appropriate places in the implementation
+details where it can find the information as it walks through each step in the core implementation or in the refinement.
+```
+
+This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
+
+You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
+
+>[!NOTE]
+>Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](base/memory/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
+
+### **STEP 10:** Validate consistency with /personas.analyze (optional)
+
+Before implementing, you can optionally validate cross-artifact consistency:
+
+```text
+/personas.analyze
+```
 
 ### **STEP 11:** Implementation
 
