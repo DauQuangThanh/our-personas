@@ -59,10 +59,47 @@ This architectural design is for a **[select one: Mock-up, Proof of Concept (PoC
 * **[Document 1 Title]**: [e.g., "Software Requirements Specification for Product X"]
 * **[Document 2 Title]**: [e.g., "Project Plan"]
 * **ISO/IEC/IEEE 42010:2011**: Systems and software engineering - Architecture description.
+* **Architecture Research Document**: [architecture-research.md](architecture-research.md) - Documents the research, options evaluated, and rationale for all major architectural decisions.
 
 ---
 
-## 2. Architectural Representation
+## 2. Architecture Research Summary
+<!--
+  ACTION REQUIRED: Summarize key architectural decisions from architecture-research.md.
+  This section provides a quick reference to major technology and design choices.
+  Full details and rationale are in the separate architecture-research.md document.
+-->
+
+### 2.1 Major Architectural Decisions
+
+The following key decisions shape this architecture (see [architecture-research.md](architecture-research.md) for detailed research and rationale):
+
+| Decision Area | Choice | Rationale Summary |
+| :--- | :--- | :--- |
+| **Technology Stack** | **[e.g., Python 3.11 + FastAPI]** | [Brief reason, e.g., "Team expertise, async support, strong ecosystem"] |
+| **Architectural Style** | **[e.g., Microservices]** | [Brief reason, e.g., "Independent scaling, team autonomy, fault isolation"] |
+| **Infrastructure** | **[e.g., AWS with Kubernetes]** | [Brief reason, e.g., "Managed services, horizontal scaling, cost-effective"] |
+| **Data Stores** | **[e.g., PostgreSQL + Redis]** | [Brief reason, e.g., "ACID compliance for core data, caching for performance"] |
+| **Communication** | **[e.g., REST APIs + RabbitMQ]** | [Brief reason, e.g., "Synchronous for queries, async for events"] |
+| **Authentication** | **[e.g., JWT with OAuth2]** | [Brief reason, e.g., "Stateless, standard protocol, third-party integration"] |
+
+### 2.2 Key Trade-offs
+
+**[Trade-off 1]**: [e.g., "Microservices vs Monolith"]
+- **Gained**: [e.g., "Independent deployment, scalability, team autonomy"]
+- **Sacrificed**: [e.g., "Increased operational complexity, network latency, distributed debugging"]
+- **Justification**: [e.g., "Product roadmap requires rapid iteration on independent features; team is growing to support service ownership"]
+
+**[Trade-off 2]**: [e.g., "PostgreSQL vs DynamoDB"]
+- **Gained**: [e.g., "ACID transactions, complex queries, data integrity"]
+- **Sacrificed**: [e.g., "Horizontal scaling complexity, higher ops burden"]
+- **Justification**: [e.g., "MVP prioritizes data consistency over massive scale; can add NoSQL for specific use cases later"]
+
+[Add more trade-offs as needed]
+
+---
+
+## 3. Architectural Representation
 <!--
   ACTION REQUIRED: Map stakeholders to their concerns and define which architectural views will address them. IMPORTANT NOTES: All diagrams should be illustrated in Mermaid format if possible.
 -->
@@ -79,7 +116,7 @@ The following table maps key stakeholders to their primary concerns, which this 
 | **QA/Testers** | Testability, reliability, behavior under load. |
 | **Security Team** | Data protection, access control, threat mitigation. |
 
-### 2.2 Architectural Views
+### 3.2 Architectural Views
 
 The architecture will be described using the following views, each chosen to address specific stakeholder concerns:
 
@@ -90,12 +127,12 @@ The architecture will be described using the following views, each chosen to add
 
 ---
 
-## 3. Architectural Goals and Constraints
+## 4. Architectural Goals and Constraints
 <!--
   ACTION REQUIRED: Define the business goals, quality attributes, and constraints that shape the architecture.
 -->
 
-### 3.1 Business Goals
+### 4.1 Business Goals
 
 The architecture is designed to support the following business objectives:
 
@@ -103,7 +140,7 @@ The architecture is designed to support the following business objectives:
 * **[Goal 2]**: [e.g., "Achieve a high level of availability to minimize service disruption."]
 * **[Goal 3]**: [e.g., "Ensure a secure platform for handling sensitive customer data."]
 
-### 3.2 Quality Attributes (Non-Functional Requirements)
+### 4.2 Quality Attributes (Non-Functional Requirements)
 
 The architecture is specifically designed to meet the following non-functional requirements:
 
@@ -112,7 +149,7 @@ The architecture is specifically designed to meet the following non-functional r
 * **Security**: All customer data must be encrypted both in transit and at rest.
 * **Availability**: The system must maintain a **[99.99%]** uptime.
 
-### 3.3 Design Constraints
+### 4.3 Design Constraints
 
 The architectural design is subject to the following constraints:
 
@@ -122,9 +159,9 @@ The architectural design is subject to the following constraints:
 
 ---
 
-## 4. Architectural Views
+## 5. Architectural Views
 
-### 4.1 Logical View (Component Diagram)
+### 5.1 Logical View (Component Diagram)
 
 This view shows the system's primary components, their responsibilities, and the main interactions between them.
 
@@ -135,7 +172,7 @@ This view shows the system's primary components, their responsibilities, and the
 * **[Component C]**: [e.g., "Order Service"] - Handles the business logic for processing and fulfilling orders.
 * **[Component D]**: [e.g., "Payment Gateway Adapter"] - An interface to a third-party payment processor.
 
-### 4.2 Process View
+### 5.2 Process View
 
 This view describes the runtime structure of the system, detailing how components interact and manage concurrency.
 
@@ -144,7 +181,7 @@ This view describes the runtime structure of the system, detailing how component
 * **Concurrency**: The system will use a multi-process, multi-threaded model. Each service will be a separate process, and each process will use multiple threads to handle concurrent requests.
 * **Inter-Process Communication**: Communication between services will be handled via **[e.g., RESTful APIs, asynchronous message queues (RabbitMQ)]**.
 
-### 4.3 Deployment View
+### 5.3 Deployment View
 
 This view illustrates how the software components are physically deployed onto the hardware infrastructure.
 
@@ -154,7 +191,7 @@ This view illustrates how the software components are physically deployed onto t
 * **Deployment Strategy**: Each service will be containerized using Docker and orchestrated by Kubernetes for automated scaling and management.
 * **Load Balancing**: An Elastic Load Balancer (ELB) will distribute incoming traffic across multiple service instances.
 
-### 4.4 Data View
+### 5.4 Data View
 
 This view describes the system's data architecture, including data stores and their relationships.
 
@@ -166,9 +203,9 @@ This view describes the system's data architecture, including data stores and th
 
 ---
 
-## 5. Architectural Decisions
+## 6. Architectural Decisions
 
-### 5.1 Key Decisions and Rationale
+### 6.1 Key Decisions and Rationale
 
 * **Decision**: To adopt a **microservices** architectural style.
 * **Rationale**: This approach addresses the scalability and maintainability goals by allowing services to be developed, deployed, and scaled independently. It also provides fault isolation.
@@ -176,30 +213,30 @@ This view describes the system's data architecture, including data stores and th
 * **Decision**: To use **[RabbitMQ]** for asynchronous communication between services.
 * **Rationale**: This decision supports the performance and reliability goals by decoupling services, allowing them to process tasks without waiting for immediate responses.
 
-### 5.2 Design Alternatives and Trade-offs
+### 6.2 Design Alternatives and Trade-offs
 
 * **Alternative**: A monolithic architecture was considered.
 * **Trade-offs**: While a monolith would be simpler to develop and deploy initially, it would not meet the long-term scalability and maintainability goals. Changes to one part of the system would risk affecting the entire application.
 
 ---
 
-## 6. Architectural Policies and Patterns
+## 7. Architectural Policies and Patterns
 
-### 6.1 System-Wide Policies
+### 7.1 System-Wide Policies
 
 * **Error Handling**: All services must use a standard logging library and log errors to a centralized log management system (e.g., ELK Stack).
 * **Security**: All APIs must be protected with an authentication and authorization layer. Secrets (e.g., API keys, database passwords) must be stored in a secure vault (e.g., AWS Secrets Manager).
 
-### 6.2 Design Patterns
+### 7.2 Design Patterns
 
 * **[Pattern 1]**: [e.g., "Circuit Breaker"] - Applied to inter-service calls to prevent cascading failures.
 * **[Pattern 2]**: [e.g., "Saga Pattern"] - Used for managing distributed transactions across multiple services.
 
 ---
 
-## 7. Appendices (Optional)
+## 8. Appendices (Optional)
 
-### 7.1 Requirements Traceability Matrix
+### 8.1 Requirements Traceability Matrix
 
 A matrix linking the architectural components and decisions to the specific requirements they fulfill.
 

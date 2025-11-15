@@ -1,5 +1,8 @@
 ---
 description: Create or update the software architecture design from interactive or provided inputs, ensuring comprehensive system architecture documentation
+scripts:
+  sh: scripts/bash/setup-arch.sh --json
+  ps: scripts/powershell/setup-arch.ps1 -Json
 ---
 
 ## User Input
@@ -10,20 +13,54 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Key Rules
+
+Before proceeding with the workflow, adhere to these critical rules:
+
+1. **Use Absolute Paths**: All file paths MUST be absolute paths from repository root (e.g., `/d-docs/architecture.md`, `/memory/ground-rules.md`)
+2. **ERROR on Missing Ground Rules**: If `/memory/ground-rules.md` does not exist, immediately ERROR and instruct user to run `/personas.regulate` first
+3. **WARN on Technology Conflicts**: If detected technology stack conflicts with user input, WARN the user and ask for clarification
+4. **Maintain ISO/IEC/IEEE 42010:2011 Standards**: Architecture document MUST follow stakeholder-driven architecture description standards
+5. **Product Level Awareness**: Tailor architectural complexity and detail to the specified product level (Mock-up, PoC, MVP, Production)
+6. **Preserve Template Structure**: Do NOT alter the heading structure or remove sections from the architecture template
+7. **System-Wide Scope**: This command affects system-wide architecture, not feature-specific implementation (use `/personas.design` for features)
+
 ## Outline
 
 You are updating the software architecture document at `/d-docs/architecture.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[System Name]`, `[briefly describe the system's purpose]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for the project architecture, and (c) ensure consistency with the project ground rules and coding standards.
 
-Follow this execution flow:
+Follow this phase-based execution flow:
 
-1. **Load the existing architecture template** at `/d-docs/architecture.md`.
-   - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]` or `[descriptive text]`.
-   - Note: This template follows ISO/IEC/IEEE 42010:2011 standards for architecture description.
+### Phase 1: Setup
+
+1. **Execute setup script** to validate environment and get paths:
+   - Run the setup script: `{SCRIPT} --json` (bash) or `{SCRIPT} -Json` (PowerShell)
+   - Parse JSON output to extract:
+     - `ARCH_DOC`: Path to architecture document (`/d-docs/architecture.md`)
+     - `REPO_ROOT`: Repository root directory
+     - `CURRENT_BRANCH`: Current git branch (or empty if not in git repo)
+     - `HAS_GIT`: Whether repository uses git ("true" or "false")
+   - If script fails or ground-rules.md missing, ERROR immediately and instruct user to run `/personas.regulate`
+
+2. **Ensure directories exist**:
+   - Verify `/d-docs/` directory exists (script creates it)
+   - Verify `/d-docs/checklists/` directory exists (script creates it)
+
+3. **Load the existing architecture template** at `ARCH_DOC` (`/d-docs/architecture.md`):
+   - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]` or `[descriptive text]`
+   - Note: This template follows ISO/IEC/IEEE 42010:2011 standards for architecture description
+
+### Phase 2: Load Context
+
+1. **Read foundational documents** (use absolute paths):
+   - Read `/memory/ground-rules.md` (REQUIRED - already validated by script)
+   - Read `/d-docs/company/architecture/architecture-guidelines.md` if exists (company architecture standards)
+   - Read `/d-docs/standards.md` if exists (coding standards to align with)
 
 2. **Detect project information and technology stack**:
-   - **Specs**: Check all files in `specs` folder, especially for `spec.md`
-   - **System Name**: Check README.md, package.json, pyproject.toml, or ask user
-   - **System Purpose**: Extract from README.md, specifications, or ask user
+   - **Specs**: Check all files in `specs/` folder, especially for `spec.md` files
+   - **System Name**: Check `README.md`, `package.json`, `pyproject.toml`, or ask user
+   - **System Purpose**: Extract from `README.md`, specifications, or ask user
    - **Technology Stack**:
      - Check for `package.json` (Node.js/JavaScript/TypeScript)
      - Check for `requirements.txt` or `pyproject.toml` (Python)
@@ -33,8 +70,8 @@ Follow this execution flow:
      - Check for `composer.json` (PHP)
      - Check for `Cargo.toml` (Rust)
    - **Infrastructure**: Check for Docker, Kubernetes, cloud provider configs
-   - **Existing Documentation**: Review README.md, design.md, specs for architecture details
-   - If unclear, ask user for clarifications
+   - **Existing Documentation**: Review `README.md`, design.md files, specs for architecture details
+   - If unclear, WARN user and ask for clarifications
 
 3. **Collect/derive values for placeholders**:
    - **Introduction (Section 1)**:
@@ -80,7 +117,130 @@ Follow this execution flow:
      - System-wide policies (error handling, security, logging)
      - Pattern applications and their rationale
 
-4. **Draft the updated architecture document**:
+### Phase 3: Research & Discovery
+
+1. **Identify architectural unknowns** from template placeholders and project context:
+   - Extract all "NEEDS CLARIFICATION" markers from architecture template
+   - Identify technology stack options (if not already detected)
+   - List architectural style alternatives (monolith, microservices, serverless, etc.)
+   - Enumerate infrastructure options (cloud providers, deployment strategies)
+   - Document data store strategy options (SQL, NoSQL, caching, persistence)
+   - Note communication pattern choices (REST, GraphQL, gRPC, message queues)
+   - List authentication/authorization strategy options
+
+2. **Research each unknown systematically**:
+   - For each technology option: evaluate 2-3 alternatives
+   - Document pros and cons for the specific use case
+   - Consider constraints from `/memory/ground-rules.md`
+   - Consider product level requirements (Mock-up/PoC/MVP/Production)
+   - Research industry best practices and proven patterns
+   - Evaluate team expertise and learning curve
+   - Consider cost implications and licensing
+   - Assess ecosystem maturity and community support
+
+3. **Make informed architectural decisions**:
+   - Select best-fit technologies with detailed rationale
+   - Choose architectural style based on requirements analysis
+   - Document all alternatives considered
+   - Record trade-offs explicitly
+   - Map decisions back to business goals and quality attributes
+   - Ensure consistency across all technology choices
+
+4. **Generate architecture research document** at `REPO_ROOT/d-docs/architecture-research.md`:
+   - Use format:
+     ```markdown
+     # Architecture Research & Decisions
+     
+     **Created**: [DATE]
+     **Product Level**: [Mock-up/PoC/MVP/Production]
+     **Architecture Document**: [/d-docs/architecture.md](architecture.md)
+     
+     ## Executive Summary
+     - Brief overview of major architectural decisions
+     - Key technology stack selections
+     - Architectural style chosen
+     
+     ## Research Areas
+     
+     ### 1. [Research Area Name, e.g., "Technology Stack"]
+     
+     **Question**: [What needed to be decided?]
+     
+     **Options Evaluated**:
+     1. **[Option 1]**: [Description]
+        - Pros: [List advantages]
+        - Cons: [List disadvantages]
+        - Fit for use case: [Analysis]
+     
+     2. **[Option 2]**: [Description]
+        - Pros: [List advantages]
+        - Cons: [List disadvantages]
+        - Fit for use case: [Analysis]
+     
+     **Decision**: [What was chosen]
+     
+     **Rationale**: [Why this choice is best for the specific context, considering ground rules, product level, and constraints]
+     
+     **Trade-offs**: [What was sacrificed to gain what benefits]
+     
+     **Alternatives Considered**: [Summary of why other options were not selected]
+     
+     [Repeat for each research area]
+     ```
+   - Include research areas:
+     - Technology Stack Selection
+     - Architectural Style
+     - Infrastructure & Deployment
+     - Data Store Strategy
+     - Communication Patterns
+     - Authentication & Authorization
+     - Security Approach
+     - Monitoring & Observability
+     - Any other areas with "NEEDS CLARIFICATION"
+
+5. **Validate research completeness**:
+   - Ensure all "NEEDS CLARIFICATION" markers are resolved
+   - Verify all major architectural decisions are documented
+   - Confirm rationale addresses ground rules principles
+   - Check that decisions align with product level
+   - Ensure technology choices are compatible with each other
+
+**Output**: `/d-docs/architecture-research.md` with all architectural unknowns resolved
+
+### Phase 4: Execute Architecture
+
+**Prerequisites**: `architecture-research.md` complete with all decisions documented
+
+1. **Fill Alignment Checks section** in architecture document:
+   - Create or update the "Alignment Checks" section BEFORE drafting architecture content
+   - Include these three alignment validations:
+   
+   **a. Ground Rules Alignment**:
+   - Review `/memory/ground-rules.md` principles and constraints
+   - Document how architecture respects each ground rule
+   - Flag any violations with justification
+   - Example: "Library-First Principle → Using established frameworks (Express, PostgreSQL) rather than custom solutions"
+   
+   **b. Company Architecture Guidelines Alignment**:
+   - Review `/d-docs/company/architecture/architecture-guidelines.md` if exists
+   - Document alignment with company architecture standards
+   - Note any deviations with business justification
+   - If file doesn't exist, state "No company architecture guidelines found - skipping check"
+   
+   **c. Technology Stack Consistency**:
+   - Ensure all technology choices are compatible and work together
+   - Verify versions are specified and compatible
+   - Document integration points between technologies
+   - Flag any technology conflicts or gaps
+
+2. **Evaluate alignment gates**:
+   - If Ground Rules violations exist without clear justification: ERROR
+   - If Company Guidelines violations exist without business justification: ERROR  
+   - If Technology Stack has critical incompatibilities: ERROR
+   - For non-critical issues: WARN and document in alignment section
+
+3. **Draft the updated architecture document**:
+   - Use decisions from `architecture-research.md` to fill placeholders
    - Replace every placeholder with concrete text (no bracketed tokens left)
    - Preserve heading hierarchy and structure
    - Ensure each section has:
@@ -88,20 +248,12 @@ Follow this execution flow:
      - Measurable quality attributes (e.g., "99.9% uptime" not "high availability")
      - Concrete technology choices with versions where applicable
      - Diagrams or diagram descriptions
+   - Reference research document for rationale
    - Tailor content to detected technology stack and product level
    - Remove ACTION REQUIRED comments
    - Add concrete examples where helpful
 
-5. **Consistency with other project documents**:
-   - Read `/memory/ground-rules.md` if it exists
-   - Read `/d-docs/company/architecture/architecture-guidelines.md` if it exists (company-wide architecture guidelines)
-   - Read `/d-docs/standards.md` if it exists
-   - Ensure architecture aligns with ground rules principles and company architecture guidelines
-   - Ensure architecture supports coding standards
-   - Flag any conflicts between documents
-   - Verify technology choices are consistent across documents
-
-6. **Product level-specific recommendations**:
+4. **Product level-specific recommendations**:
    - **Mock-up**:
      - Simple single-component architecture
      - Focus on UI/UX flows
@@ -132,7 +284,7 @@ Follow this execution flow:
      - Disaster recovery planning
      - Performance optimization
 
-7. **Technology-specific architectural patterns**:
+5. **Technology-specific architectural patterns**:
    - **Node.js/TypeScript**:
      - Microservices with Express/Fastify
      - Event-driven architecture with message queues
@@ -169,7 +321,7 @@ Follow this execution flow:
      - Memory-safe concurrency patterns
      - Container deployment
 
-8. **Produce a Sync Impact Report** (prepend as HTML comment):
+6. **Produce a Sync Impact Report** (prepend as HTML comment):
    - System name and purpose identified
    - Product level determined
    - Technology stack detected
@@ -180,7 +332,7 @@ Follow this execution flow:
    - Architectural patterns applied
    - Follow-up TODOs if any information deferred
 
-9. **Validation before final output**:
+7. **Validation before final output**:
    - No remaining unexplained bracket tokens or ACTION REQUIRED comments
    - All quality attributes have specific, measurable targets
    - Technology stack is fully specified with versions
@@ -192,11 +344,33 @@ Follow this execution flow:
    - Diagrams referenced or described
    - Alternative approaches and trade-offs documented
 
-10. **Write the completed architecture document** back to `/d-docs/architecture.md` (overwrite).
+8. **Write the completed architecture document** back to `ARCH_DOC` (typically `/d-docs/architecture.md`) - overwrite the file.
 
-11. **Architecture Quality Validation**: After writing the initial architecture document, validate it against quality criteria:
+9. **Re-evaluate all Alignment Checks**:
+   - Review the completed architecture against Ground Rules
+   - Review against Company Architecture Guidelines (if exists)
+   - Review Technology Stack Consistency
+   - Update alignment check sections with final status
+   - If critical violations found: ERROR and list specific issues
+   - If warnings remain: Document them clearly for stakeholder review
 
-   a. **Create Architecture Quality Checklist**: Generate a checklist file at `/d-docs/checklists/architecture.md` with validation structure:
+10. **Update system-wide agent context** (if applicable):
+   - Detect which agent files exist in the repository root:
+     - `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/personas-rules.mdc`, `QWEN.md`, `AGENTS.md`, `.windsurf/rules/personas-rules.md`, etc.
+   - For each existing agent file, update the "System Architecture" section with:
+     - Architecture product level (Mock-up/PoC/MVP/Production)
+     - Key technology stack decisions from architecture
+     - Major components and their responsibilities
+     - Quality attribute targets (performance, scalability, availability)
+   - Note: This is system-wide context, NOT feature-specific (features use `/personas.design` for context updates)
+   - Format: Add or update a "## System Architecture" section in each agent file
+   - Example entry: "System Architecture: MVP microservices (Node.js + Express + PostgreSQL), targeting 99.9% uptime, horizontal scaling with Kubernetes"
+
+### Phase 5: Validation
+
+1. **Architecture Quality Validation**: After writing the architecture document and updating agent context, validate against quality criteria:
+
+   a. **Create Architecture Quality Checklist**: Generate a checklist file at `REPO_ROOT/d-docs/checklists/architecture.md` with validation structure:
 
    ```markdown
    # Architecture Quality Checklist
@@ -325,12 +499,12 @@ Follow this execution flow:
    - [Additional context or observations]
    ```
 
-   b. **Run Validation Check**: Review the architecture document against each checklist item:
+2. **Run Validation Check**: Review the architecture document against each checklist item:
       - Evaluate each item based on the product level (some items only apply to MVP/Production)
       - For each item, determine if it passes or fails
       - Document specific issues found with context (quote relevant architecture sections)
 
-   c. **Handle Validation Results**:
+3. **Handle Validation Results**:
       - **If all required items pass**: Mark checklist complete and proceed
       - **If items fail**:
         1. List the failing items and specific issues with context
@@ -346,7 +520,7 @@ Follow this execution flow:
            - Warn user about incomplete areas
            - Suggest specific improvements needed
 
-   d. **Update Checklist**: After each validation iteration, update `/d-docs/checklists/architecture.md` with:
+4. **Update Checklist**: After each validation iteration, update `REPO_ROOT/d-docs/checklists/architecture.md` with:
       - Mark items as checked `[x]` or unchecked `[ ]`
       - Fill in the "Validation Iterations" section with:
         - Timestamp for the iteration
@@ -359,7 +533,13 @@ Follow this execution flow:
         - Recommendations for improvement
       - Add notes for context or additional observations
 
+### Phase 6: Report
+
 1. **Output a final summary to the user** with:
+   - Current branch: `CURRENT_BRANCH` (or "Not in git repository")
+   - Architecture document path: `ARCH_DOC`
+   - Research document path: `REPO_ROOT/d-docs/architecture-research.md`
+   - Checklist path: `REPO_ROOT/d-docs/checklists/architecture.md`
    - System name and purpose
    - Product level and architectural implications
    - Technology stack configured
@@ -367,7 +547,11 @@ Follow this execution flow:
    - Components and their interactions
    - Quality attributes and targets
    - Infrastructure and deployment approach
-   - Alignment status with ground rules and coding standards
+   - **Alignment status**:
+     - Ground Rules: [Pass/Fail with details]
+     - Company Architecture Guidelines: [Pass/Fail/N/A with details]
+     - Technology Stack Consistency: [Pass/Fail with details]
+   - **Agent context updates**: List which agent files were updated (or "None found")
    - **Checklist validation results**: Pass/fail status with details on which items passed/failed
    - **Readiness for next phase**: Confirm if ready for `/personas.standardize` or needs updates
    - **Next recommended step**:
