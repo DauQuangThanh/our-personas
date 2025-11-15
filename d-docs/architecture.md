@@ -86,14 +86,16 @@ The following key decisions shape this architecture (see [architecture-research.
 ### 2.2 Key Trade-offs
 
 **[Trade-off 1]**: [e.g., "Microservices vs Monolith"]
-- **Gained**: [e.g., "Independent deployment, scalability, team autonomy"]
-- **Sacrificed**: [e.g., "Increased operational complexity, network latency, distributed debugging"]
-- **Justification**: [e.g., "Product roadmap requires rapid iteration on independent features; team is growing to support service ownership"]
+
+* **Gained**: [e.g., "Independent deployment, scalability, team autonomy"]
+* **Sacrificed**: [e.g., "Increased operational complexity, network latency, distributed debugging"]
+* **Justification**: [e.g., "Product roadmap requires rapid iteration on independent features; team is growing to support service ownership"]
 
 **[Trade-off 2]**: [e.g., "PostgreSQL vs DynamoDB"]
-- **Gained**: [e.g., "ACID transactions, complex queries, data integrity"]
-- **Sacrificed**: [e.g., "Horizontal scaling complexity, higher ops burden"]
-- **Justification**: [e.g., "MVP prioritizes data consistency over massive scale; can add NoSQL for specific use cases later"]
+
+* **Gained**: [e.g., "ACID transactions, complex queries, data integrity"]
+* **Sacrificed**: [e.g., "Horizontal scaling complexity, higher ops burden"]
+* **Justification**: [e.g., "MVP prioritizes data consistency over massive scale; can add NoSQL for specific use cases later"]
 
 [Add more trade-offs as needed]
 

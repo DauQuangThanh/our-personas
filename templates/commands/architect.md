@@ -3,6 +3,9 @@ description: Create or update the software architecture design from interactive 
 scripts:
   sh: scripts/bash/setup-arch.sh --json
   ps: scripts/powershell/setup-arch.ps1 -Json
+agent_scripts:
+  sh: scripts/bash/update-agent-context.sh __AGENT__
+  ps: scripts/powershell/update-agent-context.ps1 -AgentType __AGENT__
 ---
 
 ## User Input
@@ -27,9 +30,25 @@ Before proceeding with the workflow, adhere to these critical rules:
 
 ## Outline
 
-You are updating the software architecture document at `/d-docs/architecture.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[System Name]`, `[briefly describe the system's purpose]`). Your job is to (a) collect/derive concrete values, (b) fill the template precisely for the project architecture, and (c) ensure consistency with the project ground rules and coding standards.
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for ARCH_DOC, REPO_ROOT, CURRENT_BRANCH, HAS_GIT. Validate environment and create necessary directories.
 
-Follow this phase-based execution flow:
+2. **Load context**: Read `/memory/ground-rules.md`, `/d-docs/company/architecture/architecture-guidelines.md` (if exists), `/d-docs/standards.md` (if exists). Detect project information and technology stack. Load ARCH_DOC template.
+
+3. **Execute architecture workflow**: Follow the phase-based execution flow to:
+   - **Fill Alignment Checks section**:
+     - **Ground Rules Check**: Verify alignment with ground rules principles (governance, values, constraints)
+     - **Company Architecture Guidelines Check**: Verify alignment with company architecture standards (if exists)
+     - **Technology Stack Consistency Check**: Verify technology choices are compatible and integrated
+   - Evaluate gates (ERROR if violations unjustified or conflicts unresolved)
+   - Phase 0: Generate architecture-research.md (resolve all architectural unknowns)
+   - Phase 1: Fill architecture.md template using research decisions
+   - Phase 1: Update system-wide agent context (not feature-specific)
+   - **Re-evaluate all Alignment Checks post-architecture** (Ground Rules, Company Guidelines, Technology Consistency)
+   - Phase 2: Validate architecture quality with checklist
+
+4. **Stop and report**: Command ends after validation. Report branch, ARCH_DOC path, research document, generated artifacts, and alignment status with all foundational documents.
+
+## Phases
 
 ### Phase 1: Setup
 
@@ -148,6 +167,7 @@ Follow this phase-based execution flow:
 
 4. **Generate architecture research document** at `REPO_ROOT/d-docs/architecture-research.md`:
    - Use format:
+
      ```markdown
      # Architecture Research & Decisions
      
@@ -187,6 +207,7 @@ Follow this phase-based execution flow:
      
      [Repeat for each research area]
      ```
+
    - Include research areas:
      - Technology Stack Selection
      - Architectural Style
@@ -214,19 +235,19 @@ Follow this phase-based execution flow:
 1. **Fill Alignment Checks section** in architecture document:
    - Create or update the "Alignment Checks" section BEFORE drafting architecture content
    - Include these three alignment validations:
-   
+
    **a. Ground Rules Alignment**:
    - Review `/memory/ground-rules.md` principles and constraints
    - Document how architecture respects each ground rule
    - Flag any violations with justification
    - Example: "Library-First Principle → Using established frameworks (Express, PostgreSQL) rather than custom solutions"
-   
+
    **b. Company Architecture Guidelines Alignment**:
    - Review `/d-docs/company/architecture/architecture-guidelines.md` if exists
    - Document alignment with company architecture standards
    - Note any deviations with business justification
    - If file doesn't exist, state "No company architecture guidelines found - skipping check"
-   
+
    **c. Technology Stack Consistency**:
    - Ensure all technology choices are compatible and work together
    - Verify versions are specified and compatible
@@ -235,7 +256,7 @@ Follow this phase-based execution flow:
 
 2. **Evaluate alignment gates**:
    - If Ground Rules violations exist without clear justification: ERROR
-   - If Company Guidelines violations exist without business justification: ERROR  
+   - If Company Guidelines violations exist without business justification: ERROR
    - If Technology Stack has critical incompatibilities: ERROR
    - For non-critical issues: WARN and document in alignment section
 
@@ -284,44 +305,7 @@ Follow this phase-based execution flow:
      - Disaster recovery planning
      - Performance optimization
 
-5. **Technology-specific architectural patterns**:
-   - **Node.js/TypeScript**:
-     - Microservices with Express/Fastify
-     - Event-driven architecture with message queues
-     - GraphQL or REST API patterns
-     - Container-based deployment
-
-   - **Python**:
-     - Django/FastAPI for web services
-     - Celery for async task processing
-     - PostgreSQL/MongoDB for data persistence
-     - Docker + Kubernetes deployment
-
-   - **Go**:
-     - Lightweight microservices
-     - gRPC for inter-service communication
-     - Standard library patterns
-     - Efficient resource utilization
-
-   - **Java**:
-     - Spring Boot microservices
-     - Enterprise patterns (Repository, Service Layer)
-     - JPA/Hibernate for persistence
-     - Container or traditional deployment
-
-   - **Ruby**:
-     - Rails monolith or modular monolith
-     - Background jobs with Sidekiq
-     - PostgreSQL/Redis stack
-     - Heroku or container deployment
-
-   - **Rust**:
-     - High-performance services
-     - Async runtime (Tokio)
-     - Memory-safe concurrency patterns
-     - Container deployment
-
-6. **Produce a Sync Impact Report** (prepend as HTML comment):
+5. **Produce a Sync Impact Report** (prepend as HTML comment):
    - System name and purpose identified
    - Product level determined
    - Technology stack detected
@@ -332,7 +316,7 @@ Follow this phase-based execution flow:
    - Architectural patterns applied
    - Follow-up TODOs if any information deferred
 
-7. **Validation before final output**:
+6. **Validation before final output**:
    - No remaining unexplained bracket tokens or ACTION REQUIRED comments
    - All quality attributes have specific, measurable targets
    - Technology stack is fully specified with versions
@@ -344,9 +328,9 @@ Follow this phase-based execution flow:
    - Diagrams referenced or described
    - Alternative approaches and trade-offs documented
 
-8. **Write the completed architecture document** back to `ARCH_DOC` (typically `/d-docs/architecture.md`) - overwrite the file.
+7. **Write the completed architecture document** back to `ARCH_DOC` (typically `/d-docs/architecture.md`) - overwrite the file.
 
-9. **Re-evaluate all Alignment Checks**:
+8. **Re-evaluate all Alignment Checks**:
    - Review the completed architecture against Ground Rules
    - Review against Company Architecture Guidelines (if exists)
    - Review Technology Stack Consistency
@@ -354,17 +338,19 @@ Follow this phase-based execution flow:
    - If critical violations found: ERROR and list specific issues
    - If warnings remain: Document them clearly for stakeholder review
 
-10. **Update system-wide agent context** (if applicable):
-   - Detect which agent files exist in the repository root:
-     - `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/personas-rules.mdc`, `QWEN.md`, `AGENTS.md`, `.windsurf/rules/personas-rules.md`, etc.
-   - For each existing agent file, update the "System Architecture" section with:
-     - Architecture product level (Mock-up/PoC/MVP/Production)
-     - Key technology stack decisions from architecture
-     - Major components and their responsibilities
-     - Quality attribute targets (performance, scalability, availability)
-   - Note: This is system-wide context, NOT feature-specific (features use `/personas.design` for context updates)
-   - Format: Add or update a "## System Architecture" section in each agent file
-   - Example entry: "System Architecture: MVP microservices (Node.js + Express + PostgreSQL), targeting 99.9% uptime, horizontal scaling with Kubernetes"
+9. **Update system-wide agent context** (if applicable):
+   - Note: Architecture context is system-wide, NOT feature-specific (features use `/personas.design` for context updates)
+   - However, update-agent-context scripts are designed for feature-specific updates from design.md
+   - For architecture, manually update agent files instead:
+     - Detect which agent files exist in the repository root:
+       - `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/personas-rules.mdc`, `QWEN.md`, `AGENTS.md`, `.windsurf/rules/personas-rules.md`, etc.
+     - For each existing agent file, add or update a "## System Architecture" section with:
+       - Architecture product level (Mock-up/PoC/MVP/Production)
+       - Key technology stack decisions from architecture
+       - Major components and their responsibilities
+       - Quality attribute targets (performance, scalability, availability)
+     - Example entry: "System Architecture: MVP microservices (Node.js + Express + PostgreSQL), targeting 99.9% uptime, horizontal scaling with Kubernetes"
+   - Do NOT use `{AGENT_SCRIPT}` here as it's for feature-specific updates
 
 ### Phase 5: Validation
 

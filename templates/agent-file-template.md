@@ -4,7 +4,7 @@ Auto-generated from all feature plans. Last updated: [DATE]
 
 ## Active Technologies
 
-[EXTRACTED FROM ALL DESIGN.MD FILES]
+[EXTRACTED FROM ALL ARCHITECTURE.MD OR DESIGN.MD FILES]
 
 ## Project Structure
 
