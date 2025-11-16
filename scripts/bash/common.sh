@@ -138,6 +138,8 @@ get_feature_paths() {
 
     cat <<EOF
 REPO_ROOT='$repo_root'
+ARCHITECTURE='$repo_root/d-docs/architecture.md'
+STANDARDS='$repo_root/d-docs/standards.md'
 CURRENT_BRANCH='$current_branch'
 HAS_GIT='$has_git_repo'
 FEATURE_DIR='$feature_dir'

@@ -68,6 +68,8 @@ if ($PathsOnly) {
     if ($Json) {
         [PSCustomObject]@{
             REPO_ROOT    = $paths.REPO_ROOT
+            ARCHITECTURE = $paths.ARCHITECTURE
+            STANDARDS    = $paths.STANDARDS
             BRANCH       = $paths.CURRENT_BRANCH
             FEATURE_DIR  = $paths.FEATURE_DIR
             FEATURE_SPEC = $paths.FEATURE_SPEC
@@ -76,6 +78,8 @@ if ($PathsOnly) {
         } | ConvertTo-Json -Compress
     } else {
         Write-Output "REPO_ROOT: $($paths.REPO_ROOT)"
+        Write-Output "ARCHITECTURE: $($paths.ARCHITECTURE)"
+        Write-Output "STANDARDS: $($paths.STANDARDS)"
         Write-Output "BRANCH: $($paths.CURRENT_BRANCH)"
         Write-Output "FEATURE_DIR: $($paths.FEATURE_DIR)"
         Write-Output "FEATURE_SPEC: $($paths.FEATURE_SPEC)"
