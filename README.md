@@ -60,11 +60,25 @@ personas init <PROJECT_NAME>
 personas check
 ```
 
-To upgrade personas run:
+To upgrade the Personas CLI tool itself:
 
 ```bash
 uv tool install personas-cli --force --from git+https://github.com/dauquangthanh/our-personas.git
 ```
+
+To upgrade an existing project's templates and scripts:
+
+```bash
+cd your-project
+personas init --upgrade
+```
+
+This will:
+- Replace `.personas/` folder (scripts, templates, memory) with latest version
+- Replace agent-specific folders (`.claude/`, `.gemini/`, etc.) with latest templates
+- Create timestamped backups (e.g., `.personas.backup-20251116-143022`)
+- Preserve your user content (`d-docs/`, project files)
+- Allow you to select AI agents (same as initial setup)
 
 #### Option 2: One-time Usage
 
@@ -256,6 +270,7 @@ The `personas` command supports the following options:
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
 | `--here`               | Flag     | Initialize project in the current directory instead of creating a new one   |
 | `--force`              | Flag     | Force merge/overwrite when initializing in current directory (skip confirmation) |
+| `--upgrade`            | Flag     | Upgrade existing Personas project by replacing `.personas` and agent folders with latest templates (creates timestamped backups) |
 | `--skip-tls`           | Flag     | Skip SSL/TLS verification (not recommended)                                 |
 | `--debug`              | Flag     | Enable detailed debug output for troubleshooting                            |
 | `--github-token`       | Option   | GitHub token for API requests (or set GH_TOKEN/GITHUB_TOKEN env variable)  |
@@ -308,6 +323,18 @@ personas init my-project --ai claude --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
 personas init my-project --ai claude --github-token ghp_your_token_here
+
+# Upgrade existing project (prompts for AI selection)
+personas init --upgrade
+
+# Upgrade with specific AI assistant
+personas init --upgrade --ai claude
+
+# Upgrade current directory project
+personas init --here --upgrade
+
+# Upgrade without confirmation prompt
+personas init --upgrade --force
 
 # Check system requirements
 personas check
