@@ -100,6 +100,8 @@ function Get-FeaturePathsEnv {
     
     [PSCustomObject]@{
         REPO_ROOT     = $repoRoot
+        ARCHITECTURE  = Join-Path $repoRoot 'd-docs/architecture.md'
+        STANDARDS     = Join-Path $repoRoot 'd-docs/standards.md'
         CURRENT_BRANCH = $currentBranch
         HAS_GIT       = $hasGit
         FEATURE_DIR   = $featureDir
