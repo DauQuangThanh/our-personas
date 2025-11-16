@@ -1,8 +1,8 @@
 ---
 description: Generate and run a custom checklist to validate architecture design quality and completeness.
 scripts:
-  sh: scripts/bash/check-prerequisites.sh --json
-  ps: scripts/powershell/check-prerequisites.ps1 -Json
+  sh: scripts/bash/setup-arch.sh --json
+  ps: scripts/powershell/setup-arch.ps1 -Json
 ---
 
 ## Checklist Purpose: "Unit Tests for Architecture Documentation"
@@ -36,10 +36,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Execution Steps
 
-1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for AVAILABLE_DOCS list.
+1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for ARCH_DOC, REPO_ROOT, CURRENT_BRANCH, HAS_GIT.
    - All file paths must be absolute.
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
-   - Architecture document is expected at `/d-docs/architecture.md`
+   - Architecture document is expected at `ARCH_DOC` path (typically `/d-docs/architecture.md`)
+   - Validate that architecture.md exists before proceeding
 
 2. **Clarify intent (dynamic)**: Derive up to THREE initial contextual clarifying questions (no pre-baked catalog). They MUST:
    - Be generated from the user's phrasing + extracted signals from architecture document
@@ -83,7 +84,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 4. **Load architecture context**: Read from `/d-docs/`:
    - `architecture.md`: Primary architecture documentation
    - `standards.md` (if exists): Coding standards that architecture must support
-   - `/memory/ground-rules.md` (if exists): Project principles for alignment check
+   - `/.personas/memory/ground-rules.md` (if exists): Project principles for alignment check
    - `/d-docs/company/architecture/architecture-guidelines.md` (if exists): Company-wide architecture guidelines
    - Relevant spec files (if exists): To ensure architecture supports requirements
 

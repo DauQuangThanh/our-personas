@@ -20,8 +20,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Before proceeding with the workflow, adhere to these critical rules:
 
-1. **Use Absolute Paths**: All file paths MUST be absolute paths from repository root (e.g., `/d-docs/architecture.md`, `/memory/ground-rules.md`)
-2. **ERROR on Missing Ground Rules**: If `/memory/ground-rules.md` does not exist, immediately ERROR and instruct user to run `/personas.regulate` first
+1. **Use Absolute Paths**: All file paths MUST be absolute paths from repository root (e.g., `/d-docs/architecture.md`, `/.personas/memory/ground-rules.md`)
+2. **ERROR on Missing Ground Rules**: If `/.personas/memory/ground-rules.md` does not exist, immediately ERROR and instruct user to run `/personas.regulate` first
 3. **WARN on Technology Conflicts**: If detected technology stack conflicts with user input, WARN the user and ask for clarification
 4. **Maintain ISO/IEC/IEEE 42010:2011 Standards**: Architecture document MUST follow stakeholder-driven architecture description standards
 5. **Product Level Awareness**: Tailor architectural complexity and detail to the specified product level (Mock-up, PoC, MVP, Production)
@@ -30,7 +30,7 @@ Before proceeding with the workflow, adhere to these critical rules:
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for ARCH_DOC, REPO_ROOT, CURRENT_BRANCH, HAS_GIT. Validate environment and create necessary directories.
 
-2. **Load context**: Read `/memory/ground-rules.md`, `/d-docs/company/architecture/architecture-guidelines.md` (if exists), `/d-docs/standards.md` (if exists). Detect project information and technology stack. Load ARCH_DOC template.
+2. **Load context**: Read `/.personas/memory/ground-rules.md`, `/d-docs/company/architecture/architecture-guidelines.md` (if exists), `/d-docs/standards.md` (if exists). Detect project information and technology stack. Load ARCH_DOC template.
 
 3. **Execute architecture workflow**: Follow the phase-based execution flow to:
    - **Fill Alignment Checks section**:
@@ -69,7 +69,7 @@ Before proceeding with the workflow, adhere to these critical rules:
 ### Phase 2: Load Context
 
 1. **Read foundational documents** (use absolute paths):
-   - Read `/memory/ground-rules.md` (REQUIRED - already validated by script)
+   - Read `/.personas/memory/ground-rules.md` (REQUIRED - already validated by script)
    - Read `/d-docs/company/architecture/architecture-guidelines.md` if exists (company architecture standards)
    - Read `/d-docs/standards.md` if exists (coding standards to align with)
 
@@ -148,7 +148,7 @@ Before proceeding with the workflow, adhere to these critical rules:
    - For each technology option: evaluate 2-3 alternatives
    - Use the latest stable versions of frameworks/libs/guidelines
    - Document pros and cons for the specific use case
-   - Consider constraints from `/memory/ground-rules.md`
+   - Consider constraints from `/.personas/memory/ground-rules.md`
    - Consider product level requirements (Mock-up/PoC/MVP/Production)
    - Research industry best practices and proven patterns
    - Evaluate team expertise and learning curve
@@ -235,7 +235,7 @@ Before proceeding with the workflow, adhere to these critical rules:
    - Include these three alignment validations:
 
    **a. Ground Rules Alignment**:
-   - Review `/memory/ground-rules.md` principles and constraints
+   - Review `/.personas/memory/ground-rules.md` principles and constraints
    - Document how architecture respects each ground rule
    - Flag any violations with justification
    - Example: "Library-First Principle → Using established frameworks (Express, PostgreSQL) rather than custom solutions"
