@@ -23,9 +23,9 @@ for arg in "$@"; do
     esac
 done
 
-# Get script directory
+# Get repository root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 
 # Check if we're in a git repository
 HAS_GIT="false"

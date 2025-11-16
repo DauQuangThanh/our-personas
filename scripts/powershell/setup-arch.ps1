@@ -19,7 +19,7 @@ if ($Help) {
 
 # Get repository root
 $scriptDir = Split-Path -Parent $PSCommandPath
-$repoRoot = Split-Path -Parent (Split-Path -Parent $scriptDir)
+$repoRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $scriptDir))
 
 # Check if we're in a git repository
 $hasGit = $false
