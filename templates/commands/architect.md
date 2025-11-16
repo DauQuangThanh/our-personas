@@ -345,6 +345,8 @@ Before proceeding with the workflow, adhere to these critical rules:
 
 ### Phase 5: Report
 
+### Phase 6: Report
+
 1. **Output a final summary to the user** with:
    - Current branch: `CURRENT_BRANCH` (or "Not in git repository")
    - Architecture document path: `ARCH_DOC`
