@@ -326,7 +326,7 @@ Total: ~20-25 hours of documentation and planning work
 /personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 
 # This creates:
-# - .personas/memory/ground-rules.md with project values and constraints
+# - d-docs/ground-rules.md with project values and constraints
 
 # Step 2: Create feature specification (5 minutes)
 /personas.specify Feature 001: Kanban board with drag-and-drop, task assignment, commenting, and real-time updates
@@ -621,7 +621,7 @@ The templates transform the LLM from a creative writer into a disciplined system
 
 ## The Foundational Rules: Enforcing Architectural Discipline
 
-At the heart of SDD lies a ground-rule set of immutable principles that govern how specifications become code. The ground rules (`memory/ground-rules.md`) act as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
+At the heart of SDD lies a ground-rule set of immutable principles that govern how specifications become code. The ground rules (`d-docs/ground-rules.md`) act as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
 
 ### The Nine Articles of Development
 

@@ -60,7 +60,7 @@ When working on our-personas:
 1. Test changes with the `personas` CLI commands (`/personas.specify`, `/personas.design`, `/personas.taskify`) in your coding agent of choice
 2. Verify templates are working correctly in `templates/` directory
 3. Test script functionality in the `scripts/` directory
-4. Ensure memory files (`memory/ground-rules.md`) are updated if major process changes are made
+4. Ensure foundational files (`d-docs/ground-rules.md`, `d-docs/architecture.md`, `d-docs/standards.md`) are updated if major process changes are made
 
 ### Testing template and command changes locally
 

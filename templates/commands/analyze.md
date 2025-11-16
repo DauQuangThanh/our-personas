@@ -25,7 +25,7 @@ Identify inconsistencies, duplications, ambiguities, and underspecified items ac
 
 This analysis enforces a strict authority hierarchy where governance documents have different levels of authority:
 
-### 1. SUPREME AUTHORITY: Ground Rules (`/memory/ground-rules.md`)
+### 1. SUPREME AUTHORITY: Ground Rules (`/d-docs/ground-rules.md`)
 
 **The project ground rules are THE AUTHORITATIVE STANDARD and are ABSOLUTELY NON-NEGOTIABLE.**
 
@@ -138,7 +138,7 @@ Load only the minimal necessary context from each artifact:
 
 **From ground rules:**
 
-- Load `/memory/ground-rules.md` for principle validation
+- Load `/d-docs/ground-rules.md` for principle validation
 - **CRITICAL**: Ground rules are THE AUTHORITATIVE STANDARD - extract ALL principles, constraints, and MUST/SHOULD requirements
 - Every principle in ground rules is non-negotiable and must be validated against all artifacts
 

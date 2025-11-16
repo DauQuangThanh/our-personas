@@ -34,7 +34,7 @@ try {
 }
 
 # Validate ground-rules.md exists
-$groundRules = Join-Path $repoRoot '.personas/memory/ground-rules.md'
+$groundRules = Join-Path $repoRoot 'd-docs/ground-rules.md'
 if (-not (Test-Path $groundRules)) {
     Write-Error "Ground rules not found at $groundRules"
     Write-Error "Please run /personas.regulate first to establish project principles"

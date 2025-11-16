@@ -20,7 +20,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC, `/memory/ground-rules.md`, `/d-docs/company/design/design-guidelines.md` (if exists), `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load IMPL_PLAN template (already copied).
+2. **Load context**: Read FEATURE_SPEC, `/d-docs/ground-rules.md`, `/d-docs/company/design/design-guidelines.md` (if exists), `/d-docs/architecture.md`, and `/d-docs/standards.md`. Load IMPL_PLAN template (already copied).
 
 3. **Execute design workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")

@@ -36,7 +36,7 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 fi
 
 # Validate ground-rules.md exists
-GROUND_RULES="$REPO_ROOT/.personas/memory/ground-rules.md"
+GROUND_RULES="$REPO_ROOT/d-docs/ground-rules.md"
 if [[ ! -f "$GROUND_RULES" ]]; then
     echo "Error: Ground rules not found at $GROUND_RULES" >&2
     echo "Please run /personas.regulate first to establish project principles" >&2
