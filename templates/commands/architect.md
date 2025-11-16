@@ -25,8 +25,6 @@ Before proceeding with the workflow, adhere to these critical rules:
 3. **WARN on Technology Conflicts**: If detected technology stack conflicts with user input, WARN the user and ask for clarification
 4. **Maintain ISO/IEC/IEEE 42010:2011 Standards**: Architecture document MUST follow stakeholder-driven architecture description standards
 5. **Product Level Awareness**: Tailor architectural complexity and detail to the specified product level (Mock-up, PoC, MVP, Production)
-6. **Preserve Template Structure**: Do NOT alter the heading structure or remove sections from the architecture template
-7. **System-Wide Scope**: This command affects system-wide architecture, not feature-specific implementation (use `/personas.design` for features)
 
 ## Outline
 
@@ -42,9 +40,8 @@ Before proceeding with the workflow, adhere to these critical rules:
    - Evaluate gates (ERROR if violations unjustified or conflicts unresolved)
    - Phase 0: Generate architecture-research.md (resolve all architectural unknowns)
    - Phase 1: Fill architecture.md template using research decisions
-   - Phase 1: Update system-wide agent context (not feature-specific)
+   - Phase 1: Update agent context by running the agent script
    - **Re-evaluate all Alignment Checks post-architecture** (Ground Rules, Company Guidelines, Technology Consistency)
-   - Phase 2: Validate architecture quality with checklist
 
 4. **Stop and report**: Command ends after validation. Report branch, ARCH_DOC path, research document, generated artifacts, and alignment status with all foundational documents.
 
@@ -77,7 +74,7 @@ Before proceeding with the workflow, adhere to these critical rules:
    - Read `/d-docs/standards.md` if exists (coding standards to align with)
 
 2. **Detect project information and technology stack**:
-   - **Specs**: Check all files in `specs/` folder, especially for `spec.md` files
+   - **Specs**: Check all files in `specs/` folder, especially for ALL `spec.md` files
    - **System Name**: Check `README.md`, `package.json`, `pyproject.toml`, or ask user
    - **System Purpose**: Extract from `README.md`, specifications, or ask user
    - **Technology Stack**:
@@ -126,7 +123,7 @@ Before proceeding with the workflow, adhere to these critical rules:
      - Diagram placeholders (create or reference actual diagrams if possible)
 
    - **Architectural Decisions (Section 5)**:
-     - `[RabbitMQ]` or other technology choices
+     - Rationale for technological choices
      - Rationale for architectural style (microservices, monolith, etc.)
      - Alternative approaches considered
      - Trade-offs made
@@ -149,6 +146,7 @@ Before proceeding with the workflow, adhere to these critical rules:
 
 2. **Research each unknown systematically**:
    - For each technology option: evaluate 2-3 alternatives
+   - Use the latest stable versions of frameworks/libs/guidelines
    - Document pros and cons for the specific use case
    - Consider constraints from `/memory/ground-rules.md`
    - Consider product level requirements (Mock-up/PoC/MVP/Production)
@@ -171,8 +169,8 @@ Before proceeding with the workflow, adhere to these critical rules:
      ```markdown
      # Architecture Research & Decisions
      
-     **Created**: [DATE]
-     **Product Level**: [Mock-up/PoC/MVP/Production]
+     **Created**: [DATE] |
+     **Product Level**: [Mock-up/PoC/MVP/Production] |
      **Architecture Document**: [/d-docs/architecture.md](architecture.md)
      
      ## Executive Summary
@@ -338,188 +336,14 @@ Before proceeding with the workflow, adhere to these critical rules:
    - If critical violations found: ERROR and list specific issues
    - If warnings remain: Document them clearly for stakeholder review
 
-9. **Update system-wide agent context** (if applicable):
-   - Note: Architecture context is system-wide, NOT feature-specific (features use `/personas.design` for context updates)
-   - However, update-agent-context scripts are designed for feature-specific updates from design.md
-   - For architecture, manually update agent files instead:
-     - Detect which agent files exist in the repository root:
-       - `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `.cursor/rules/personas-rules.mdc`, `QWEN.md`, `AGENTS.md`, `.windsurf/rules/personas-rules.md`, etc.
-     - For each existing agent file, add or update a "## System Architecture" section with:
-       - Architecture product level (Mock-up/PoC/MVP/Production)
-       - Key technology stack decisions from architecture
-       - Major components and their responsibilities
-       - Quality attribute targets (performance, scalability, availability)
-     - Example entry: "System Architecture: MVP microservices (Node.js + Express + PostgreSQL), targeting 99.9% uptime, horizontal scaling with Kubernetes"
-   - Do NOT use `{AGENT_SCRIPT}` here as it's for feature-specific updates
+9. **Update agent context** (if applicable):
+   - Run `{AGENT_SCRIPT}`
+   - These scripts detect which AI agent is in use
+   - Update the appropriate agent-specific context file
+   - Add only new technology from current plan
+   - Preserve manual additions between markers
 
-### Phase 5: Validation
-
-1. **Architecture Quality Validation**: After writing the architecture document and updating agent context, validate against quality criteria:
-
-   a. **Create Architecture Quality Checklist**: Generate a checklist file at `REPO_ROOT/d-docs/checklists/architecture.md` with validation structure:
-
-   ```markdown
-   # Architecture Quality Checklist
-   
-   **Purpose**: Validate architecture completeness and quality before proceeding to standards and design
-   **Created**: [DATE]
-   **Product Level**: [Mock-up/PoC/MVP/Production]
-   **Architecture Document**: [/d-docs/architecture.md](../architecture.md)
-   
-   ## Architecture Completeness
-   
-   - [ ] System name and purpose clearly defined
-   - [ ] Product level specified with architectural implications
-   - [ ] Technology stack fully documented with versions
-   - [ ] All stakeholders and their concerns identified
-   - [ ] Appropriate architectural views selected (Logical, Process, Deployment, Data)
-   
-   ## Quality Attributes (Product Level Dependent)
-   
-   **Mock-up Requirements**:
-   - [ ] Basic UI/UX architecture defined
-   - [ ] Simple component structure documented
-   
-   **PoC Requirements** (includes Mock-up):
-   - [ ] Core technical feasibility demonstrated
-   - [ ] Key components identified with basic responsibilities
-   - [ ] Basic error handling approach defined
-   
-   **MVP Requirements** (includes PoC):
-   - [ ] Essential components for user value defined
-   - [ ] Security essentials documented (authentication, authorization, data protection)
-   - [ ] Performance baseline established with targets
-   - [ ] Vertical scaling approach defined
-   - [ ] Basic monitoring and logging planned
-   
-   **Production Requirements** (includes MVP):
-   - [ ] All quality attributes have specific, measurable targets
-   - [ ] High availability setup documented (uptime SLA, failover)
-   - [ ] Horizontal scaling capabilities defined
-   - [ ] Comprehensive security hardening documented
-   - [ ] Full observability stack planned (metrics, logs, traces)
-   - [ ] Disaster recovery strategy documented
-   - [ ] Performance optimization approach defined
-   
-   ## Component Architecture
-   
-   - [ ] All components have clear, single responsibilities
-   - [ ] Component interactions and communication patterns documented
-   - [ ] Inter-component communication mechanisms specified (REST, gRPC, message queues, etc.)
-   - [ ] Data ownership and boundaries clarified
-   - [ ] Component dependencies are explicit
-   
-   ## Infrastructure & Deployment
-   
-   - [ ] Deployment strategy defined
-   - [ ] Infrastructure approach documented (cloud provider, containers, orchestration)
-   - [ ] Scalability approach appropriate for product level
-   - [ ] Infrastructure costs considered and documented
-   
-   ## Data Architecture
-   
-   - [ ] Data stores identified with justification
-   - [ ] Data persistence strategy defined
-   - [ ] Data flow between components documented
-   
-   ## Architectural Decisions
-   
-   - [ ] Key architectural decisions recorded with rationale
-   - [ ] Alternative approaches considered and documented
-   - [ ] Trade-offs explicitly stated
-   - [ ] Architectural style justified (monolith, microservices, etc.)
-   
-   ## Security & Compliance
-   
-   - [ ] Security policies defined system-wide
-   - [ ] Data protection at rest and in transit addressed
-   - [ ] Access control mechanisms defined
-   - [ ] Threat mitigation strategies documented
-   
-   ## Consistency & Standards
-   
-   - [ ] Architecture aligns with project ground rules (if exists)
-   - [ ] Technology choices consistent across document
-   - [ ] No unexplained placeholder tokens remain
-   - [ ] No ACTION REQUIRED comments remain
-   
-   ## Documentation Quality
-   
-   - [ ] Diagrams referenced or described in detail
-   - [ ] Technical terms and acronyms defined
-   - [ ] Document reads as cohesive project documentation
-   - [ ] Concrete examples provided where helpful
-   
-   ---
-   
-   ## Validation Iterations
-   
-   ### Iteration 1: [Timestamp]
-   - **Status**: [Pass/Fail]
-   - **Issues Found**: [List issues or "None"]
-   - **Fixes Applied**: [List fixes or "N/A"]
-   
-   ### Iteration 2: [Timestamp]
-   - **Status**: [Pass/Fail]
-   - **Issues Found**: [List issues or "None"]
-   - **Fixes Applied**: [List fixes or "N/A"]
-   
-   ### Iteration 3: [Timestamp]
-   - **Status**: [Pass/Fail]
-   - **Issues Found**: [List issues or "None"]
-   - **Fixes Applied**: [List fixes or "N/A"]
-   
-   ---
-   
-   ## Overall Assessment
-   
-   **Final Status**: [Ready for Standards / Needs Updates]
-   
-   **Blockers**:
-   - [List any blocking issues or "None"]
-   
-   **Recommendations**:
-   - [List recommendations for improvement or "None"]
-   
-   **Notes**:
-   - [Additional context or observations]
-   ```
-
-2. **Run Validation Check**: Review the architecture document against each checklist item:
-      - Evaluate each item based on the product level (some items only apply to MVP/Production)
-      - For each item, determine if it passes or fails
-      - Document specific issues found with context (quote relevant architecture sections)
-
-3. **Handle Validation Results**:
-      - **If all required items pass**: Mark checklist complete and proceed
-      - **If items fail**:
-        1. List the failing items and specific issues with context
-        2. Determine if failures are blockers based on product level:
-           - **Mock-up**: Only basic completeness required
-           - **PoC**: Core technical approach must be clear
-           - **MVP**: Security + performance baselines required
-           - **Production**: All quality attributes must be comprehensive
-        3. Update the architecture document to address blocking issues
-        4. Re-run validation until all blocking items pass (max 3 iterations)
-        5. If still failing after 3 iterations:
-           - Document remaining issues in checklist notes
-           - Warn user about incomplete areas
-           - Suggest specific improvements needed
-
-4. **Update Checklist**: After each validation iteration, update `REPO_ROOT/d-docs/checklists/architecture.md` with:
-      - Mark items as checked `[x]` or unchecked `[ ]`
-      - Fill in the "Validation Iterations" section with:
-        - Timestamp for the iteration
-        - Pass/Fail status
-        - Issues found (or "None")
-        - Fixes applied (or "N/A")
-      - Update "Overall Assessment" section with:
-        - Final status (Ready for Standards / Needs Updates)
-        - Any blockers identified
-        - Recommendations for improvement
-      - Add notes for context or additional observations
-
-### Phase 6: Report
+### Phase 5: Report
 
 1. **Output a final summary to the user** with:
    - Current branch: `CURRENT_BRANCH` (or "Not in git repository")
@@ -538,7 +362,6 @@ Before proceeding with the workflow, adhere to these critical rules:
      - Company Architecture Guidelines: [Pass/Fail/N/A with details]
      - Technology Stack Consistency: [Pass/Fail with details]
    - **Agent context updates**: List which agent files were updated (or "None found")
-   - **Checklist validation results**: Pass/fail status with details on which items passed/failed
    - **Readiness for next phase**: Confirm if ready for `/personas.standardize` or needs updates
    - **Next recommended step**:
      - **Recommended**: Run `/personas.validate-arch` to generate custom architecture validation checklists for deeper quality assurance
@@ -686,23 +509,22 @@ The architecture document is complete when:
 
 After completing the architecture document and checklist validation:
 
-1. **Review checklist results**: Check `/d-docs/checklists/architecture.md` for any remaining issues
-2. **Commit architecture**: Use suggested commit message to save the architecture document
-3. **Optional - Validate architecture**: Run `/personas.validate-arch` to generate custom architecture validation checklists for deeper quality assurance
+1. **Commit architecture**: Use suggested commit message to save the architecture document
+2. **Validate architecture**: Run `/personas.validate-arch` to generate custom architecture validation checklists for deeper quality assurance
    - Creates focused checklists for specific architectural concerns (component design, security, deployment, data, performance)
    - Complements the built-in architecture.md validation with targeted, context-specific checks
    - Recommended for MVP and Production levels
-4. **Establish coding standards**: Run `/personas.standardize` to create technology-specific coding standards that align with this architecture
+3. **Establish coding standards**: Run `/personas.standardize` to create technology-specific coding standards that align with this architecture
    - This ensures consistent development practices across all features
    - Standards will be based on the technology stack defined in this architecture
    - Required before running `/personas.design` to ensure implementation designs follow established standards
-5. **Review with stakeholders**: Get feedback from team, product, and ops
-6. **Document ADRs**: Create Architecture Decision Records for key choices
-7. **Update related docs**: Ensure README, design docs align with architecture
-8. **Ready for feature work**: After standards are established, proceed to `/personas.design` and `/personas.taskify` for feature development
-9. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
-10. **Establish monitoring**: Set up observability for quality attribute tracking
-11. **Create runbooks**: Document operational procedures for the architecture
+4. **Review with stakeholders**: Get feedback from team, product, and ops
+5. **Document ADRs**: Create Architecture Decision Records for key choices
+6. **Update related docs**: Ensure README, design docs align with architecture
+7. **Ready for feature work**: After standards are established, proceed to `/personas.design` and `/personas.taskify` for feature development
+8. **Set up infrastructure**: Provision cloud resources, containers, etc. (after planning)
+9. **Establish monitoring**: Set up observability for quality attribute tracking
+10. **Create runbooks**: Document operational procedures for the architecture
 
 **Complete workflow context**:
 Your response **MUST** suggest the user's next step, following the sequential order below and based on the result of the last action.
