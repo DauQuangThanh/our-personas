@@ -1332,6 +1332,7 @@ def init(
     no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
     here: bool = typer.Option(False, "--here", help="Initialize project in the current directory instead of creating a new one"),
     force: bool = typer.Option(False, "--force", help="Force merge/overwrite when using --here (skip confirmation)"),
+    upgrade: bool = typer.Option(False, "--upgrade", help="Upgrade existing Personas project by replacing .personas and agent folders with latest templates"),
     skip_tls: bool = typer.Option(False, "--skip-tls", help="Skip SSL/TLS verification (not recommended)"),
     debug: bool = typer.Option(False, "--debug", help="Show verbose diagnostic output for network and extraction failures"),
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
@@ -1361,6 +1362,9 @@ def init(
         personas init --here --ai codebuddy
         personas init --here
         personas init --here --force  # Skip confirmation when current directory not empty
+        personas init --upgrade             # Upgrade existing project (prompts for AI selection)
+        personas init --upgrade --ai claude # Upgrade with specific AI assistant
+        personas init --here --upgrade      # Upgrade current directory project
     """
 
     show_banner()
@@ -1387,16 +1391,21 @@ def init(
         console.print("[red]Error:[/red] Cannot personas both project name and --here flag")
         raise typer.Exit(1)
 
-    if not here and not project_name:
+    if not here and not project_name and not upgrade:
         console.print("[red]Error:[/red] Must personas either a project name, use '.' for current directory, or use --here flag")
         raise typer.Exit(1)
+    
+    # For upgrade mode without explicit location, default to current directory
+    if upgrade and not here and not project_name:
+        here = True
+        project_name = None
 
     if here:
         project_name = Path.cwd().name
         project_path = Path.cwd()
 
         existing_items = list(project_path.iterdir())
-        if existing_items:
+        if existing_items and not upgrade:
             console.print(f"[yellow]Warning:[/yellow] Current directory is not empty ({len(existing_items)} items)")
             console.print("[yellow]Template files will be merged with existing content and may overwrite existing files[/yellow]")
             if force:
@@ -1408,7 +1417,7 @@ def init(
                     raise typer.Exit(0)
     else:
         project_path = Path(project_name).resolve()
-        if project_path.exists():
+        if project_path.exists() and not upgrade:
             error_panel = Panel(
                 f"Directory '[cyan]{project_name}[/cyan]' already exists\n"
                 "Please choose a different project name or remove the existing directory.",
@@ -1421,9 +1430,64 @@ def init(
             raise typer.Exit(1)
 
     current_dir = Path.cwd()
+    
+    # Upgrade mode validation and setup
+    is_upgrade_mode = False
+    backup_paths = {}
+    existing_agents = []
+    
+    if upgrade:
+        personas_dir = project_path / ".personas"
+        if not personas_dir.exists():
+            error_panel = Panel(
+                f"No Personas project found in '[cyan]{project_path}[/cyan]'\n"
+                "The .personas folder does not exist. Cannot upgrade.\n\n"
+                "Use 'personas init' without --upgrade to initialize a new project.",
+                title="[red]Upgrade Failed[/red]",
+                border_style="red",
+                padding=(1, 2)
+            )
+            console.print()
+            console.print(error_panel)
+            raise typer.Exit(1)
+        
+        # Detect existing agent folders
+        for agent_key, agent_config in AGENT_CONFIG.items():
+            agent_folder = project_path / agent_config["folder"]
+            if agent_folder.exists():
+                existing_agents.append((agent_key, agent_config["name"], agent_config["folder"]))
+        
+        is_upgrade_mode = True
+        
+        # Show upgrade warning
+        upgrade_lines = [
+            "[yellow]⚠️  Upgrade Mode[/yellow]\n",
+            "The following will be [bold red]completely replaced[/bold red]:",
+            "  • .personas/ folder (scripts, templates, memory)",
+        ]
+        
+        if existing_agents:
+            upgrade_lines.append("  • Detected agent folders:")
+            for _, agent_name, agent_folder in existing_agents:
+                upgrade_lines.append(f"    - {agent_folder}")
+        
+        upgrade_lines.extend([
+            "",
+            "[cyan]Backups will be created with timestamp.[/cyan]",
+            "[dim]User content (d-docs/, project files) will be preserved.[/dim]"
+        ])
+        
+        console.print()
+        console.print(Panel("\n".join(upgrade_lines), border_style="yellow", padding=(1, 2)))
+        
+        if not force:
+            response = typer.confirm("\nDo you want to continue with the upgrade?")
+            if not response:
+                console.print("[yellow]Upgrade cancelled[/yellow]")
+                raise typer.Exit(0)
 
     setup_lines = [
-        "[cyan]Personas Project Setup[/cyan]",
+        f"[cyan]Personas Project {'Upgrade' if is_upgrade_mode else 'Setup'}[/cyan]",
         "",
         f"{'Project':<15} [green]{project_path.name}[/green]",
         f"{'Working Path':<15} [dim]{current_dir}[/dim]",
@@ -1431,6 +1495,9 @@ def init(
 
     if not here:
         setup_lines.append(f"{'Target Path':<15} [dim]{project_path}[/dim]")
+    
+    if is_upgrade_mode:
+        setup_lines.append(f"{'Mode':<15} [yellow]UPGRADE[/yellow]")
 
     console.print(Panel("\n".join(setup_lines), border_style="cyan", padding=(1, 2)))
 
@@ -1489,7 +1556,7 @@ def init(
     console.print(f"[cyan]Selected AI assistant(s):[/cyan] {', '.join(selected_ais)}")
     console.print(f"[cyan]Selected script type:[/cyan] {selected_script}")
 
-    tracker = StepTracker("Initialize Personas Project")
+    tracker = StepTracker("Upgrade Personas Project" if is_upgrade_mode else "Initialize Personas Project")
 
     sys._personas_tracker_active = True
 
@@ -1499,6 +1566,10 @@ def init(
     tracker.complete("ai-select", f"{', '.join(selected_ais)}")
     tracker.add("script-select", "Select script type")
     tracker.complete("script-select", selected_script)
+    
+    # Add backup step for upgrade mode
+    if is_upgrade_mode:
+        tracker.add("backup", "Backup existing files")
 
     # Add steps for each AI assistant template download
     for selected_ai in selected_ais:
@@ -1527,6 +1598,30 @@ def init(
             verify = not skip_tls
             local_ssl_context = ssl_context if verify else False
             local_client = httpx.Client(verify=local_ssl_context)
+            
+            # Create backups in upgrade mode
+            if is_upgrade_mode:
+                import datetime
+                tracker.start("backup")
+                timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+                
+                # Backup .personas folder
+                personas_dir = project_path / ".personas"
+                backup_personas = project_path / f".personas.backup-{timestamp}"
+                if personas_dir.exists():
+                    shutil.move(str(personas_dir), str(backup_personas))
+                    backup_paths[".personas"] = backup_personas
+                
+                # Backup agent folders
+                for agent_key, agent_name, agent_folder in existing_agents:
+                    agent_path = project_path / agent_folder
+                    if agent_path.exists():
+                        backup_agent = project_path / f"{agent_folder.rstrip('/')}.backup-{timestamp}"
+                        shutil.move(str(agent_path), str(backup_agent))
+                        backup_paths[agent_folder] = backup_agent
+                
+                backup_count = len(backup_paths)
+                tracker.complete("backup", f"{backup_count} folder{'s' if backup_count != 1 else ''} backed up")
 
             # Download and extract templates for each selected AI assistant
             for idx, selected_ai in enumerate(selected_ais):
@@ -1562,7 +1657,8 @@ def init(
                 ai_tracker = AISpecificTracker(tracker, ai_tracker_keys)
 
                 # For first AI, create the project; for subsequent ones, merge into existing
-                is_merge = idx > 0 or here
+                # In upgrade mode, always treat as fresh installation (not merge)
+                is_merge = (idx > 0 or here) and not is_upgrade_mode
 
                 if local_templates:
                     # Use local templates instead of downloading from GitHub
@@ -1628,7 +1724,21 @@ def init(
             pass
 
     console.print(tracker.render())
-    console.print("\n[bold green]Project ready.[/bold green]")
+    
+    # Show upgrade-specific success message
+    if is_upgrade_mode:
+        console.print("\n[bold green]✓ Upgrade completed successfully![/bold green]")
+        console.print()
+        
+        if backup_paths:
+            backup_lines = ["[cyan]Backups created:[/cyan]"]
+            for original, backup_path in backup_paths.items():
+                backup_lines.append(f"  • {original} → {backup_path.name}")
+            console.print("\n".join(backup_lines))
+            console.print()
+            console.print("[dim]You can safely delete backups after verifying the upgrade.[/dim]")
+    else:
+        console.print("\n[bold green]Project ready.[/bold green]")
     
     # Show git error details if initialization failed
     if git_error_message:
@@ -1654,7 +1764,7 @@ def init(
         if agent_config:
             agent_folders.append(agent_config["folder"])
 
-    if agent_folders:
+    if agent_folders and not is_upgrade_mode:
         folders_text = ", ".join([f"[cyan]{folder}[/cyan]" for folder in agent_folders])
         security_notice = Panel(
             f"Some agents may store credentials, auth tokens, or other identifying and private artifacts in the agent folder within your project.\n"
@@ -1667,15 +1777,18 @@ def init(
         console.print(security_notice)
 
     steps_lines = []
-    if not here:
+    if not here and not is_upgrade_mode:
         steps_lines.append(f"1. Go to the project folder: [cyan]cd {project_name}[/cyan]")
         step_num = 2
-    else:
+    elif not is_upgrade_mode:
         steps_lines.append("1. You're already in the project directory!")
         step_num = 2
+    else:
+        # In upgrade mode, skip directory navigation
+        step_num = 1
 
     # Add Codex-specific setup step if needed
-    if "codex" in selected_ais:
+    if "codex" in selected_ais and not is_upgrade_mode:
         codex_path = project_path / ".codex"
         quoted_path = shlex.quote(str(codex_path))
         if os.name == "nt":  # Windows
@@ -1686,33 +1799,38 @@ def init(
         steps_lines.append(f"{step_num}. Set [cyan]CODEX_HOME[/cyan] environment variable before running Codex: [cyan]{cmd}[/cyan]")
         step_num += 1
 
-    steps_lines.append(f"{step_num}. Start using slash commands with your AI agent(s):")
+    if not is_upgrade_mode:
+        steps_lines.append(f"{step_num}. Start using slash commands with your AI agent(s):")
 
-    steps_lines.append("   2.1 [cyan]/personas.regulate[/] - Establish project ground rules")
-    steps_lines.append("   2.2 [cyan]/personas.specify[/] - Create baseline specification")
-    steps_lines.append("   2.3 [cyan]/personas.architect[/] - Compose software architecture design")
-    steps_lines.append("   2.4 [cyan]/personas.standardize[/] - Develop project coding standards")
-    steps_lines.append("   2.5 [cyan]/personas.design[/] - Design the implementation plan")
-    steps_lines.append("   2.6 [cyan]/personas.design-test[/] - Build E2E test specification")
-    steps_lines.append("   2.7 [cyan]/personas.taskify[/] - Generate actionable tasks")
-    steps_lines.append("   2.8 [cyan]/personas.implement[/] - Execute implementation")
-    steps_lines.append("   2.9 [cyan]/personas.test[/] - Perform E2E testing")
+        steps_lines.append("   2.1 [cyan]/personas.regulate[/] - Establish project ground rules")
+        steps_lines.append("   2.2 [cyan]/personas.specify[/] - Create baseline specification")
+        steps_lines.append("   2.3 [cyan]/personas.architect[/] - Compose software architecture design")
+        steps_lines.append("   2.4 [cyan]/personas.standardize[/] - Develop project coding standards")
+        steps_lines.append("   2.5 [cyan]/personas.design[/] - Design the implementation plan")
+        steps_lines.append("   2.6 [cyan]/personas.design-test[/] - Build E2E test specification")
+        steps_lines.append("   2.7 [cyan]/personas.taskify[/] - Generate actionable tasks")
+        steps_lines.append("   2.8 [cyan]/personas.implement[/] - Execute implementation")
+        steps_lines.append("   2.9 [cyan]/personas.test[/] - Perform E2E testing")
+    else:
+        steps_lines.append(f"{step_num}. Your project has been upgraded! Continue using slash commands with your AI agent(s).")
 
-    steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
-    console.print()
-    console.print(steps_panel)
+    if steps_lines:
+        steps_panel = Panel("\n".join(steps_lines), title="Next Steps", border_style="cyan", padding=(1,2))
+        console.print()
+        console.print(steps_panel)
 
-    enhancement_lines = [
-        "Optional commands that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]",
-        "",
-        f"○ [cyan]/personas.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/personas.design[/] if used)",
-        f"○ [cyan]/personas.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/personas.taskify[/], before [cyan]/personas.implement[/])",
-        f"○ [cyan]/personas.validate-specs[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/personas.design[/])",
-        f"○ [cyan]/personas.validate-arch[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate architecture design documentation (after [cyan]/personas.architect[/])"
-    ]
-    enhancements_panel = Panel("\n".join(enhancement_lines), title="Enhancement Commands", border_style="cyan", padding=(1,2))
-    console.print()
-    console.print(enhancements_panel)
+    if not is_upgrade_mode:
+        enhancement_lines = [
+            "Optional commands that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]",
+            "",
+            f"○ [cyan]/personas.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/personas.design[/] if used)",
+            f"○ [cyan]/personas.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/personas.taskify[/], before [cyan]/personas.implement[/])",
+            f"○ [cyan]/personas.validate-specs[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/personas.design[/])",
+            f"○ [cyan]/personas.validate-arch[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate architecture design documentation (after [cyan]/personas.architect[/])"
+        ]
+        enhancements_panel = Panel("\n".join(enhancement_lines), title="Enhancement Commands", border_style="cyan", padding=(1,2))
+        console.print()
+        console.print(enhancements_panel)
 
 @app.command()
 def check():
