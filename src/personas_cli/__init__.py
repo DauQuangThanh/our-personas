@@ -1168,7 +1168,7 @@ def download_and_extract_template(project_path: Path, ai_assistant: str, script_
 
     try:
         if not is_current_dir:
-            project_path.mkdir(parents=True)
+            project_path.mkdir(parents=True, exist_ok=True)
 
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_contents = zip_ref.namelist()
@@ -1705,6 +1705,9 @@ def init(
                 tracker.skip("git", "--no-git flag")
 
             tracker.complete("final", "project ready")
+        except typer.Exit:
+            # Re-raise typer.Exit without modification - these are intentional exits
+            raise
         except Exception as e:
             tracker.error("final", str(e))
             console.print(Panel(f"Initialization failed: {e}", title="Failure", border_style="red"))
