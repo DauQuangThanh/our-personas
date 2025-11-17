@@ -60,11 +60,25 @@ personas init <PROJECT_NAME>
 personas check
 ```
 
-To upgrade personas run:
+To upgrade the Personas CLI tool itself:
 
 ```bash
 uv tool install personas-cli --force --from git+https://github.com/dauquangthanh/our-personas.git
 ```
+
+To upgrade an existing project's templates and scripts:
+
+```bash
+cd your-project
+personas init --upgrade
+```
+
+This will:
+- Replace `.personas/` folder (scripts, templates, memory) with latest version
+- Replace agent-specific folders (`.claude/`, `.gemini/`, etc.) with latest templates
+- Create timestamped backups (e.g., `.personas.backup-20251116-143022`)
+- Preserve your user content (`d-docs/`, project files)
+- Allow you to select AI agents (same as initial setup)
 
 #### Option 2: One-time Usage
 
@@ -256,6 +270,7 @@ The `personas` command supports the following options:
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
 | `--here`               | Flag     | Initialize project in the current directory instead of creating a new one   |
 | `--force`              | Flag     | Force merge/overwrite when initializing in current directory (skip confirmation) |
+| `--upgrade`            | Flag     | Upgrade existing Personas project by replacing `.personas` and agent folders with latest templates (creates timestamped backups) |
 | `--skip-tls`           | Flag     | Skip SSL/TLS verification (not recommended)                                 |
 | `--debug`              | Flag     | Enable detailed debug output for troubleshooting                            |
 | `--github-token`       | Option   | GitHub token for API requests (or set GH_TOKEN/GITHUB_TOKEN env variable)  |
@@ -308,6 +323,18 @@ personas init my-project --ai claude --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
 personas init my-project --ai claude --github-token ghp_your_token_here
+
+# Upgrade existing project (prompts for AI selection)
+personas init --upgrade
+
+# Upgrade with specific AI assistant
+personas init --upgrade --ai claude
+
+# Upgrade current directory project
+personas init --here --upgrade
+
+# Upgrade without confirmation prompt
+personas init --upgrade --force
 
 # Check system requirements
 personas check
@@ -473,7 +500,7 @@ The first step should be establishing your project's governing principles using 
 /personas.regulate Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
-This step creates or updates the `.personas/memory/ground-rules.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `d-docs/ground-rules.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create feature specifications
 
@@ -597,7 +624,7 @@ For simpler applications:
 /personas.architect Design a single-page application with local storage, using a modular component architecture with clear separation between UI and data layers.
 ```
 
-This step creates the `.personas/memory/architecture.md` file that documents:
+This step creates the `d-docs/architecture.md` file that documents:
 
 - System components and their responsibilities
 - Technology stack and versions
@@ -618,7 +645,7 @@ ESLint for code quality, automated security scanning with OWASP dependency check
 with GitHub Actions.
 ```
 
-This step creates the `.personas/memory/standards.md` file that defines:
+This step creates the `d-docs/standards.md` file that defines:
 
 - Testing requirements (frameworks, coverage targets, test types)
 - Security practices (authentication, authorization, data validation)
@@ -749,7 +776,7 @@ This helps refine the implementation plan and helps you avoid potential blind sp
 You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
 
 >[!NOTE]
->Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](base/memory/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
+>Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [ground rules](d-docs/ground-rules.md) as the foundational piece that it must adhere to when establishing the plan.
 
 ### **STEP 10:** Validate consistency with /personas.analyze (optional)
 

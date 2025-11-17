@@ -84,7 +84,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 4. **Load architecture context**: Read from `/d-docs/`:
    - `architecture.md`: Primary architecture documentation
    - `standards.md` (if exists): Coding standards that architecture must support
-   - `/.personas/memory/ground-rules.md` (if exists): Project principles for alignment check
+   - `/d-docs/ground-rules.md` (if exists): Project principles for alignment check
    - `/d-docs/company/architecture/architecture-guidelines.md` (if exists): Company-wide architecture guidelines
    - Relevant spec files (if exists): To ensure architecture supports requirements
 

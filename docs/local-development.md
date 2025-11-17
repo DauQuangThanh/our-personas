@@ -40,6 +40,15 @@ python -m src.personas_cli init --here --force --ai claude
 # Enable debug output for troubleshooting network/download issues
 python -m src.personas_cli init demo-project --ai gemini --debug
 
+# Upgrade existing project (prompts for AI selection)
+python -m src.personas_cli init --upgrade --local-templates
+
+# Upgrade with specific AI assistant
+python -m src.personas_cli init --upgrade --ai claude --local-templates
+
+# Upgrade without confirmation
+python -m src.personas_cli init --upgrade --force --local-templates
+
 # Explicitly provide GitHub token (avoids rate limiting)
 python -m src.personas_cli init demo-project --github-token ghp_xxx...
 # Or use environment variables: GH_TOKEN or GITHUB_TOKEN
@@ -246,6 +255,8 @@ personas init demo --skip-tls --ai gemini --ignore-agent-tools --script ps
 | Force init in current dir | `personas init --here --force --ai claude` |
 | Debug network issues | `personas init demo --debug` |
 | With GitHub token | `personas init demo --github-token $GITHUB_TOKEN` |
+| Upgrade existing project | `personas init --upgrade` |
+| Upgrade with specific AI | `personas init --upgrade --ai claude` |
 | Use local templates | `python -m src.personas_cli init demo --local-templates --ai claude` |
 | Local templates + custom path | `personas init demo --local-templates --template-path /path/to/repo` |
 | Local templates via env var | `PERSONAS_USE_LOCAL_TEMPLATES=1 personas init demo` |

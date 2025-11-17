@@ -107,7 +107,7 @@ Follow this execution flow:
    - Remove sections not applicable to the project (e.g., frontend sections for backend-only projects)
 
 6. **Consistency with project ground rules** (if exists):
-   - Read `/memory/ground-rules.md` if it exists
+   - Read `/d-docs/ground-rules.md` if it exists
    - Ensure coding standards align with ground rules
    - Ensure standards support company coding guidelines (if loaded)
    - Flag any conflicts between ground rules, company guidelines, and coding standards
