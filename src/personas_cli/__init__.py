@@ -1006,10 +1006,6 @@ def copy_local_template(
                 console.print(f"[red]Error copying template:[/red] {e}")
                 if debug:
                     console.print(Panel(str(e), title="Copy Error", border_style="red"))
-
-        if not is_current_dir and project_path.exists() and len(list(project_path.iterdir())) == 0:
-            # Only remove if we created an empty directory
-            project_path.rmdir()
         raise typer.Exit(1)
 
     if tracker:
@@ -1258,9 +1254,6 @@ def download_and_extract_template(project_path: Path, ai_assistant: str, script_
                 console.print(f"[red]Error extracting template:[/red] {e}")
                 if debug:
                     console.print(Panel(str(e), title="Extraction Error", border_style="red"))
-
-        if not is_current_dir and project_path.exists():
-            shutil.rmtree(project_path)
         raise typer.Exit(1)
     else:
         if tracker:
@@ -1720,8 +1713,6 @@ def init(
                 _label_width = max(len(k) for k, _ in _env_pairs)
                 env_lines = [f"{k.ljust(_label_width)} → [bright_black]{v}[/bright_black]" for k, v in _env_pairs]
                 console.print(Panel("\n".join(env_lines), title="Debug Environment", border_style="magenta"))
-            if not here and project_path.exists():
-                shutil.rmtree(project_path)
             raise typer.Exit(1)
         finally:
             pass
