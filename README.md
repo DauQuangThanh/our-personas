@@ -1,6 +1,6 @@
 <div align="center">
     <img src="./media/logo_small.webp" alt="Our Personas Logo"/>
-    <h1>🌿 Our Personas - Organizing Us Rapidly</h1>
+    <h1>🌿 Our Personas - Drive Quality Together</h1>
     <h3><em>Powering Team Synergy and Project Velocity.</em></h3>
 </div>
 
